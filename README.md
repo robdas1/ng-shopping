@@ -56,7 +56,17 @@ git add .
 git commit -m "initial commit"
 
 
-git push
+git push --set-upstream origin main
 
+
+## Troubleshooting
+
+### Q: I encountered the error `fatal: The current branch main has no upstream branch.` when running the deployment script. How do I fix this?
+
+A: This error occurs because the `main` branch does not have an upstream branch set. You can resolve this by running the following command:
+
+```sh
+git push --set-upstream origin main
+```
 
 
