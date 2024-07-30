@@ -61,7 +61,10 @@ git push --set-upstream origin main
 
 ## Troubleshooting
 
-### Q: I encountered the error `fatal: The current branch main has no upstream branch.` when running the deployment script. How do I fix this?
+### Q: I encountered the error  
+`fatal: The current branch main has no upstream branch.`  
+
+when running the deployment script. How do I fix this?
 
 A: This error occurs because the `main` branch does not have an upstream branch set. You can resolve this by running the following command:
 
@@ -70,3 +73,19 @@ git push --set-upstream origin main
 ```
 
 
+### Q: I encountered the error  
+`cannot open file:///e%3A/GitHub/ng-shopping/.angular/cache/18.1.2/vite/deps_temp_afd4ac51/chunk-OYXLHNU7.js. Detail: Unable to read file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js' (Error: Unable to resolve nonexistent file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js')`  
+
+when chatting with GitHub copilot. 
+
+A: The error is related to the angular cache, which may have been corrupted. Try clearing out and reseting the cache by deleting the `.angular\cache` directory. This will force angular to regenerate the cache the next time you build or serve your application. Here's how you can clear the cache and build the app.
+
+```powershell
+Remove-Item -Recurse -Force .angular\cache
+ng build
+```
+
+#### Additional steps  
+- Close any open terminals that might be referencing the cache. 
+- Restart VSCode and create a new Chat.
+- Delete node_modules and run npm install  
