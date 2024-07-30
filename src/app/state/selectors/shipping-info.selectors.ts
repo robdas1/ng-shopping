@@ -1,26 +1,26 @@
 /**
- * Available Product Selectors
+ * Shipping Info Selectors
  * 
- * This file contains the selectors for the availableProducts state slice. Selectors are
- * functions used to select, derive, and compose pieces of state. This file specifically includes
- * selectors to access the entire availableProducts state slice, individual available products by ID, and
- * any other derived state specific to avail products. These selectors ensure a consistent and
- * optimized method of accessing state throughout the application, particularly for the availableProducts
- * feature.
+ * This file contains the selectors for the shippingInfo state slice. 
  * 
- * The string "availableProducts" used here for selecting a state slice is derived from the AppState 
- * interface definition's property name. This property name is used in the StoreModule.forRoot() method.
+ * The property name shippingInfo is used to configure NGRX state in the 
+ * StoreModule.forRoot() method, in the src/main.ts file. This property name is
+ * used in the AppState interface definition, found in the src/app/state/app.state.ts
  */
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { AvailableProduct } from 'src/app/models/available-product.interface';
+import { createSelector } from "@ngrx/store";
+import { AppState } from "../app.state";
 
-// Selector to get the availableProducts slice of the AppState.
-export const selectAvailableProductsState = 
-  createFeatureSelector<AvailableProduct[]>('availableProducts');
+// Selector to get the shippingInfo slice of the AppState.
+export const selectShippingInfo = (state: AppState) => state.shippingInfo;
 
-// Selector to get an available product by id.
-export const selectAvailableProductById = (id: string) => createSelector(
-  createFeatureSelector<AvailableProduct[]>('availableProducts'),
-  (availableProducts: AvailableProduct[]) => 
-    availableProducts.find(availableProduct => availableProduct.id === id) || null
+// Selector to get the customer name.
+export const selectCustomerName = createSelector(
+    selectShippingInfo,
+    (shippingInfo) => shippingInfo.customerName
+);
+
+// Selector to get the customer address.
+export const selectCustomerAddress = createSelector(
+    selectShippingInfo,
+    (shippingInfo) => shippingInfo.customerAddress
 );
