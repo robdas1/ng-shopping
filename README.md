@@ -77,6 +77,14 @@ git push
 ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
 ```
 
+### Git production branches
+
+#### main
+This is the main production  branch that has the code. In the olden day we used to call this the master branch.
+
+#### gh-pages  
+This is the branch that hosts the deployed app.
+
 ### Deployment references
 
 [Angular CLI Deploy Documentation](https://angular.dev/cli/deploy)
