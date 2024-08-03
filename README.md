@@ -26,42 +26,70 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
-## Initial deployment steps
+## Deployment to GitHub Pages
 
+### Initial setup
 
-git clone https://github.com/robdas1/ng-shopping.git
+- Create ng-shopping repo on GitHub.
 
-
+- Create ng-shopping project locally.
+```
+ng new ng-shopping
 cd ng-shopping
-
-
-ng new ng-shopping --directory "."
-
-
-npm run start
-
-
-ng build --output-path "docs" --base-href  "/ng-shopping/"
-
-
-Move-Item -Path ".\docs\browser\\**" -Destination ".\docs"
-
-
-Remove-Item -Path ".\docs\browser"
-
-
+```
+- Connect local project to remote repo.
+```
+git remote add origin https://github.com/robdas1/ng-shopping.git
+```
+- Add angular-cli-ghpages to project.
+```
+ng add angular-cli-ghpages
+```
+- Push local code to GitHub repo.
+```
 git add .
-
-
 git commit -m "initial commit"
+git push -u origin main
+```
 
 
-git push --set-upstream origin main
+- Deploy project to GitHub Pages (this will deploy what is currently on the local computer but will not push the code to the remote repo).
+```
+ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
+```
+
+- After this is done, verify the GitHub Pages settings are correct, online in the repo.
+
+![Verify GitHub Pages Settings](readme-images/verify-gh-pages-settings.jpg)
 
 
-## Troubleshooting
+### On-going 
 
-### Q: I encountered the error  
+#### Push Code 
+```
+git add .
+git commit -m "[commit comment]"
+git push
+```
+
+#### Re-deploy App
+```
+ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
+```
+
+### Deployment references
+
+[Angular CLI Deploy Documentation](https://angular.dev/cli/deploy)
+
+[npm angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages)
+
+[Host Angular on GitHub - video](https://youtu.be/C6cRSJayS_g?si=91hU1O_DuII7jpx9)
+
+
+
+### Deployment troubleshooting
+
+#### Q: I encountered the error  
 `fatal: The current branch main has no upstream branch.`  
 
 when running the deployment script. How do I fix this?
@@ -73,7 +101,7 @@ git push --set-upstream origin main
 ```
 
 
-### Q: I encountered the error  
+#### Q: I encountered the error  
 `cannot open file:///e%3A/GitHub/ng-shopping/.angular/cache/18.1.2/vite/deps_temp_afd4ac51/chunk-OYXLHNU7.js. Detail: Unable to read file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js' (Error: Unable to resolve nonexistent file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js')`  
 
 when chatting with GitHub copilot. 
@@ -89,3 +117,13 @@ ng build
 - Close any open terminals that might be referencing the cache. 
 - Restart VSCode and create a new Chat.
 - Delete node_modules and run npm install  
+
+
+
+## Setup for Angular Router
+
+
+
+
+### Angular Router references 
+[Angular Routing Overview](https://angular.dev/tutorials/learn-angular/12-enable-routing)
