@@ -10,7 +10,6 @@
  * architecture.
  */
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store'; // NgRx Store for state management
 
 import { AppState } from './state/app.state';
@@ -30,7 +29,6 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ng-shopping v0.0.13';
 
   // Constructor injects the NgRx Store for state management
   constructor(private store: Store<AppState>) {}
@@ -38,6 +36,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // On component initialization, log to console and dispatch action to load products
     console.log('AppComponent: initializing...');
-    // this.store.dispatch(loadAvailableProducts());
+    this.store.dispatch(loadAvailableProducts());
   }
 }
