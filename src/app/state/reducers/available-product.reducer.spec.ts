@@ -61,7 +61,7 @@ describe('AvailableProductReducer', () => {
 
     // Test failure to load available products
     it('should handle loadAvailableProductsFailure action correctly', () => {
-        const error = new Error('Failed to load products');
+        const error = new Error('Mocked load available products failure');
         const action = loadAvailableProductsFailure({ error });
         const result = availableProductReducer(initialState, action);
         expect(result).toEqual(initialState); // Expect the state to remain unchanged on failure

@@ -22,12 +22,15 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, MainLayoutComponent, FooterComponent],
+  imports: [
+    HeaderComponent, 
+    MainLayoutComponent, 
+    FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ng-shopping v0.0.11';
+  title = 'ng-shopping v0.0.12';
 
   // Constructor injects the NgRx Store for state management
   constructor(private store: Store<AppState>) {}
