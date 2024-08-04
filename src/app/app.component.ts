@@ -30,7 +30,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ng-shopping v0.0.12';
+  title = 'ng-shopping v0.0.13';
 
   // Constructor injects the NgRx Store for state management
   constructor(private store: Store<AppState>) {}
