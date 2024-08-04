@@ -1,0 +1,8 @@
+.product-list-container {
+    display: flex; /* create a flex container */
+    flex-wrap: wrap; /* wrap items to the next row if needed */
+    justify-content: space-around; /* distribute the items evenly within the container */
+    margin: 0 auto; /* center the container */
+  }
+  
+  

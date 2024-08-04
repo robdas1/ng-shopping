@@ -1,1 +1,6 @@
-<h2>Your Stuff</h2>
+<h2>Get Stuff</h2>
+<div class="product-list-container">
+    <div *ngFor="let product of products$ | async">
+        <app-product-summary [product]="product"></app-product-summary>
+    </div>
+</div>

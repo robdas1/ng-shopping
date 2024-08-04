@@ -1,0 +1,32 @@
+.product-summary {
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 0;
+    margin: 10px auto;
+    /* display: block; */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden; /* Prevents display of content outside the border */
+    background-color: var(--product-summary-background);
+    transition: background-color 0.3s ease; /* Smooth color transition */
+  }
+  
+  .product-summary img {
+    max-height: 200px;
+    margin: 0 auto;
+  }
+  
+  .product-summary h3 {
+    padding-left: 10px; /* Adds some space on the left for better visual appearance */
+  }
+  
+  .product-summary:hover {
+    cursor: pointer; 
+    background-color: var(--nav-blue);
+    color: var(--nav-text);
+  }
+  
+  
+  
+  
