@@ -1,1 +1,42 @@
-<h2>Checkout</h2>
+<app-totals></app-totals>
+
+<fieldset>
+  <legend>Payment</legend>
+  <div>
+	<label for="paymentMethod">Payment Method</label>
+	<select id="paymentMethod" 
+		[value]="paymentMethod$ | async" 
+		(change)="onChangePaymentMethod($event)">
+	  <option value="credit card">Credit Card</option>
+	  <option value="pay pal">PayPal</option>
+	  <option value="my pay">My Pay</option>
+	</select>
+  </div>
+  <div>
+	<label for="cardExpiration">Card Expiry</label>
+	<input 
+	type="date" 
+	id="cardExpiration" 
+	[value]="cardExpirationString$ | async"
+	(change)="onChangeCardExpiration($event)">	
+  </div>
+</fieldset>
+
+<fieldset>
+	<legend>Shipping</legend>
+	<div>
+	  <label for="customerName">Customer Name</label>
+	  <input 
+	  type="text" 
+	  id="customerName" 
+	  [value]="customerName$ | async" 
+	  (change)="onChangeCustomerName($event)">
+	</div>
+	<div>
+	  <label for="customerAddress">Customer Address</label>
+	  <input type="text" id="customerAddress" 
+	  [value]="customerAddress$ | async" 
+	  (change)="onChangeCustomerAddress($event)">
+	</div>
+  </fieldset>
+
