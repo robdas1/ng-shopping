@@ -17,7 +17,7 @@ export const paymentInfoReducer = createReducer(
     ...state,
     paymentMethod: paymentMethod
   })),
-  
+
   // Handle the updateCardExpiration action
   on(updateCardExpiration, (state, { cardExpiration }) => ({
     ...state,

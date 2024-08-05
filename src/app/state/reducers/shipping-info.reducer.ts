@@ -17,7 +17,7 @@ export const shippingInfoReducer = createReducer(
         ...state,
         customerName: customerName
     })),
-    
+
     // Handle the updateCustomerAddress action
     on(updateCustomerAddress, (state, { customerAddress }) => ({
         ...state,
