@@ -47,17 +47,17 @@ describe('AppComponent', () => {
   });
 
   // // Test to check if loadAvailableProducts action is dispatched on initialization
-  // it('should dispatch loadAvailableProducts action on initialization', () => {
+  it('should dispatch loadAvailableProducts action on initialization', () => {
   
-  //   // Arrange - Create the component fixture and inject the Store service to spy on its dispatch method
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const store = TestBed.inject(Store); 
+    // Arrange - Create the component fixture and inject the Store service to spy on its dispatch method
+    const fixture = TestBed.createComponent(AppComponent);
+    const store = TestBed.inject(Store); 
 
-  //   // Act - Trigger change detection to simulate lifecycle events
-  //   fixture.detectChanges();  
+    // Act - Trigger change detection to simulate lifecycle events
+    fixture.detectChanges();  
 
-  //   // Assert that the dispatch method was called once with the expected action
-  //   expect(store.dispatch).toHaveBeenCalledOnceWith(loadAvailableProducts());
-  // });
+    // Assert that the dispatch method was called once with the expected action
+    expect(store.dispatch).toHaveBeenCalledOnceWith(loadAvailableProducts());
+  });
 
 });
