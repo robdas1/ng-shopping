@@ -1,1 +1,24 @@
-<h2>Your Cart</h2>
+<h2>Cart</h2>
+<table id="stuff-table" class="full-width-table" [style.display]="isDataInIt ? 'table' : 'none'">
+    <thead>
+        <tr>
+            <th class="text-left">your stuff</th>
+            <th class="text-right">remove / add</th>
+            <th class="number-right">qty</th>
+            <th class="number-right">cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of chosenProducts$ | async">
+            <td class="text-left">{{ product.productName }}</td>
+            <td class="text-right">
+                <button (click)="removeProduct(product.id)">Remove</button> /
+                <button (click)="addProduct(product.id, product.productName, product.unitPrice)">Add</button>
+            </td>
+            <td class="number-right">{{ product.qty }}</td>
+            <td class="number-right">{{ product.unitPrice * product.qty | currency }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<app-totals></app-totals>
