@@ -21,10 +21,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./totals.component.css']
 })
 export class TotalsComponent implements OnInit {
-  // Initialize subtotal, tax, and grandTotal with default values.
-  subtotal: number = 0; // Hardcoded for testing
-  tax: number = 1; // Hardcoded for testing
-  grandTotal: number = 1; // Hardcoded for testing
+
+  // @typescript-eslint/no-inferrable-types Type number trivially inferred from a number literal, remove type annotation
+  subtotal = 0; // Hardcoded for testing
+  tax = 1; // Hardcoded for testing
+  grandTotal = 1; // Hardcoded for testing
 
   // Inject the NgRx store to access the application state.
   constructor(private store: Store<AppState>) {}

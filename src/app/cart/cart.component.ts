@@ -49,7 +49,7 @@ export class CartComponent implements OnInit {
   // when there are products in the cart, this flag is set to true, and the cart 
   //  table is displayed using Angular's template binding and the ngIf directive
   // in the template.
-  isDataInIt: boolean = false;
+  isDataInIt = false; // @typescript-eslint/no-inferrable-types Type boolean trivially inferred from a boolean literal, remove type annotation
 
   constructor(private store: Store<AppState>) { }
 

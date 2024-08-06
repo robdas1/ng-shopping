@@ -16,7 +16,7 @@ export class AvailableProductService {
   // Array of available products
   private availableProducts: AvailableProduct[] = AVAILABLE_PRODUCTS;
 
-  constructor() { }
+  // constructor() { }  // @typescript-eslint/no-empty-function Unexpected empty constructor
 
   // Get an available product by its id.
   getById(id: string): Observable<AvailableProduct | null> {
