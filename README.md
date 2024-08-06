@@ -1,6 +1,6 @@
-# Online Store Angular 17
+# Angular Shopping App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
 
 ## Development server
 
