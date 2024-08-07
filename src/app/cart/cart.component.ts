@@ -20,9 +20,9 @@ import { TotalsComponent } from '../totals/totals.component';
   standalone: true,
   imports: [
 
-  // FormsModule is imported to enable template-driven forms functionality,
-  // allowing us to bind input fields in the template to component properties
-  // and handle form submission.
+    // FormsModule is imported to enable template-driven forms functionality,
+    // allowing us to bind input fields in the template to component properties
+    // and handle form submission.
     FormsModule,
 
     // CommonModule is imported to use common directives like ngIf and ngFor

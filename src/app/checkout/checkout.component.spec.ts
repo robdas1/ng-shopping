@@ -1,3 +1,9 @@
+/**
+ * checkout.component.spec.ts
+ * 
+ * This file contains unit tests for the CheckoutComponent, ensuring it behaves as
+ * expected and integrates correctly with the NgRx Store.
+ */
 import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { CheckoutComponent } from './checkout.component';
@@ -7,14 +13,17 @@ import { selectCardExpiration, selectPaymentMethod } from '../state/selectors/pa
 import { updateCustomerAddress, updateCustomerName } from '../state/actions/shipping-info.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { ChosenProduct } from '../models/chosen-product.interface';
+import { selectCustomerAddress, selectCustomerName } from '../state/selectors/shipping-info.selectors';
+import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 
-// Mock TotalsComponent to isolate the testing environment and remove dependencies.
-// Specifically, the TotalsComponent depends on the NgRx store, which is not needed for this test.
 @Component({
   selector: 'app-totals',
   template: '',
   standalone: true
 })
+// Mock TotalsComponent to isolate the testing environment and remove dependencies.
+// Specifically, the TotalsComponent depends on the NgRx store, which is not needed for this test.
 class MockTotalsComponent { }
 
 describe('CheckoutComponent', () => {
@@ -45,6 +54,48 @@ describe('CheckoutComponent', () => {
       })
       .compileComponents();
 
+  });
+
+  it('should alert when onPurchase is called', () => {
+    spyOn(window, 'alert');
+    mockStore = TestBed.inject(MockStore);
+    standaloneComponent = new CheckoutComponent(mockStore as Store<AppState>);
+    
+    // Act: Call the onPurchase method
+    standaloneComponent.onPurchase();
+    
+    // Assert: Verify the alert was called with the correct message
+    expect(window.alert).toHaveBeenCalledWith('Payment system not yet available');
+  });
+
+
+  it('should enable purchase when all required fields are filled', (done) => {
+    // Arrange: Define mock values for the required fields
+    const mockPaymentMethod = 'credit card';
+    const mockCardExpiration = new Date();
+    const mockCustomerName = 'John Doe';
+    const mockCustomerAddress = '123 Main St';
+    const mockChosenProducts: ChosenProduct[] = [{ id: "1", productName: 'Product 1', unitPrice: 100, qty: 1 }];
+  
+    // Initialize the mock store and the component under test
+    mockStore = TestBed.inject(MockStore);
+    standaloneComponent = new CheckoutComponent(mockStore as Store<AppState>);
+  
+    // Override selectors to return the mock values
+    mockStore.overrideSelector(selectPaymentMethod, mockPaymentMethod);
+    mockStore.overrideSelector(selectCardExpiration, mockCardExpiration);
+    mockStore.overrideSelector(selectCustomerName, mockCustomerName);
+    mockStore.overrideSelector(selectCustomerAddress, mockCustomerAddress);
+    mockStore.overrideSelector(selectChosenProductsState, mockChosenProducts);
+  
+    // Act: Trigger the component's ngOnInit lifecycle method
+    standaloneComponent.ngOnInit();
+  
+    // Assert: Subscribe to the isPurchaseEnabled$ observable and verify it emits true
+    standaloneComponent.isPurchaseEnabled$.subscribe(isEnabled => {
+      expect(isEnabled).toBeTrue();
+      done();
+    });
   });
 
   it('should initialize paymentMethod$ observable with the current payment method from store', () => {

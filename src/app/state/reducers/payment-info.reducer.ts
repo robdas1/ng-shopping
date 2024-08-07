@@ -1,3 +1,20 @@
+/**
+ * Payment Info Reducer
+ * 
+ * This file contains the reducer function for managing the payment information state
+ * in the application. It handles actions related to updating the payment method and 
+ * card expiration date.
+ * 
+ * The initial state is defined based on the PaymentInfo interface, with default values 
+ * set to null for both paymentMethod and cardExpiration.
+ * 
+ * Actions handled by this reducer include:
+ * - updatePaymentMethod: Updates the payment method in the state.
+ * - updateCardExpiration: Updates the card expiration date in the state.
+ * 
+ * The reducer function uses the createReducer utility from @ngrx/store to define the 
+ * state transitions in response to the actions.
+ */
 import { createReducer, on } from '@ngrx/store';
 import { PaymentInfo } from '../../models/payment-info.interface';
 import { updatePaymentMethod, updateCardExpiration } from '../actions/payment-info.actions';

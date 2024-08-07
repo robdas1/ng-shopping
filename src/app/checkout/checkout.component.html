@@ -40,3 +40,5 @@
 	</div>
   </fieldset>
 
+<button [disabled]="(isPurchaseEnabled$ | async) === false" (click)="onPurchase()">Purchase</button>
+

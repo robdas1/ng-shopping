@@ -1,13 +1,22 @@
+/**
+ * checkout.component.ts
+ * 
+ * This component represents the checkout view of the application. It allows users
+ * to manage the checkout process, including selecting payment methods, entering
+ * card expiration dates, and providing customer information.
+ */
 import { Component, OnInit } from '@angular/core';
 import { TotalsComponent } from "../totals/totals.component";
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { updateCardExpiration, updatePaymentMethod } from '../state/actions/payment-info.actions';
 import { selectCardExpiration, selectPaymentMethod } from '../state/selectors/payment-info.selectors';
 import { CommonModule } from '@angular/common';
 import { selectCustomerAddress, selectCustomerName } from '../state/selectors/shipping-info.selectors';
 import { updateCustomerAddress, updateCustomerName } from '../state/actions/shipping-info.actions';
+import { ChosenProduct } from '../models/chosen-product.interface';
+import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 
 @Component({
   selector: 'app-checkout',
@@ -16,12 +25,20 @@ import { updateCustomerAddress, updateCustomerName } from '../state/actions/ship
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
+// The CheckoutComponent class in the provided Angular code is responsible for 
+// managing the checkout process in an e-commerce application.
 export class CheckoutComponent implements OnInit {
+
+  // These observables are tied to the application's state using NgRx 
+  // selectors, which are functions that retrieve specific pieces of state 
+  // from the store.
   paymentMethod$!: Observable<"credit card" | "pay pal" | "my pay" | null>;
   cardExpiration$!: Observable<Date | null>;
   cardExpirationString$!: Observable<string | null>;
   customerName$!: Observable<string | null>;
   customerAddress$!: Observable<string | null>;
+  chosenProducts$!: Observable<ChosenProduct[]>;
+  isPurchaseEnabled$!: Observable<boolean>;
 
   constructor(private store: Store<AppState>) { }
 
@@ -35,6 +52,7 @@ export class CheckoutComponent implements OnInit {
         if (date) {
           returnValue = this.formatDate(date);
         }
+
         return returnValue;
       })
     );
@@ -42,14 +60,36 @@ export class CheckoutComponent implements OnInit {
     // Use selectors to get the current shipping info state
     this.customerName$ = this.store.select(selectCustomerName);
     this.customerAddress$ = this.store.select(selectCustomerAddress);
+    this.chosenProducts$ = this.store.select(selectChosenProductsState);
+
+    // Combine the latest values from these observables and then maps them to a boolean value. 
+    this.isPurchaseEnabled$ = combineLatest([
+      this.paymentMethod$,
+      this.cardExpiration$,
+      this.customerName$,
+      this.customerAddress$,
+      this.chosenProducts$
+    ]).pipe(
+      // The mapping function checks if all required fields are filled 
+      // (i.e., paymentMethod, cardExpiration, customerName, and customerAddress are
+      // not null, and chosenProducts has at least one item).
+      map(([paymentMethod, cardExpiration, customerName, customerAddress, chosenProducts]) =>
+        !!paymentMethod && !!cardExpiration && !!customerName && !!customerAddress && chosenProducts.length > 0
+      )
+    );
 
   }
 
-  // src\app\checkout\checkout.component.ts
+  // Placeholder function to handle the purchase button click
+  onPurchase(): void {
+    alert('Payment system not yet available');
+  }
+
+  // Dispatch update payment method action when the payment method changes
   onChangePaymentMethod(event: Event) {
     const selectElement = event.target as HTMLSelectElement; // Safely cast to HTMLSelectElement
-    const newMethod = selectElement.value as "credit card" | "pay pal" | "my pay" | null; // Assuming these are the only possible values
-    this.store.dispatch(updatePaymentMethod({ paymentMethod: newMethod }));
+    const newPaymentMethod = selectElement.value as "credit card" | "pay pal" | "my pay" | null; // these are the only possible values
+    this.store.dispatch(updatePaymentMethod({ paymentMethod: newPaymentMethod }));
   }
 
   // Dispatch an action when the card expiration date changes
@@ -77,6 +117,5 @@ export class CheckoutComponent implements OnInit {
     const newAddress = inputElement.value;
     this.store.dispatch(updateCustomerAddress({ customerAddress: newAddress }));
   }
-
 
 }

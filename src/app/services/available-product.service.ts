@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AvailableProduct } from '../models/available-product.interface';
 
-
 @Injectable({
   providedIn: 'root'
 })

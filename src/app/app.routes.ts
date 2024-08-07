@@ -1,3 +1,11 @@
+/**
+ * app.routes.ts
+ * 
+ * This file defines the application's routes for the Angular application.
+ * It maps URL paths to their corresponding components, enabling navigation
+ * within the application. Additionally, it includes a default route and a 
+ * wildcard route to handle undefined paths.
+ */
 import { Routes } from '@angular/router';
 import { StartPageComponent } from './start-page/start-page.component';
 import { CartComponent } from './cart/cart.component';
