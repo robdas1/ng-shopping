@@ -28,7 +28,8 @@ const appInitialState: AppState = {
     shippingInfo: {
       customerName: null,
       customerAddress: null
-    }
+    },
+    taxRate: 0.05
   };
 
   const paymentInfoInitialState: PaymentInfo = {

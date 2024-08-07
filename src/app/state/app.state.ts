@@ -22,4 +22,7 @@ export interface AppState {
 
   // The shipping information in the application state.
   shippingInfo: ShippingInfo; 
+
+  // The tax rate in the application state.
+  taxRate: number;
 }

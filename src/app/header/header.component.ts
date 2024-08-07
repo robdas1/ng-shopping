@@ -10,5 +10,5 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent {
   title = 'DTEK Online Shopping';
-  version = 'v0.1.1';
+  version = 'v0.1.2';
 }

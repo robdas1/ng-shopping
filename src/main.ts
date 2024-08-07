@@ -17,6 +17,7 @@ import { paymentInfoReducer } from './app/state/reducers/payment-info.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AvailableProductEffects } from './app/state/effects/available-product.effects';
 import { shippingInfoReducer } from './app/state/reducers/shipping-info.reducer';
+import { taxRateReducer } from './app/state/reducers/tax-rate.reducer';
 
 // Create an extended application configuration that includes the original
 // configuration and adds the necessary providers for NgRx Store and
@@ -48,7 +49,8 @@ const extendedAppConfig = {
         chosenProducts: chosenProductReducer,
         availableProducts: availableProductReducer,
         paymentInfo: paymentInfoReducer,
-        shippingInfo: shippingInfoReducer
+        shippingInfo: shippingInfoReducer,
+        taxRate: taxRateReducer
       }),
 
       // Tell NgRx to start listening to actions and running the associated effects.
