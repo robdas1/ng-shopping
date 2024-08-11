@@ -1,0 +1,19 @@
+<ng-template #modalPopupNotifier let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">
+            Notification
+        </h5>
+        <button type="button" class="btn-close" aria-label="Close"
+            (click)="modal.dismiss('the dismiss button was clicked')">
+            <span aria-hidden="true"></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>{{ modalMessage }}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">
+            Close
+        </button>
+    </div>
+</ng-template>

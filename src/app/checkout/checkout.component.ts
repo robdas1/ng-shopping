@@ -5,7 +5,7 @@
  * to manage the checkout process, including selecting payment methods, entering
  * card expiration dates, and providing customer information.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TotalsComponent } from "../totals/totals.component";
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
@@ -17,17 +17,21 @@ import { selectCustomerAddress, selectCustomerName } from '../state/selectors/sh
 import { updateCustomerAddress, updateCustomerName } from '../state/actions/shipping-info.actions';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
+import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [TotalsComponent, CommonModule],
+  imports: [TotalsComponent, CommonModule, ModalPopupComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 // The CheckoutComponent class in the provided Angular code is responsible for 
 // managing the checkout process in an e-commerce application.
 export class CheckoutComponent implements OnInit {
+
+  // Reference to the ModalPopupComponent instance
+  @ViewChild(ModalPopupComponent) modalComponent!: ModalPopupComponent;
 
   // These observables are tied to the application's state using NgRx 
   // selectors, which are functions that retrieve specific pieces of state 
@@ -82,7 +86,7 @@ export class CheckoutComponent implements OnInit {
 
   // Placeholder function to handle the purchase button click
   onPurchase(): void {
-    alert('Payment system not yet available');
+    this.modalComponent.openModal('Payment system not yet available');
   }
 
   // Dispatch update payment method action when the payment method changes

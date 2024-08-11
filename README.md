@@ -402,7 +402,7 @@ Add Bootstrap styles to the angular.json configuration:
     })
     export class ModalComponent {
       // Reference to the modal in the component template
-      @ViewChild('myModal', { static: true }) myModal!: TemplateRef<any>;
+      @ViewChild('modalPopupNotifier', { static: true }) modalPopupNotifier!: TemplateRef<any>;
       modalMessage: string = '';
 
       constructor(private modalService: NgbModal) { }
@@ -410,7 +410,7 @@ Add Bootstrap styles to the angular.json configuration:
       openModal(message: string) {
         this.modalMessage = message;
         this.modalService.open(
-            this.myModal, 
+            this.modalPopupNotifier, 
             { ariaLabelledBy: 'modal-basic-title' }
           ).result.then(
           (result) => { console.debug(`Closed: ${result}`); },
@@ -421,14 +421,14 @@ Add Bootstrap styles to the angular.json configuration:
     }
     ```
     Explanation of @ViewChild Parameters  
-      - First Parameter ('myModal'): This is a string that refers to the template reference variable defined in the template file (modal.component.html). It allows Angular to locate the specific element or template within the component's template.  
+      - First Parameter ('modalPopupNotifier'): This is a string that refers to the template reference variable defined in the template file (modal.component.html). It allows Angular to locate the specific element or template within the component's template.  
       - Second Parameter ({ static: true }): This is an options object. The static property determines when the query is resolved. If true, the query is resolved before change detection runs. This is useful for accessing the template reference variable during the component's initialization.
 
 
 3. **Update the Modal Component Template**  
-Modify `src/app/modal/modal.component.html` to define the modal structure. The #myModal in the \<ng-template\> tag is a template reference variable, which is referenced by the @ViewChild decorator in the component class.
+Modify `src/app/modal/modal.component.html` to define the modal structure. The #modalPopupNotifier in the \<ng-template\> tag is a template reference variable, which is referenced by the @ViewChild decorator in the component class.
     ```html
-    <ng-template #myModal let-modal>
+    <ng-template #modalPopupNotifier let-modal>
       <div class="modal-header">
         <h5 class="modal-title" id="modal-basic-title">
           My Modal
