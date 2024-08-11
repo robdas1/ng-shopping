@@ -454,7 +454,7 @@ Modify `src/app/modal/modal.component.html` to define the modal structure. The #
       </div>
     </ng-template>
     ```
-    The let-modal attribute is an Angular-specific feature. It is used in the ng-template structural directives. It declares a local variable (modal in this case) that holds the context of the template. This context is provided by the NgbModal service when the modal is opened. The modal variable gives you access to methods like dismiss and close to control the modal's behavior.
+    The let-modal attribute is an Angular Bootstrap specific feature. It is used in the ng-template structural directives. It declares a local variable (modal in this case) that holds the context of the template. This context is provided by the NgbModal service when the modal is opened. The modal variable gives you access to methods like dismiss and close to control the modal's behavior.
 
 
 4. **Use the Modal Component**  
