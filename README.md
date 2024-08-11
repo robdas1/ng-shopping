@@ -353,13 +353,7 @@ The loadAvailableProductsEffect$ effect listens for loadAvailableProducts action
 
 ## Setup for Bootstrap  
 
-While the Bootstrap CSS can be used with any framework, the Bootstrap JavaScript is not fully compatible with JavaScript frameworks like React, Vue, and Angular which assume full knowledge of the DOM. Both Bootstrap and the framework may attempt to mutate the same DOM element, resulting in bugs like dropdowns that are stuck in the “open” position. A better alternative is to use an angular-specific package instead of the Bootstrap JavaScript. Bootstrap 5.3 documentation recommends ng-bootstrap 17.x.x for Angular ^18.0.0. The documentation for ng-bootstrap strongly recommends using Angular CLI:
-
-```
-ng add @ng-bootstrap/ng-bootstrap
-```
-
-However, this fails and gives many errors. Stackoverflow accepted answer is to use npm instead of Angular CLI. The Github repo calls this manual installation and gives these commands: 
+While the Bootstrap CSS can be used with any framework, the Bootstrap JavaScript is not fully compatible with JavaScript frameworks like React, Vue, and Angular which assume full knowledge of the DOM. Both Bootstrap and the framework may attempt to mutate the same DOM element, resulting in bugs like dropdowns that are stuck in the “open” position. A better alternative is to use an angular-specific package instead of the Bootstrap JavaScript. Bootstrap 5.3 documentation recommends ng-bootstrap 17.x.x for Angular ^18.0.0.  
 
 ```
  npm install bootstrap
@@ -367,8 +361,13 @@ However, this fails and gives many errors. Stackoverflow accepted answer is to u
  npm install @popperjs/core
  npm install @ng-bootstrap/ng-bootstrap
 ```
-Add Bootstrap styles to your angular.json configuration:
+Alternatively, Github Copilot suggests replacing these four npm and ng commands with a single npm command. 
 ```
+npm install bootstrap @popperjs/core @angular/localize @ng-bootstrap/ng-bootstrap
+```
+
+Add Bootstrap styles to the angular.json configuration:
+```json
 "yourApp": {
   "architect": {
     "build": {
@@ -381,69 +380,13 @@ Add Bootstrap styles to your angular.json configuration:
   }
 }
 ```
+### How to Create an Angular Bootstrap Modal Popup Component  
 
-Import the Angular Bootsatrap main module into my-component. For example
-```
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-
-@Component({
-  selector: 'app-mycomponent',
-  standalone: true,
-  imports: [NgbAlert],
-  templateUrl: './mycomponent.component.html'
-})
-export class MyComponentComponent {
-}
-```
-
-
-
- - Bootstrap 5.3 [https://getbootstrap.com/](https://getbootstrap.com/)  
- - Usage with JavaScript frameworks [https://getbootstrap.com/docs/5.3/getting-started/javascript/#usage-with-javascript-frameworks](https://getbootstrap.com/docs/5.3/getting-started/javascript/#usage-with-javascript-frameworks)  
- - ng-bootstrap [https://ng-bootstrap.github.io/](https://ng-bootstrap.github.io/) 
- - Stackoverflow discussion for error when installing ng-bootstrap [https://stackoverflow.com/questions/66014183/error-when-installing-ng-add-ng-bootstrap-ng-bootstrap](https://stackoverflow.com/questions/66014183/error-when-installing-ng-add-ng-bootstrap-ng-bootstrap)
-
-
-
-
-### Bootstrap references
-
-
-
-## How to Create an Angular Bootstrap Modal Popup Component
-
-### Prerequisites
-
-1. **Install Angular CLI**: Ensure you have the Angular CLI installed. If not, install it using:
-    ```sh
-    npm install -g @angular/cli
-    ```
-
-2. **Create a New Angular Project**: If you don't have an existing project, create a new one:
-    ```sh
-    ng new my-angular-app --standalone
-    cd my-angular-app
-    ```
-
-3. **Install Dependencies**: Add the necessary dependencies to your project:
-    ```sh
-    npm install bootstrap @popperjs/core @angular/localize @ng-bootstrap/ng-bootstrap
-    ```
-
-4. **Add Bootstrap CSS**: Update `angular.json` to include Bootstrap CSS:
-    ```json
-    "styles": [
-      "node_modules/bootstrap/dist/css/bootstrap.min.css",
-      "src/styles.css"
-    ]
-    ```
-
-### Step-by-Step Instructions
-
-1. **Create the Modal Component**:
+1. **Create the Modal Component**  
     ```sh
     ng generate component modal --standalone
     ```
+
 
 2. **Update the Modal Component Class**: Modify `src/app/modal/modal.component.ts` to include the modal logic:
     ```typescript
@@ -458,6 +401,7 @@ export class MyComponentComponent {
       styleUrl: './modal.component.css'
     })
     export class ModalComponent {
+      // Reference to the modal in the component template
       @ViewChild('myModal', { static: true }) myModal!: TemplateRef<any>;
       modalMessage: string = '';
 
@@ -465,34 +409,35 @@ export class MyComponentComponent {
 
       openModal(message: string) {
         this.modalMessage = message;
-        this.modalService.open(this.myModal, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-          (result) => {
-            console.log(`Closed with: ${result}`);
-          },
-          (reason) => {
-            console.log(`Dismissed ${this.getDismissReason(reason)}`);
-          }
+        this.modalService.open(
+            this.myModal, 
+            { ariaLabelledBy: 'modal-basic-title' }
+          ).result.then(
+          (result) => { console.debug(`Closed: ${result}`); },
+          (reason) => { console.debug(`Dismissed: ${reason}`); }
         );
       }
 
-      private getDismissReason(reason: any): string {
-        if (reason === 'ESC') {
-          return 'by pressing ESC';
-        } else if (reason === 'BACKDROP_CLICK') {
-          return 'by clicking on a backdrop';
-        } else {
-          return `with: ${reason}`;
-        }
-      }
     }
     ```
+    Explanation of @ViewChild Parameters  
+      - First Parameter ('myModal'): This is a string that refers to the template reference variable defined in the template file (modal.component.html). It allows Angular to locate the specific element or template within the component's template.  
+      - Second Parameter ({ static: true }): This is an options object. The static property determines when the query is resolved. If true, the query is resolved before change detection runs. This is useful for accessing the template reference variable during the component's initialization.
 
-3. **Update the Modal Component Template**: Modify `src/app/modal/modal.component.html` to define the modal structure:
+
+3. **Update the Modal Component Template**  
+Modify `src/app/modal/modal.component.html` to define the modal structure. The #myModal in the \<ng-template\> tag is a template reference variable, which is referenced by the @ViewChild decorator in the component class.
     ```html
     <ng-template #myModal let-modal>
       <div class="modal-header">
-        <h5 class="modal-title" id="modal-basic-title">My Modal</h5>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <h5 class="modal-title" id="modal-basic-title">
+          My Modal
+        </h5>
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close" 
+          (click)="modal.dismiss('the dismiss button was clicked')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -500,36 +445,75 @@ export class MyComponentComponent {
         <p>{{ modalMessage }}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+        <button 
+          type="button" 
+          class="btn btn-secondary" 
+          (click)="modal.close('Save click')">
+          Close
+        </button>
       </div>
     </ng-template>
     ```
+    The let-modal attribute is an Angular-specific feature. It is used in the ng-template structural directives. It declares a local variable (modal in this case) that holds the context of the template. This context is provided by the NgbModal service when the modal is opened. The modal variable gives you access to methods like dismiss and close to control the modal's behavior.
 
-4. **Use the Modal Component**: In any other component, inject and use the modal component. For example, in `src/app/app.component.ts`:
+
+4. **Use the Modal Component**  
+In any other component, inject and use the modal component.  
+For example, in `src/app/app.component.ts`  
+
+
     ```typescript
     import { Component, ViewChild } from '@angular/core';
-    import { RouterOutlet } from '@angular/router';
     import { ModalComponent } from './modal/modal.component';
 
     @Component({
       selector: 'app-root',
       standalone: true,
-      imports: [RouterOutlet, ModalComponent],
+      imports: [ModalComponent],
       templateUrl: './app.component.html',
       styleUrl: './app.component.css'
     })
     export class AppComponent {
+      // Reference to the ModalComponent instance
       @ViewChild(ModalComponent) modalComponent!: ModalComponent;
 
+      // Method to trigger the modal with a custom message
       openModal() {
         this.modalComponent.openModal('Your custom message here!');
       }
     }
     ```
+    Explanation of @ViewChild Parameters  
+    - The @ViewChild decorator is used with a component class (ModalComponent) as the parameter, which directly references the child component instance. This usage does not require the static option because it references a component instance rather than a template reference variable.
 
-5. **Trigger the Modal**: Add a button in `src/app/app.component.html` to trigger the modal:
-    ```html
-    <button (click)="openModal()">Open Modal</button>
+5. **Trigger the Modal**  
+Add a button and the modal component to the client component's template to trigger the modal:
+    ```html 
+    <button 
+      type="button" 
+      class="btn btn-primary" 
+      (click)="openModal()">
+      Open Modal
+    </button>
+    <app-modal></app-modal>
     ```
 
-By following these steps, you can create a reusable modal popup component in your Angular application. This component can be used to replace the JavaScript `alert()` function with a more production-appropriate solution.
+
+
+
+
+
+### Bootstrap references
+
+
+
+
+
+ - Bootstrap 5.3 [https://getbootstrap.com/](https://getbootstrap.com/)  
+ - Usage with JavaScript frameworks [https://getbootstrap.com/docs/5.3/getting-started/javascript/#usage-with-javascript-frameworks](https://getbootstrap.com/docs/5.3/getting-started/javascript/#usage-with-javascript-frameworks)  
+ - ng-bootstrap [https://ng-bootstrap.github.io/](https://ng-bootstrap.github.io/) 
+ - Stackoverflow discussion for error when installing ng-bootstrap [https://stackoverflow.com/questions/66014183/error-when-installing-ng-add-ng-bootstrap-ng-bootstrap](https://stackoverflow.com/questions/66014183/error-when-installing-ng-add-ng-bootstrap-ng-bootstrap)
+
+
+
+
