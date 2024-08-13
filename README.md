@@ -501,6 +501,160 @@ Add a button and the modal component to the client component's template to trigg
 
 
 
+### How to Setup Toast Notification in Angular with NgbToast  
+
+This guide will help you set up toast notifications in your Angular application using Bootstrap and Angular's standalone components.
+
+
+#### 1. Generate Toast Service
+
+Run the following command to generate a new service:
+
+```sh
+ng generate service app-toast
+```
+
+
+
+
+#### 2. Implement Toast Service
+
+Update the generated `app-toast.service.ts` with the following code:
+
+```typescript
+import { Injectable } from '@angular/core';
+
+export interface Toast {
+  message: string;
+  classname?: string;
+  delay?: number;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AppToastService {
+  toasts: Toast[] = [];
+
+  show(message: string, options: Partial<Toast> = {}) {
+    this.toasts.push({ message, ...options });
+  }
+
+  remove(toast: Toast) {
+    this.toasts = this.toasts.filter(t => t !== toast);
+  }
+}
+```
+
+#### 3. Generate Toast Component 
+
+Run the following command to generate a new standalone component: 
+
+```
+ng generate component app-toast --standalone
+```
+
+
+#### 4. Implement Toast Component 
+
+Update the generated app-toast.component.ts with the following code: 
+
+```typescript
+
+import { Component } from '@angular/core';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppToastService } from '../app-toast.service';
+
+@Component({
+  selector: 'app-toasts',
+  standalone: true,
+  imports: [NgbToastModule],
+  template: `
+    <ngb-toast
+      *ngFor="let toast of toastService.toasts"
+      [class]="toast.classname"
+      [autohide]="true"
+      [delay]="toast.delay || 5000"
+      (hidden)="toastService.remove(toast)"
+    >
+      {{ toast.message }}
+    </ngb-toast>
+  `,
+  styles: [`
+    :host {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1200;
+    }
+  `]
+})
+export class AppToastComponent {
+  constructor(public toastService: AppToastService) {}
+}
+
+```
+
+#### 5. Update App Component 
+
+Update app.component.ts with the following code: 
+
+```typescript
+import { Component } from '@angular/core'; 
+import { RouterOutlet } from '@angular/router'; 
+import { AppToastService } from './app-toast.service'; 
+import { AppToastComponent } from './app-toast/app-toast.component';
+
+@Component({ 
+    selector: 'app-root', 
+    standalone: true, 
+    imports: [RouterOutlet, AppToastComponent], 
+    templateUrl: './app.component.html', 
+    styleUrls: ['./app.component.css'] }) 
+export class AppComponent { title = 'ngbToast';
+
+constructor(private toastService: AppToastService) {}
+
+showToast() { 
+    this.toastService.show('Hello, this is a toast message!'); 
+    } 
+}
+```
+
+#### 6. Update App Component HTML 
+
+Update src/app/app.component.html to include the button and the toast container: 
+
+```html
+<button (click)="showToast()">Show Toast</button> 
+<app-toasts></app-toasts>
+```
+
+#### 7. Update Angular JSON 
+
+Ensure angular.json includes Bootstrap styles and scripts: 
+
+```json
+"styles": [ 
+    "src/styles.css", 
+    "node_modules/bootstrap/dist/css/bootstrap.min.css" 
+], 
+"scripts": [ 
+    "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" 
+]
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Bootstrap references
@@ -513,6 +667,7 @@ Add a button and the modal component to the client component's template to trigg
  - Usage with JavaScript frameworks [https://getbootstrap.com/docs/5.3/getting-started/javascript/#usage-with-javascript-frameworks](https://getbootstrap.com/docs/5.3/getting-started/javascript/#usage-with-javascript-frameworks)  
  - ng-bootstrap [https://ng-bootstrap.github.io/](https://ng-bootstrap.github.io/) 
  - Stackoverflow discussion for error when installing ng-bootstrap [https://stackoverflow.com/questions/66014183/error-when-installing-ng-add-ng-bootstrap-ng-bootstrap](https://stackoverflow.com/questions/66014183/error-when-installing-ng-add-ng-bootstrap-ng-bootstrap)
+ - NgbToast [https://ng-bootstrap.github.io/#/components/toast/overview](https://ng-bootstrap.github.io/#/components/toast/overview)
 
 
 
