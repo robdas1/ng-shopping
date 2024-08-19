@@ -506,20 +506,20 @@ Add a button and the modal component to the client component's template to trigg
 This guide will help you set up toast notifications in your Angular application using Bootstrap and Angular's standalone components.
 
 
-#### 1. Generate Toast Service
+#### 1. Generate Toasts Service
 
 Run the following command to generate a new service:
 
 ```sh
-ng generate service app-toast
+ng generate service services/toasts
 ```
 
 
 
 
-#### 2. Implement Toast Service
+#### 2. Implement Toasts Service
 
-Update the generated `app-toast.service.ts` with the following code:
+Update the generated `toasts.service.ts` with the following code:
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -533,7 +533,7 @@ export interface Toast {
 @Injectable({
   providedIn: 'root',
 })
-export class AppToastService {
+export class ToastsService {
   toasts: Toast[] = [];
 
   show(message: string, options: Partial<Toast> = {}) {
@@ -551,24 +551,25 @@ export class AppToastService {
 Run the following command to generate a new standalone component: 
 
 ```
-ng generate component app-toast --standalone
+ng generate component toasts --standalone
 ```
 
 
 #### 4. Implement Toast Component 
 
-Update the generated app-toast.component.ts with the following code: 
+Update the generated toasts.component.ts with the following code: 
 
 ```typescript
 
 import { Component } from '@angular/core';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppToastService } from '../app-toast.service';
+import { ToastsService } from '../services/toasts.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-toasts',
   standalone: true,
-  imports: [NgbToastModule],
+  imports: [CommonModule, NgbToastModule],
   template: `
     <ngb-toast
       *ngFor="let toast of toastService.toasts"
@@ -589,8 +590,8 @@ import { AppToastService } from '../app-toast.service';
     }
   `]
 })
-export class AppToastComponent {
-  constructor(public toastService: AppToastService) {}
+export class ToastsComponent {
+  constructor(public toastService: ToastsService) {}
 }
 
 ```
@@ -601,22 +602,22 @@ Update app.component.ts with the following code:
 
 ```typescript
 import { Component } from '@angular/core'; 
-import { RouterOutlet } from '@angular/router'; 
-import { AppToastService } from './app-toast.service'; 
-import { AppToastComponent } from './app-toast/app-toast.component';
+//import { RouterOutlet } from '@angular/router'; 
+import { ToastsService } from './services/toasts.service'; 
+import { ToastsComponent } from './toasts/toasts.component';
 
 @Component({ 
     selector: 'app-root', 
     standalone: true, 
-    imports: [RouterOutlet, AppToastComponent], 
+    imports: [ /*RouterOutlet, */ ToastsComponent], 
     templateUrl: './app.component.html', 
     styleUrls: ['./app.component.css'] }) 
-export class AppComponent { title = 'ngbToast';
+export class AppComponent {
 
-constructor(private toastService: AppToastService) {}
+constructor(private toastsService: ToastsService) {}
 
 showToast() { 
-    this.toastService.show('Hello, this is a toast message!'); 
+    this.toastsService.show('Hello, this is a toast message!'); 
     } 
 }
 ```
