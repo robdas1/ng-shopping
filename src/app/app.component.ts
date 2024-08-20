@@ -17,6 +17,16 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { loadAvailableProducts } from './state/actions/available-product.actions';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { ToastsComponent } from './toasts/toasts.component';
+import { ToastsService } from './services/toasts.service';
+
+import { Observable } from 'rxjs';
+import { ChosenProduct } from './models/chosen-product.interface';
+import { selectChosenProductsState } from './state/selectors/chosen-product.selectors';
+
+import { map, combineLatestWith } from 'rxjs/operators';
+import { selectTaxRate } from './state/selectors/tax-rate.selectors';
+
 
 @Component({
   selector: 'app-root',
@@ -24,18 +34,43 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
   imports: [
     HeaderComponent, 
     MainLayoutComponent, 
-    FooterComponent],
+    FooterComponent,
+    ToastsComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  chosenProducts$!: Observable<ChosenProduct[]>;
+  grandTotal$!: Observable<number>;
+
+
 
   // Constructor injects the NgRx Store for state management
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private toastsService: ToastsService) {}
 
   ngOnInit(): void {
+
+    this.chosenProducts$ = this.store.select(selectChosenProductsState);
+
+    this.grandTotal$ = this.chosenProducts$.pipe(
+      combineLatestWith(this.store.select(selectTaxRate)),
+      map(([products, taxRate]) => {
+        const subtotal = products.reduce((sum, product) => sum + (product.qty * product.unitPrice), 0);
+        return subtotal + (subtotal * taxRate);
+      })
+    );
+
+    this.grandTotal$.subscribe(grandTotal => {
+      if (grandTotal > 0) {
+        this.toastsService.show(`Grand Total: $${grandTotal.toFixed(2)}`);
+      }
+    });
+
+
     // On component initialization, log to console and dispatch action to load products
     console.log('AppComponent: initializing...');
     this.store.dispatch(loadAvailableProducts());
   }
+
+  
 }
