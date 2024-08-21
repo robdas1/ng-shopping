@@ -3,18 +3,23 @@
 // TestBed to create a testing module, mocking necessary services such as the
 // NgRx Store. The tests ensure that the AppComponent is created successfully
 // and that specific actions are dispatched upon initialization.
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadAvailableProducts } from './state/actions/available-product.actions';
+import { of } from 'rxjs';
+
 
 // Mock Store service to spy on and assert dispatch calls
 class MockStore {
   dispatch = jasmine.createSpy('dispatch');
+  select = jasmine.createSpy('select').and.callFake(selector => of([]));
 }
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
   // Set up TestBed configuration before each test
   beforeEach(async () => {
@@ -31,32 +36,24 @@ describe('AppComponent', () => {
       ]
       // Compile components to initialize the testing environment
     }).compileComponents(); 
+    // Creating the component instance and triggering initial data binding and lifecycle hooks
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  // Test to verify the AppComponent instance is created
-  it('should create the app', () => {
-
-    // Arrange - Create the component fixture
-    const fixture = TestBed.createComponent(AppComponent);
-
-    // Act - Trigger change detection to simulate lifecycle events
-    const app = fixture.componentInstance;
-
-    // Assert that the app component is truthy (exists)
-    expect(app).toBeTruthy(); 
+  it('should create', () => {
+    expect(component).toBeTruthy(); 
   });
 
   // // Test to check if loadAvailableProducts action is dispatched on initialization
   it('should dispatch loadAvailableProducts action on initialization', () => {
   
-    // Arrange - Create the component fixture and inject the Store service to spy on its dispatch method
-    const fixture = TestBed.createComponent(AppComponent);
+    // Arrange - inject the Store service to spy on its method methods
     const store = TestBed.inject(Store); 
 
-    // Act - Trigger change detection to simulate lifecycle events
-    fixture.detectChanges();  
-
-    // Assert that the dispatch method was called once with the expected action
+    // Act - no action needed because change detection to simulate lifecycle events was triggered during setup
+    // Assert - that the dispatch method was called once with the expected action
     expect(store.dispatch).toHaveBeenCalledOnceWith(loadAvailableProducts());
   });
 

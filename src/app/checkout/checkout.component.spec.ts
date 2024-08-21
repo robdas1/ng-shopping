@@ -16,6 +16,7 @@ import { AppState } from '../state/app.state';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { selectCustomerAddress, selectCustomerName } from '../state/selectors/shipping-info.selectors';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
+import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
 
 @Component({
   selector: 'app-totals',
@@ -26,6 +27,11 @@ import { selectChosenProductsState } from '../state/selectors/chosen-product.sel
 // Specifically, the TotalsComponent depends on the NgRx store, which is not needed for this test.
 class MockTotalsComponent { }
 
+// Mock ModalPopupComponent
+class MockModalPopupComponent {
+  openModal(message: string) {}
+}
+
 describe('CheckoutComponent', () => {
 
   // The mockStore variable is a mock version of the NgRx store used for testing
@@ -35,6 +41,7 @@ describe('CheckoutComponent', () => {
   // The standaloneComponent variable represents an instance of the
   // CheckoutComponent, which is under test.
   let standaloneComponent: CheckoutComponent;
+  let mockModalPopupComponent: MockModalPopupComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,8 +49,9 @@ describe('CheckoutComponent', () => {
         MockTotalsComponent
       ],
       providers: [
-        provideMockStore(), // Sets up the MockStore for tests.
-        CheckoutComponent // Includes the component under test.
+        provideMockStore(), // Sets up the MockStore for tests
+        CheckoutComponent, // Includes the component under test
+        { provide: MockModalPopupComponent, useClass: MockModalPopupComponent }
       ]
 
     })
@@ -57,15 +65,19 @@ describe('CheckoutComponent', () => {
   });
 
   it('should alert when onPurchase is called', () => {
-    spyOn(window, 'alert');
+
+    // Arrange: Initialize the mock store and the component under test
     mockStore = TestBed.inject(MockStore);
+    mockModalPopupComponent = TestBed.inject(MockModalPopupComponent);
     standaloneComponent = new CheckoutComponent(mockStore as Store<AppState>);
+    standaloneComponent.modalComponent = mockModalPopupComponent as ModalPopupComponent; // Inject the mock modal component
+    spyOn(mockModalPopupComponent, 'openModal');
     
     // Act: Call the onPurchase method
     standaloneComponent.onPurchase();
     
     // Assert: Verify the alert was called with the correct message
-    expect(window.alert).toHaveBeenCalledWith('Payment system not yet available');
+    expect(mockModalPopupComponent.openModal).toHaveBeenCalledWith('Payment system not yet available');
   });
 
 

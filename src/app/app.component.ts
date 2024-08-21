@@ -43,13 +43,11 @@ export class AppComponent implements OnInit {
   chosenProducts$!: Observable<ChosenProduct[]>;
   grandTotal$!: Observable<number>;
 
-
-
   // Constructor injects the NgRx Store for state management
   constructor(private store: Store<AppState>, private toastsService: ToastsService) {}
 
   ngOnInit(): void {
-
+    console.debug('AppComponent: initializing...');
     this.chosenProducts$ = this.store.select(selectChosenProductsState);
 
     this.grandTotal$ = this.chosenProducts$.pipe(
@@ -66,11 +64,7 @@ export class AppComponent implements OnInit {
       }
     });
 
-
     // On component initialization, log to console and dispatch action to load products
-    console.log('AppComponent: initializing...');
     this.store.dispatch(loadAvailableProducts());
   }
-
-  
 }

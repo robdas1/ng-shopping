@@ -12,6 +12,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TotalsComponent } from './totals.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 
 describe('TotalsComponent', () => {
 
@@ -43,17 +44,16 @@ describe('TotalsComponent', () => {
     standaloneComponent = new TotalsComponent(mockStore as Store<AppState>);
   });
   
-  it('should correctly calculate subtotal considering custom quantities', () => {
+  it('should correctly calculate subtotal considering custom quantities', () => { 
     
-    // Directly setting the state in the mock store to predefined values. This
-    // simulates a specific application state for testing the component's
-    // behavior under these conditions.
-    mockStore.setState({
-      chosenProducts: [
-        { id: '01', productName: 'Product 1', unitPrice: 10.00, qty: 3 },
-        { id: '03', productName: 'Product 3', unitPrice: 30.00, qty: 2 }
-      ]
-    });
+    // The mockChosenProducts variable represents a mock state containing a list of chosen products.
+    const mockChosenProducts = [
+      { id: '01', productName: 'Product 1', unitPrice: 10.00, qty: 3 },
+      { id: '03', productName: 'Product 3', unitPrice: 30.00, qty: 2 }
+    ];
+
+    // Override the selector to return the mock data
+    mockStore.overrideSelector(selectChosenProductsState, mockChosenProducts);
     
     // Initializing the component to trigger any setup logic, such as
     // subscriptions to the store. This is crucial for the test to reflect the
@@ -71,4 +71,4 @@ describe('TotalsComponent', () => {
     // quantities.
     expect(standaloneComponent.subtotal).toEqual(expectedSubtotal);
   });
-});
+}); 
