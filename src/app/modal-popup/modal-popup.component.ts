@@ -1,3 +1,8 @@
+/**
+ * ModalPopupComponent
+ * 
+ * A component that displays a modal popup with a message. 
+ */
 import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,6 +21,10 @@ export class ModalPopupComponent {
 
   constructor(private modalService: NgbModal) { }
 
+  /**
+   * Opens a modal popup with the provided message.
+   * @param message The message to display in the modal popup.
+   */
   openModal(message: string) {
     this.modalMessage = message;
     this.modalService.open(
