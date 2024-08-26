@@ -1,1 +1,24 @@
-<h2>Footer</h2>
+<div class="container">
+  <div class="row" style="height: 100%;">
+    <!-- Row to ensure full height for vertical centering -->
+    <div class="d-inline-flex justify-content-center align-items-center">
+      <!-- Flex container to center content both horizontally and vertically -->
+      <div id="logo-div" class="text-center text-md-start">
+        <!-- Logo section, centered on small screens and left-aligned on medium and larger screens -->
+        <img src="assets/logo-sm.png" alt="Logo" class="img-fluid">
+      </div>
+      <div id="app-info-div" class="text-center text-md-start ms-3">
+        <!-- App info section, centered on small screens and left-aligned on medium and larger screens -->
+        <h2>{{ appName }}</h2>
+        <p>{{ appVersion }} - {{ appDescription }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Row for the copyright information -->
+    <div id="copyright-div" class="col-12 text-center">
+      <!-- Full-width column, centered text -->
+      <p>&copy; {{ currentYear }} Your Company. All rights reserved.</p>
+    </div>
+  </div>
+</div>
