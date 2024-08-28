@@ -1,26 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --border-color: darkgray;
-    --nav-green: #28a745;
-    --nav-blue: #0056b3;
-    --nav-text: #fff; /* White text */
-    --nav-unselected: #808080; /* Default nav button color is gray */
     --product-summary-background: aliceblue;
   }
   
-.link-button {
-    display: inline-block;
-    width: 10rem; /* Adjust this value as needed */
-    padding: 0.625rem 1.25rem; /* Padding around the text */
-    margin: 0.3125rem; /* Space around each button */
-    text-decoration: none; /* Remove underline from links */
-    color: var(--nav-text); 
-    background-color: var(--nav-unselected); 
-    border: none; /* No border */
-    border-radius: 0.703125rem; /* Rounded corners */
-    text-align: center; /* Center the text */
-}
-
 .full-width-table {
     width: 100%;
 }
