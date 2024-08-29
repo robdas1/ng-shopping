@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   appName = 'DTEK Online Shopping';
-  appVersion = 'v0.3.0';
-  appDescription = 'The best place to shop online';
+  appVersion = 'v0.3.1';
+  appDescription = 'an Angular development, proof-of-concept. This simulated eCommerce site is intended to provide a recreational shopping experience.';
   currentYear = new Date().getFullYear();
 }

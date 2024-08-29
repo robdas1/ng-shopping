@@ -3,22 +3,36 @@
     <!-- Row to ensure full height for vertical centering -->
     <div class="d-inline-flex justify-content-center align-items-center">
       <!-- Flex container to center content both horizontally and vertically -->
-      <div id="logo-div" class="text-center text-md-start">
+      <div class="text-center text-md-start">
         <!-- Logo section, centered on small screens and left-aligned on medium and larger screens -->
         <img src="assets/logo-sm.png" alt="Logo" class="img-fluid">
       </div>
-      <div id="app-info-div" class="text-center text-md-start ms-3">
+      <div class="text-center text-md-start ms-3">
         <!-- App info section, centered on small screens and left-aligned on medium and larger screens -->
-        <h2>{{ appName }}</h2>
-        <p>{{ appVersion }} - {{ appDescription }}</p>
+        <p>
+          <span class="text-primary">{{ appName }}</span> {{ appVersion }} &mdash; {{ appDescription }}
+        </p>
+        <p>
+          Copyright &copy; Robi Indra Das, 2009- {{ currentYear }}. All rights reserved.
+          DTEK Consulting Services Ltd. is a Canadian company.
+        </p>
       </div>
     </div>
   </div>
   <div class="row">
-    <!-- Row for the copyright information -->
-    <div id="copyright-div" class="col-12 text-center">
-      <!-- Full-width column, centered text -->
-      <p>&copy; {{ currentYear }} Your Company. All rights reserved.</p>
+    <div class="col-12">
+      <p>
+        This site is not intended for buying or selling anything. Nothing
+        changes hands. It's a simulation of a user's shopping experience,
+        without concern for payment or shipping - just a bottomless shopping
+        cart with an unlimited grand total that never actually gets paid.
+        It's therapeutic - try it, you might like it.
+      </p>
+      <p>
+        In the context of this site,
+        "<em>Stuff</em>" are just images of real things. They're based on royalty free, public domain pics
+        from <a href="https://www.pexels.com/" target='_blank' rel="noreferrer">Pexels</a>.
+      </p>
     </div>
   </div>
 </div>
