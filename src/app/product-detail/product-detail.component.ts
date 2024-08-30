@@ -30,6 +30,7 @@ import { AvailableProduct } from 'src/app/models/available-product.interface';
 import { selectAvailableProductById } from 'src/app/state/selectors/available-product.selectors';
 import { AppState } from 'src/app/state/app.state';
 import { addToCart } from '../state/actions/chosen-product.actions';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
@@ -54,7 +55,11 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
 
     // injected to interact with the NgRx Store for state management
-    private store: Store<AppState>) { }
+    private store: Store<AppState>,
+
+    // injected to navigate back to the previous page
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     // We have to use .snapshot because Angular's ActivatedRoute parameters (params) are Observables. 
@@ -69,17 +74,18 @@ export class ProductDetailComponent implements OnInit {
         const { id, productName, unitPrice } = product;
 
         // Dispatch the addToCart action with the desctructured properties
-        this.store.dispatch(addToCart({ id, productName, unitPrice}));
+        this.store.dispatch(addToCart({ id, productName, unitPrice }));
 
         // Go back to the stuff page so the user can't accidentally click the buy button more than once.
         // This is a variation on the PRG (Post Redirect Get) design pattern.
         this.router.navigate(['/stuff']);
       }
     });
-    
   }
 
-
+  goBack(): void {
+    this.location.back();
+  }
 
 
 }
