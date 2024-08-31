@@ -20,10 +20,103 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - Run `ng test --code-coverage` to get a code coverage report.
 - Run `ng test --watch=false` to execute the unit tests only once and then exit.
 
+### Unit Testing Standalone Components with Mocked Sub-Components
+
+#### Overview
+
+When unit testing standalone components in Angular, especially those that include other standalone components as sub-components, it's important to isolate the component under test. This often involves replacing sub-components with mock versions to avoid testing dependencies that are not directly relevant to the unit test.
+
+This guide provides a step-by-step approach using the `HeaderComponent` and `CartSummaryComponent` as examples.
+
+#### Challenges and Solutions
+
+1. **Standalone Component Restrictions**: Standalone components cannot be declared in any NgModule. They need to be imported directly in the `TestBed.configureTestingModule`.
+  
+   **Solution**: Use the `imports` array within `TestBed.configureTestingModule` to include standalone components.
+
+2. **Mocking Sub-Components**: To avoid testing a real sub-component (e.g., `CartSummaryComponent`), you can create a mock component. However, you need to ensure that the mock is used in place of the real component.
+
+   **Solution**: Use `TestBed.overrideComponent` to replace the sub-component with a mock version.
+
+#### Step-by-Step Instructions
+
+##### 1. Create the Mock Sub-Component
+
+Define a mock version of the sub-component. This mock should mimic the sub-component's selector and any necessary lifecycle hooks.
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-cart-summary',
+  standalone: true,
+  template: '' // The template is empty as this is a mock component
+})
+class MockCartSummaryComponent {
+  
+  ngOnInit() {
+    console.debug('MockCartSummaryComponent ngOnInit...');
+  }
+}
+```
+
+##### 2. Set Up the TestBed
+
+In the `beforeEach` block, configure `TestBed` by importing the component under test and any necessary modules (e.g., `RouterModule`). Use `TestBed.overrideComponent` to replace the real sub-component with the mock.
+
+```typescript
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './header.component';
+
+describe('HeaderComponent', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        RouterModule.forRoot([]),
+        HeaderComponent,
+      ],
+    })
+    .overrideComponent(HeaderComponent, {
+      set: {
+        imports: [
+          RouterOutlet, 
+          RouterLink, 
+          RouterLinkActive, 
+          NgbNavModule, 
+          MockCartSummaryComponent
+        ],
+      }
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+```
+
+##### 3. Run the Tests
+
+With this setup, the unit test will create the `HeaderComponent` while using `MockCartSummaryComponent` instead of the real `CartSummaryComponent`. This ensures the test only focuses on the `HeaderComponent` logic and template, avoiding indirect dependencies like NGRX or other services used by the sub-component.
+
+---
+
+By following these steps, you can effectively isolate and test standalone components in Angular, ensuring your unit tests are focused, maintainable, and free of unintended dependencies.
+
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you first need to add a package 
-that implements end-to-end testing capabilities.
+that implements end-to-end testing capabilities. No end-to-end tests for this application have been created at this time.
 
 ## Further help
 

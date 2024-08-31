@@ -1,54 +1,87 @@
 /**
- * HeaderComponent Tests
+ * @file header.component.spec.ts
+ * @description Unit test for the HeaderComponent in an Angular 18 application using standalone components.
  * 
- * This file contains the unit tests for the HeaderComponent. It utilizes the Angular testing utilities
- * to create a testing module and environment for the HeaderComponent. The tests ensure that the component
- * is created successfully and functions as expected. The RouterModule is imported to support any router
- * functionality within the component. These tests verify the component's integration with Angular's router
- * and its standalone capability.
+ * This file tests the HeaderComponent, which is a standalone component that includes another custom 
+ * component called CartSummaryComponent. The goal of this test is to ensure that HeaderComponent works as 
+ * expected while replacing CartSummaryComponent with a mock component, MockCartSummaryComponent, to isolate 
+ * the test from dependencies that aren't directly related to HeaderComponent.
  * 
- * The TestBed.configureTestingModule method is used to configure the testing module by declaring the component
- * under test and importing necessary modules, such as RouterModule. The ComponentFixture is used to create
- * an instance of the HeaderComponent, allowing interaction with the component's template and class during
- * testing. The tests within this file serve as a foundation for ensuring the HeaderComponent's reliability
- * and functionality within the application.
+ * Key challenges include ensuring that the mock component is used instead of the real component in the test. 
+ * These challenges were overcome by carefully configuring the TestBed and using TestBed.overrideComponent 
+ * to inject the mock component and reserve necessary imports for routing and navigation.
  */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
-import { HeaderComponent } from './header.component';
+import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';  
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './header.component';  
+import { Component } from '@angular/core';
 
-// Setup for HeaderComponent tests
+// Mock CartSummaryComponent
+@Component({
+  selector: 'app-cart-summary',
+  standalone: true,
+  template: ''  // The template is empty because this is a mock component
+})
+class MockCartSummaryComponent {
+  
+  // Debugging message to confirm when this mock is used
+  ngOnInit() {
+    console.debug('MockCartSummaryComponent ngOnInit...');  
+  }
+}
+
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+  let component: HeaderComponent;  
+  let fixture: ComponentFixture<HeaderComponent>;  
 
-  // Setup TestBed and ComponentFixture
   beforeEach(async () => {
-    // Arrange: Setup TestBed environment for HeaderComponent
+    
+    // Setting up the test environment for HeaderComponent
     await TestBed.configureTestingModule({
+      
+      // Importing router module to satisfy router dependencies
       imports: [
-        HeaderComponent,
-
-        // Main layout uses RouterLink and Karma, the test runner, expects 
-        // RouterLink to use ActivatedRoute, which is provided by RouterModule.
-        RouterModule.forRoot([])
+        RouterModule.forRoot([]),  
+        
+        // Import the actual HeaderComponent for testing
+        HeaderComponent,  
       ]
+      
     })
-      .compileComponents();
+    .overrideComponent(HeaderComponent, {
+      
+      // Override CartSummaryComponent with MockCartSummaryComponent
+      set: {
+        imports: [
+          RouterOutlet, 
+          RouterLink, 
+          RouterLinkActive, 
+          NgbNavModule, 
+          MockCartSummaryComponent
+        ],  
+      }
+      
+    })
+    .compileComponents();  
 
-    // Act: Create HeaderComponent instance
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-
-    // Assert: Initial state verification
-    fixture.detectChanges();
+    // Create the component instance
+    fixture = TestBed.createComponent(HeaderComponent);  
+    
+    // Access the component instance
+    component = fixture.componentInstance;  
+    
+    // Trigger Angular's change detection
+    fixture.detectChanges();  
   });
 
-  // Test case: Verifies the component's creation
   it('should create', () => {
-    // Arrange: Component setup is already done in beforeEach
-    // Act: No action needed as creation is being tested
-    // Assert: Component should be truthy upon creation
-    expect(component).toBeTruthy();
+    
+    // Debugging message to confirm test execution
+    console.debug('HeaderComponent should create...');  
+    
+    // Assertion to verify the component is created
+    expect(component).toBeTruthy();  
   });
 });

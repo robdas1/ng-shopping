@@ -1,0 +1,19 @@
+
+ .background-image {
+    position: relative;
+    padding: 20px;
+}
+
+.background-image::before {
+    content: '';
+    background-image: url('../../assets/shopping-cart.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35; /* Adjust the opacity value as needed */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
