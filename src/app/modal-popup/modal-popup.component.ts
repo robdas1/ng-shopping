@@ -16,8 +16,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalPopupComponent {
 
   // Reference to the modal in the component template
-  @ViewChild('modalPopupNotifier', { static: true }) modalPopupNotifier!: TemplateRef<any>;
-  modalMessage: string = '';
+  @ViewChild('modalPopupNotifier', { static: true }) modalPopupNotifier!: TemplateRef<unknown>;
+  modalMessage = '';
 
   constructor(private modalService: NgbModal) { }
 

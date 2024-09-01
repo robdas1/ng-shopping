@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   active = 1;
-  routeTitles: { [key: string]: string } = {};
+  routeTitles: Record<string, string> = {}; // this type is equivalent to {[key:string]:string} but lint prefers it
 
   constructor(private router: Router) { }
 

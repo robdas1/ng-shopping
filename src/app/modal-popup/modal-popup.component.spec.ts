@@ -53,7 +53,7 @@ describe('ModalPopupComponent', () => {
 
     // Arrange - Set up the component and message
     const message = 'Test Message';
-    component.modalPopupNotifier = {} as TemplateRef<any>; // Mock the TemplateRef
+    component.modalPopupNotifier = {} as TemplateRef<unknown>; // Mock the TemplateRef
 
     // Act - Open the modal with the message
     component.openModal(message);
@@ -77,15 +77,21 @@ describe('ModalPopupComponent', () => {
     // Arrange - Set up the test with a message and dismiss reason
     const message = 'Test Message';
     const dismissReason = 'Dismissed by user';
-    spyOn(console, 'debug'); 
-    component.modalPopupNotifier = {} as TemplateRef<any>; 
+    spyOn(console, 'debug');
+    component.modalPopupNotifier = {} as TemplateRef<unknown>; // Mock the TemplateRef
 
     // Act - Open the modal and reject the result promise to simulate dismissal
-    modalRef.result = Promise.reject(dismissReason); 
+    modalRef.result = Promise.reject(dismissReason);
     component.openModal(message);
 
     // Catch the rejection to prevent unhandled promise rejection
-    try { await modalRef.result; } catch (e) { }
+    try {
+      await modalRef.result;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e: unknown) {
+      // Intentionally empty
+    }
+
 
     // Assert - Ensure the dismiss reason is logged
     expect(console.debug).toHaveBeenCalledWith(`Dismissed: ${dismissReason}`);

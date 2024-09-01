@@ -15,7 +15,7 @@ import { selectChosenProductsState } from '../state/selectors/chosen-product.sel
 export class CartSummaryComponent implements OnInit {
   // Holds the list of products as an Observable stream.
   chosenProducts$!: Observable<ChosenProduct[]>; // note the use of the definite assignment assertion operator (!)
-  totalItems: number = 0; // the total number of items in the cart
+  totalItems = 0; // the total number of items in the cart
 
   constructor(private store: Store) {
     // The constructor injects the NgRx Store for state management.

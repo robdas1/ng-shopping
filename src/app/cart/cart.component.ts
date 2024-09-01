@@ -86,7 +86,7 @@ export class CartComponent implements OnInit {
 
   // Function to remove a product from state.
   removeProduct(id: string): void {
-    this.store.dispatch(removeChosenProduct({ productId: id })); // Use testProductId directly
+    this.store.dispatch(removeChosenProduct({ productId: id })); 
   }
 
 }

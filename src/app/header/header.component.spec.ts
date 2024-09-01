@@ -13,10 +13,10 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Mock CartSummaryComponent
@@ -25,7 +25,7 @@ import { ActivatedRoute } from '@angular/router';
   standalone: true,
   template: ''  // The template is empty because this is a mock component
 })
-class MockCartSummaryComponent {
+class MockCartSummaryComponent implements OnInit {
 
   // Debugging message to confirm when this mock is used
   ngOnInit() {

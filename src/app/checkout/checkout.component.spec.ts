@@ -30,6 +30,7 @@ class MockTotalsComponent { }
 
 // Mock ModalPopupComponent
 class MockModalPopupComponent {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   openModal(message: string) {}
 }
 
