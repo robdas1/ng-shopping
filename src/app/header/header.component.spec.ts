@@ -13,9 +13,9 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';  
+import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './header.component';  
+import { HeaderComponent } from './header.component';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -26,10 +26,10 @@ import { ActivatedRoute } from '@angular/router';
   template: ''  // The template is empty because this is a mock component
 })
 class MockCartSummaryComponent {
-  
+
   // Debugging message to confirm when this mock is used
   ngOnInit() {
-    console.debug('MockCartSummaryComponent ngOnInit...');  
+    console.debug('MockCartSummaryComponent ngOnInit...');
   }
 }
 
@@ -52,72 +52,76 @@ const mockActivatedRoute = {
   }
 };
 
-
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;  
-  let fixture: ComponentFixture<HeaderComponent>;  
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
   let mockRouter: MockRouter;
 
   beforeEach(async () => {
     mockRouter = new MockRouter();
 
-    
     // Setting up the test environment for HeaderComponent
     await TestBed.configureTestingModule({
-      
-      // Importing router module to satisfy router dependencies
-      imports: [
-        RouterModule.forRoot([]),  
 
-        NgbNavModule, 
-        MockCartSummaryComponent,
-        
+      imports: [
+
+        // Importing router module to satisfy router dependencies
+        RouterModule.forRoot([]),
+
         // Import the actual HeaderComponent for testing
-        HeaderComponent,  
+        HeaderComponent,
       ],
 
-      // providers: [
-      //   { provide: Router, useValue: mockRouter },
-      //   { provide: ActivatedRoute, useValue: mockActivatedRoute }
-      // ]
+      providers: [
+        { provide: Router, useValue: mockRouter },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+      ]
 
-
-
-      
-      
     })
-    .overrideComponent(HeaderComponent, {
-      
-      // Override CartSummaryComponent with MockCartSummaryComponent
-      set: {
-        imports: [
-          RouterOutlet, 
-          RouterLink, 
-          RouterLinkActive, 
-          NgbNavModule, 
-          MockCartSummaryComponent
-        ],  
-      }
-      
-    })
-    .compileComponents();  
+      .overrideComponent(HeaderComponent, {
+
+        // Override CartSummaryComponent with MockCartSummaryComponent
+        set: {
+          imports: [
+            NgbNavModule,
+            MockCartSummaryComponent
+          ],
+        }
+
+      })
+      .compileComponents();
 
     // Create the component instance
-    fixture = TestBed.createComponent(HeaderComponent);  
-    
+    fixture = TestBed.createComponent(HeaderComponent);
+
     // Access the component instance
-    component = fixture.componentInstance;  
-    
+    component = fixture.componentInstance;
+
     // Trigger Angular's change detection
-    fixture.detectChanges();  
+    fixture.detectChanges();
   });
 
   it('should create', () => {
-    
-    // Debugging message to confirm test execution
-    console.debug('HeaderComponent should create...');  
-    
+
+    // Arrange, Act: Component setup is already done in beforeEach
     // Assertion to verify the component is created
-    expect(component).toBeTruthy();  
+    expect(component).toBeTruthy();
   });
+
+  it('should populate routeTitles correctly on ngOnInit', () => {
+
+    // Arrange: Define the expected route titles 
+    const expectedTitles = {
+      'start': 'Start Here',
+      'stuff': 'Stuff',
+      'cart': 'Cart',
+      'checkout': 'Checkout'
+    };
+
+    // Act: implicitly handled by fixture.detectChanges() in beforeEach
+    // Assert: Verify the routeTitles are populated correctly
+    expect(component.routeTitles).toEqual(expectedTitles);
+  });
+
+
 });
