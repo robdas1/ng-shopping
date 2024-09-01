@@ -4,7 +4,7 @@
  * This component represents the cart view of the application. It allows users
  * to view chosen products and interact with them.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { addToCart, removeChosenProduct } from '../state/actions/chosen-product.actions';
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 import { CommonModule } from '@angular/common';
 import { TotalsComponent } from '../totals/totals.component';
+import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -51,7 +52,11 @@ export class CartComponent implements OnInit {
   // in the template.
   isDataInIt = false; // @typescript-eslint/no-inferrable-types Type boolean trivially inferred from a boolean literal, remove type annotation
 
-  constructor(private store: Store<AppState>) { }
+  title: string | Type<Resolve<string>> | ResolveFn<string> | undefined; // data type returned by route.snapshot.routeConfig?.title
+
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) { 
+    this.title = this.route.snapshot.routeConfig?.title;
+  }
 
   ngOnInit(): void {
 

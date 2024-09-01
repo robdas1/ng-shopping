@@ -17,6 +17,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductListComponent } from './product-list.component';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
 // This mock class is used to simulate the behavior of the NgRx Store within the test environment.
 // It includes a spy for the 'select' method to assert its calls and arguments.
@@ -27,6 +28,7 @@ class MockStore {
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
   let fixture: ComponentFixture<ProductListComponent>;
+  const mockActivatedRoute = { snapshot: { routeConfig: { title: 'Product List' } } };
 
   // Setup before each test case
   beforeEach(async () => {
@@ -37,7 +39,8 @@ describe('ProductListComponent', () => {
         // Provide the mock store instead of the actual Store service
         // This substitution ensures that the tests are not dependent on the actual implementation
         // of the Store service, making them more reliable and faster.
-        { provide: Store, useClass: MockStore }
+        { provide: Store, useClass: MockStore },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
     })
       .compileComponents();

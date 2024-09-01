@@ -10,6 +10,7 @@ import { provideStore } from '@ngrx/store';
 import { chosenProductReducer } from '../state/reducers/chosen-product.reducer';
 import { Store } from '@ngrx/store';
 import { addToCart, removeChosenProduct } from '../state/actions/chosen-product.actions';
+import { ActivatedRoute } from '@angular/router';
 
 describe('CartComponent', () => {
 
@@ -25,13 +26,16 @@ describe('CartComponent', () => {
   // interactions with the application's state management.
   let store: Store;
 
+  const mockActivatedRoute = { snapshot: { routeConfig: { title: 'Shopping Cart' } } };
+
   beforeEach(async () => {
     // Setting up the testing module for CartComponent
     await TestBed.configureTestingModule({
       imports: [CartComponent],
       providers: [
         // Providing the NgRx store with the chosenProductReducer
-        provideStore({ chosenProducts: chosenProductReducer })
+        provideStore({ chosenProducts: chosenProductReducer }),
+        { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
     }).compileComponents();
 

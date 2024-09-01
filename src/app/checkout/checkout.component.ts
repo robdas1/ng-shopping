@@ -5,7 +5,7 @@
  * to manage the checkout process, including selecting payment methods, entering
  * card expiration dates, and providing customer information.
  */
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Type, ViewChild } from '@angular/core';
 import { TotalsComponent } from "../totals/totals.component";
 import { AppState } from '../state/app.state';
 import { Store } from '@ngrx/store';
@@ -18,6 +18,7 @@ import { updateCustomerAddress, updateCustomerName } from '../state/actions/ship
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
+import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -44,7 +45,12 @@ export class CheckoutComponent implements OnInit {
   chosenProducts$!: Observable<ChosenProduct[]>;
   isPurchaseEnabled$!: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) { }
+  // The title from the activated route
+  title: string | Type<Resolve<string>> | ResolveFn<string> | undefined; // data type returned by route.snapshot.routeConfig?.title
+
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) { 
+    this.title = this.route.snapshot.routeConfig?.title;
+  }
 
   ngOnInit(): void {
     // Use selectors to get the current state

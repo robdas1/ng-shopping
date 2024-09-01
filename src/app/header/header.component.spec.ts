@@ -13,10 +13,11 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';  
+import { RouterModule, RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';  
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header.component';  
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 // Mock CartSummaryComponent
 @Component({
@@ -32,11 +33,34 @@ class MockCartSummaryComponent {
   }
 }
 
+// Mock Router with route configuration
+class MockRouter {
+  config = [
+    { path: 'start', title: 'Start Here' },
+    { path: 'stuff', title: 'Stuff' },
+    { path: 'cart', title: 'Cart' },
+    { path: 'checkout', title: 'Checkout' }
+  ];
+}
+
+// Mock ActivatedRoute
+const mockActivatedRoute = {
+  snapshot: {
+    routeConfig: {
+      title: 'Mock Title'
+    }
+  }
+};
+
+
 describe('HeaderComponent', () => {
   let component: HeaderComponent;  
   let fixture: ComponentFixture<HeaderComponent>;  
+  let mockRouter: MockRouter;
 
   beforeEach(async () => {
+    mockRouter = new MockRouter();
+
     
     // Setting up the test environment for HeaderComponent
     await TestBed.configureTestingModule({
@@ -44,10 +68,22 @@ describe('HeaderComponent', () => {
       // Importing router module to satisfy router dependencies
       imports: [
         RouterModule.forRoot([]),  
+
+        NgbNavModule, 
+        MockCartSummaryComponent,
         
         // Import the actual HeaderComponent for testing
         HeaderComponent,  
-      ]
+      ],
+
+      // providers: [
+      //   { provide: Router, useValue: mockRouter },
+      //   { provide: ActivatedRoute, useValue: mockActivatedRoute }
+      // ]
+
+
+
+      
       
     })
     .overrideComponent(HeaderComponent, {

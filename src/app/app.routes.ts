@@ -14,11 +14,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 export const routes: Routes = [
-    { path: 'start', component: StartPageComponent },
-    { path: 'stuff', component: ProductListComponent },
-    { path: 'cart', component: CartComponent},
-    { path: 'checkout', component: CheckoutComponent},
-    { path: 'product/:id', component: ProductDetailComponent },
+    { path: 'start', component: StartPageComponent, title: 'Start Here' },
+    { path: 'stuff', component: ProductListComponent, title: 'Need Stuff?' },
+    { path: 'cart', component: CartComponent, title: 'Shopping Cart' },
+    { path: 'checkout', component: CheckoutComponent, title: 'Checkout' },
+    { path: 'product/:id', component: ProductDetailComponent, title: 'Details' },
     { path: '', redirectTo: '/start', pathMatch: 'full' },
     { path: '**', redirectTo: '/start', pathMatch: 'full' }
 ];
