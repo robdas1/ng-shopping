@@ -1,0 +1,16 @@
+/* 
+The third row of the totals table contains the grand total, 
+so we put a solid thin line at the top of that table row to imply
+that the grand total is the business "bottom-line".
+See: 
+  https://stackoverflow.com/questions/20872200/giving-a-border-to-an-html-table-row-tr
+*/
+.totals-table tr:nth-child(3) { border-top: solid thin; }
+
+.totals-table {
+    border-top:solid;
+    border-bottom:solid;
+    margin-top:1.0rem;
+    margin-bottom: 1.0rem;
+}
+
