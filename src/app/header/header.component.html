@@ -2,12 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <img src="assets/logo-lg.png" alt="Logo" class="img-fluid logo">
+                <a href="https://rob-das-win.azurewebsites.net/about" target="_blank" rel="noreferrer">
+                    <img src="assets/logo-lg.png" alt="Logo" class="img-fluid logo shadow-sm bg-body">
+                </a>
             </div>
             <div class="col-sm-6 d-inline-flex justify-content-center align-items-center">
                 <hgroup class="text-center">
-                    <h2>DTEK Online Shopping</h2>
-                    <p>late-night shopping, made easy</p>
+                    <h4 class="display-5">DTEK Online Shopping</h4>
+                    <p class="display-6" style="font-size: 1.5rem;">late-night shopping, made easy</p>
                 </hgroup>
             </div>
             <div class="col-sm-3 d-inline-flex justify-content-center align-items-center background-image">
@@ -24,7 +26,7 @@
                 <nav>
                     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs">
                         <li [ngbNavItem]="1" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/start" routerLinkActive="active"> 
+                            <a class="link-button nav-link" routerLink="/start" routerLinkActive="active">
                                 {{ routeTitles['start'] }}
                             </a>
                         </li>
@@ -34,12 +36,12 @@
                             </a>
                         </li>
                         <li [ngbNavItem]="3" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/cart" routerLinkActive="active"> 
-                                {{ routeTitles['cart'] }} 
+                            <a class="link-button nav-link" routerLink="/cart" routerLinkActive="active">
+                                {{ routeTitles['cart'] }}
                             </a>
                         </li>
                         <li [ngbNavItem]="4" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/checkout" routerLinkActive="active"> 
+                            <a class="link-button nav-link" routerLink="/checkout" routerLinkActive="active">
                                 {{ routeTitles['checkout'] }}
                             </a>
                         </li>
