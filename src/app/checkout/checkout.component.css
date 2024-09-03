@@ -1,0 +1,23 @@
+ 
+
+fieldset {
+    border: solid thin gray;
+    border-radius: 5px;
+    padding: 1.0rem;
+}
+
+/**
+* In order to override bootstrap placement of legend inside the border, 
+* we need to use the `all: revert;` property.
+*/
+legend {
+    all: revert;
+    font-size: 20px;
+    padding: 0.5rem;
+}
+
+button {
+    margin-top: 1.0rem;
+    width: 10.0rem;
+}
+
