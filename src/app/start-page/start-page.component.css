@@ -1,0 +1,39 @@
+#outerdiv {
+    position: relative;
+    text-align:center; 
+}
+
+#innerdiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+    text-align: center;
+    padding: 0.5rem 2.5rem;
+    border: 2px solid white; 
+}
+
+#innerdiv p {
+    margin: 0;
+}
+
+#innerdiv img {
+    height: 2.7rem;
+    width: 2.7rem;
+    border: solid thin;
+    margin-top: 0.6rem;
+}
+
+#innerdiv:hover {
+    cursor: pointer;
+}
+
+#bg-img {
+    height:100%; 
+    max-width: 550px;
+}
+
+#containerdiv {
+    height: 400px;
+}

@@ -1,3 +1,13 @@
-<div class="text-center">
-    <h2 class="display-6">{{title}}</h2>
+<div id="containerdiv" class="container">
+    <div class="row">
+        <div class="col">
+            <div id="outerdiv">
+                <img id="bg-img" src="../../assets/stuff_sm.jpg" alt="stuff" class="rounded-3">
+                <div id="innerdiv" class="text-bg-success rounded-3" (click)="goToStuff()">
+                    <p class="fw-bold">Let's go shopping!</p>
+                    <img id="fg-img" src="../../assets/pushbutton.jpg" class="rounded-3" alt="Push Button">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
