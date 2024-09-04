@@ -38,6 +38,19 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 When unit testing standalone components in Angular, especially those that include other standalone components as sub-components, it's important to isolate the component under test. This often involves replacing sub-components with mock versions to avoid testing dependencies that are not directly relevant to the unit test.
 
+#### Unit testing spies
+
+In Jasmine, a "spy" is a feature that allows you to track and control the behavior of functions or methods in your tests. Spies are used to create mock functions that can record how they are called and what arguments they are called with, without executing the actual function logic. This is particularly useful for isolating the unit under test from its dependencies. For example, in the start page unit testing file, jasmine.createSpy('navigate') creates a spy named 'navigate'. Here's what it does:  
+
+1. *Creates a mock function* that can be used instead of the real navigate method. This mock function does not execute any real logic but can be used to simulate the behavior of the actual method.
+
+1. *Tracks calls an arguments* The spy records all calls made to it, including the arguments passed in each call. This allows you to make assertions about how the function was used during the test.
+
+1. *Provides control* You can control the behavior of the spy, such as specifying return values or throwing errors, to test different scenarios.
+ 
+
+### Example  
+
 This guide provides a step-by-step approach using the `HeaderComponent` and `CartSummaryComponent` as examples.
 
 #### Challenges and Solutions
@@ -776,7 +789,7 @@ You are advised to view every piece of code given to you by AI sceptically. Make
 
 The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used over-and-over again, and fine tuned in the process. 
 
-#### Documentation Prompts 
+#### Documentation prompts 
 
 ##### Whole source code file
   
@@ -789,4 +802,20 @@ The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used o
 ```
 @workspace Please give me a file header for this source code file using inline comments. Wrap lines are 100 chars co that they can easily be read on small screens. The file header should have a title, and a summary paragraph explaining the purpose of the source code in the file. For the file header, use the multi-line comment delimiter "/**" and "*/". Assume the audience is a junior, entry level developer with minimal experience with the programming language.
 ```
+#### Unit testing prompts
+
+##### Mocking the Angular Router 
+  
+```  
+@workspace is there a mock provider for router available for testing, similar to the provider available from ngrx for mocking the store? I want to use a mock so that I don't end up with the fully functional router in my unit test. The purpose here is to unit test the component, not the component's dependencies. That's why I'm looking for a mock router. 
+```  
+  
+```  
+@workspace what is the purpose of jasmine.createSpy('navigate')? What does it do? What is a 'Spy'?  
+```  
+  
+#### Use of @workspace  
+
+I've discovered that by starting each prompt with @workspace, GH Copilot will actually look at the code and try to understand it, and it's responses tend to better address the problem at hand rather than addressing imaginary problems that it dreams up. In this sense @workspace serves as a counter measure against AI Hallucination by grounding GH Copilot in the reality of the actual codebase.
+
 

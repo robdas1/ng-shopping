@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class StartPageComponent {
   constructor(private router: Router) {}
 
-  goToStuff(): void {
+  navigateToStuff(): void {
     this.router.navigate(['/stuff']);
   }
 
