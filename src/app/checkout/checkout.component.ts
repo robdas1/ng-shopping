@@ -17,13 +17,13 @@ import { selectCustomerAddress, selectCustomerName } from '../state/selectors/sh
 import { updateCustomerAddress, updateCustomerName } from '../state/actions/shipping-info.actions';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
-import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
+import { ModalNotificationComponent } from '../modal-notification/modal-notification.component';
 import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [TotalsComponent, CommonModule, ModalPopupComponent],
+  imports: [TotalsComponent, CommonModule, ModalNotificationComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
@@ -31,8 +31,8 @@ import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
 // managing the checkout process in an e-commerce application.
 export class CheckoutComponent implements OnInit {
 
-  // Reference to the ModalPopupComponent instance
-  @ViewChild(ModalPopupComponent) modalComponent!: ModalPopupComponent;
+  // Reference to the ModalNotificationComponent instance
+  @ViewChild(ModalNotificationComponent) modalComponent!: ModalNotificationComponent;
 
   // These observables are tied to the application's state using NgRx 
   // selectors, which are functions that retrieve specific pieces of state 
@@ -92,7 +92,7 @@ export class CheckoutComponent implements OnInit {
 
   // Placeholder function to handle the purchase button click
   onPurchase(): void {
-    this.modalComponent.openModal('Payment system not yet available');
+    this.modalComponent.openModalNotification('Payment system not yet available');
   }
 
   // Dispatch update payment method action when the payment method changes

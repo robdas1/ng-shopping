@@ -16,7 +16,7 @@ import { AppState } from '../state/app.state';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { selectCustomerAddress, selectCustomerName } from '../state/selectors/shipping-info.selectors';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
-import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
+import { ModalNotificationComponent } from '../modal-notification/modal-notification.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -28,10 +28,10 @@ import { ActivatedRoute } from '@angular/router';
 // Specifically, the TotalsComponent depends on the NgRx store, which is not needed for this test.
 class MockTotalsComponent { }
 
-// Mock ModalPopupComponent
-class MockModalPopupComponent {
+// Mock ModalNotificationComponent
+class MockModalNotificationComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  openModal(message: string) {}
+  openModalNotification(message: string) {}
 }
 
 describe('CheckoutComponent', () => {
@@ -43,7 +43,7 @@ describe('CheckoutComponent', () => {
   // The standaloneComponent variable represents an instance of the
   // CheckoutComponent, which is under test.
   let standaloneComponent: CheckoutComponent;
-  let mockModalPopupComponent: MockModalPopupComponent;
+  let mockModalNotificationComponent: MockModalNotificationComponent;
 
   const mockActivatedRoute = {
     snapshot: {
@@ -61,7 +61,7 @@ describe('CheckoutComponent', () => {
       providers: [
         provideMockStore(), // Sets up the MockStore for tests
         CheckoutComponent, // Includes the component under test
-        { provide: MockModalPopupComponent, useClass: MockModalPopupComponent },
+        { provide: MockModalNotificationComponent, useClass: MockModalNotificationComponent },
         { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
 
@@ -79,16 +79,16 @@ describe('CheckoutComponent', () => {
 
     // Arrange: Initialize the mock store and the component under test
     mockStore = TestBed.inject(MockStore);
-    mockModalPopupComponent = TestBed.inject(MockModalPopupComponent);
+    mockModalNotificationComponent = TestBed.inject(MockModalNotificationComponent);
     standaloneComponent = new CheckoutComponent(mockStore as Store<AppState>, mockActivatedRoute as ActivatedRoute);
-    standaloneComponent.modalComponent = mockModalPopupComponent as ModalPopupComponent; // Inject the mock modal component
-    spyOn(mockModalPopupComponent, 'openModal');
+    standaloneComponent.modalComponent = mockModalNotificationComponent as ModalNotificationComponent; // Inject the mock modal component
+    spyOn(mockModalNotificationComponent, 'openModalNotification');
     
     // Act: Call the onPurchase method
     standaloneComponent.onPurchase();
     
     // Assert: Verify the alert was called with the correct message
-    expect(mockModalPopupComponent.openModal).toHaveBeenCalledWith('Payment system not yet available');
+    expect(mockModalNotificationComponent.openModalNotification).toHaveBeenCalledWith('Payment system not yet available');
   });
 
 

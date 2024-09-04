@@ -1,24 +1,24 @@
 /**
- * ModalPopupComponent Unit Tests
+ * ModalNotificationComponent Unit Tests
  * 
- * This file contains the unit tests for the ModalPopupComponent. It leverages Angular testing utilities
- * to establish a testing module and environment tailored for the ModalPopupComponent. These tests aim to 
+ * This file contains the unit tests for the ModalNotificationComponent. It leverages Angular testing utilities
+ * to establish a testing module and environment tailored for the ModalNotificationComponent. These tests aim to 
  * confirm the successful creation and expected operation of the component.
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TemplateRef } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import { ModalPopupComponent } from './modal-popup.component';
+import { ModalNotificationComponent } from './modal-notification.component';
 
-// Group of tests for ModalPopupComponent
-describe('ModalPopupComponent', () => {
+// Group of tests for ModalNotificationComponent
+describe('ModalMotificationComponent', () => {
 
   // Declare variables for the component, its fixture, and the modal service
-  let component: ModalPopupComponent;
-  let fixture: ComponentFixture<ModalPopupComponent>;
+  let component: ModalNotificationComponent;
+  let fixture: ComponentFixture<ModalNotificationComponent>;
 
-  // The modal service provides the open method to create a modal popup in the component.
+  // The modal service provides the open method to create a modal notification in the component.
   let modalService: jasmine.SpyObj<NgbModal>;
 
   // Declare a variable for the modal reference
@@ -33,14 +33,14 @@ describe('ModalPopupComponent', () => {
     modalService.open.and.returnValue(modalRef);
 
     await TestBed.configureTestingModule({
-      imports: [ModalPopupComponent],
+      imports: [ModalNotificationComponent],
       providers: [
         { provide: NgbModal, useValue: modalService }
       ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ModalPopupComponent);
+    fixture = TestBed.createComponent(ModalNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -56,7 +56,7 @@ describe('ModalPopupComponent', () => {
     component.modalPopupNotifier = {} as TemplateRef<unknown>; // Mock the TemplateRef
 
     // Act - Open the modal with the message
-    component.openModal(message);
+    component.openModalNotification(message);
 
     // Assert 
     // Ensure the modal is opened with the correct message
@@ -82,7 +82,7 @@ describe('ModalPopupComponent', () => {
 
     // Act - Open the modal and reject the result promise to simulate dismissal
     modalRef.result = Promise.reject(dismissReason);
-    component.openModal(message);
+    component.openModalNotification(message);
 
     // Catch the rejection to prevent unhandled promise rejection
     try {
