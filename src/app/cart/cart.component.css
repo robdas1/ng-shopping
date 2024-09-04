@@ -1,0 +1,8 @@
+.link:hover {
+  cursor: pointer;
+}
+
+.add-rem-btn {
+  padding-top: 0;
+  padding-bottom: 0;
+}

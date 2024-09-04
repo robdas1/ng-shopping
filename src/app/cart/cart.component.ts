@@ -15,6 +15,7 @@ import { selectChosenProductsState } from '../state/selectors/chosen-product.sel
 import { CommonModule } from '@angular/common';
 import { TotalsComponent } from '../totals/totals.component';
 import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -34,7 +35,9 @@ import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
     // TotalsComponent is imported to include the totals section directly
     // within the cart component's template. This allows us to display the
     // subtotal, tax, and total amounts calculated from the cart's contents.
-    TotalsComponent
+    TotalsComponent,
+
+    RouterLink
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],

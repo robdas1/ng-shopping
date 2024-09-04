@@ -22,7 +22,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
@@ -51,9 +51,6 @@ export class ProductDetailComponent implements OnInit {
     // injected to access the route parameters, specifically the 'id' of the product
     private route: ActivatedRoute,
 
-    // router is needed to redirect back to product list after product is added to cart
-    private router: Router,
-
     // injected to interact with the NgRx Store for state management
     private store: Store<AppState>,
 
@@ -73,12 +70,12 @@ export class ProductDetailComponent implements OnInit {
       if (product) {
         const { id, productName, unitPrice } = product;
 
-        // Dispatch the addToCart action with the desctructured properties
+        // Dispatch the addToCart action with the destructured properties
         this.store.dispatch(addToCart({ id, productName, unitPrice }));
 
-        // Go back to the stuff page so the user can't accidentally click the buy button more than once.
-        // This is a variation on the PRG (Post Redirect Get) design pattern.
-        this.router.navigate(['/stuff']);
+        // // Go back to the previous page so the user can't accidentally click the buy button more than once.
+        // // This is a variation on the PRG (Post Redirect Get) design pattern.
+        this.goBack();
       }
     });
   }

@@ -1,9 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <button *ngIf="totalItems > 0" id="cart-items" type="button" class="btn btn-primary position-relative"
+            <button *ngIf="totalItems > 0" id="cart-items" type="button" class="btn btn-primary position-relative" title="whats in my cart?"
                 (click)="navigateToCart()">
-                &nbsp; <span class="badge text-bg-danger"> {{ totalItems }} </span> &nbsp;
+                stuff
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> {{ totalItems }} </span> 
             </button>
         </div>
     </div>

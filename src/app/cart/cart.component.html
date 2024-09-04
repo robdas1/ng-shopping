@@ -5,18 +5,22 @@
 <table id="stuff-table" class="full-width-table" [style.display]="isDataInIt ? 'table' : 'none'">
     <thead>
         <tr>
-            <th class="text-left">your stuff</th>
-            <th class="text-right">remove / add</th>
-            <th class="number-right">qty</th>
-            <th class="number-right">cost</th>
+            <th class="text-left text-decoration-underline">your stuff</th>
+            <th class="text-right text-decoration-underline">change qty</th>
+            <th class="number-right text-decoration-underline">qty</th>
+            <th class="number-right text-decoration-underline">cost</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let product of chosenProducts$ | async">
-            <td class="text-left">{{ product.productName }}</td>
+            <td class="text-left">
+                <div [routerLink]="['/product', product.id]">
+                    <span class="text-primary link">{{ product.productName }}</span>
+                </div>
+            </td>
             <td class="text-right">
-                <button (click)="removeProduct(product.id)">Remove</button> /
-                <button (click)="addProduct(product.id, product.productName, product.unitPrice)">Add</button>
+                <button (click)="removeProduct(product.id)" class="btn btn-danger add-rem-btn" title="remove one">-</button> / 
+                <button (click)="addProduct(product.id, product.productName, product.unitPrice)" class="btn btn-success add-rem-btn" title="add one">+</button>
             </td>
             <td class="number-right">{{ product.qty }}</td>
             <td class="number-right">{{ product.unitPrice * product.qty | currency }}</td>
