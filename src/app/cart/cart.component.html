@@ -6,8 +6,8 @@
     <thead>
         <tr>
             <th class="text-left text-decoration-underline">your stuff</th>
-            <th class="text-right text-decoration-underline">change qty</th>
             <th class="number-right text-decoration-underline">qty</th>
+            <th class="text-right text-decoration-underline">change qty</th>
             <th class="number-right text-decoration-underline">cost</th>
         </tr>
     </thead>
@@ -18,14 +18,23 @@
                     <span class="text-primary link">{{ product.productName }}</span>
                 </div>
             </td>
+            <td class="number-right">{{ product.qty }}</td>
             <td class="text-right">
                 <button (click)="removeProduct(product.id)" class="btn btn-danger add-rem-btn" title="remove one">-</button> / 
                 <button (click)="addProduct(product.id, product.productName, product.unitPrice)" class="btn btn-success add-rem-btn" title="add one">+</button>
             </td>
-            <td class="number-right">{{ product.qty }}</td>
             <td class="number-right">{{ product.unitPrice * product.qty | currency }}</td>
         </tr>
     </tbody>
 </table>
 
 <app-totals></app-totals>
+
+<div class="text-center">
+	<button type="button" type="button" class="btn btn-primary" 
+		(click)="onRestart()">
+		Restart
+	</button>
+</div>
+
+<app-confirmation-popup></app-confirmation-popup>

@@ -1,10 +1,10 @@
-<ng-template #modalPopupNotifier let-modal>
+<ng-template #modalPopupConfirm let-modal>
     <div class="modal-header">
         <h5 class="modal-title" id="modal-basic-title">
             Notification
         </h5>
         <button type="button" class="btn-close" aria-label="Close"
-            (click)="modal.dismiss('modalPopupNotifier dismiss clicked')">
+            (click)="modal.dismiss('modalPopupConfirm dismiss clicked')">
             <span aria-hidden="true"></span>
         </button>
     </div>
@@ -12,8 +12,11 @@
         <p>{{ modalMessage }}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="testfunction(); modal.close('Save clicked'); ">
-            Close
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Yes clicked')">
+            Yes
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('No clicked')">
+            No
         </button>
     </div>
 </ng-template>

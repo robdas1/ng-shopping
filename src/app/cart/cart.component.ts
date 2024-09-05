@@ -4,7 +4,7 @@
  * This component represents the cart view of the application. It allows users
  * to view chosen products and interact with them.
  */
-import { Component, OnInit, Type } from '@angular/core';
+import { Component, OnInit, Type, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { addToCart, removeChosenProduct } from '../state/actions/chosen-product.actions';
@@ -16,6 +16,8 @@ import { CommonModule } from '@angular/common';
 import { TotalsComponent } from '../totals/totals.component';
 import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { ModalNotificationComponent } from '../modal-notification/modal-notification.component';
+import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-cart',
@@ -37,12 +39,16 @@ import { RouterLink } from '@angular/router';
     // subtotal, tax, and total amounts calculated from the cart's contents.
     TotalsComponent,
 
-    RouterLink
+    RouterLink, ModalConfirmationComponent
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+
+  // @ViewChild(ModalNotificationComponent) modalComponent!: ModalNotificationComponent;
+  @ViewChild(ModalConfirmationComponent) modalComponent!: ModalConfirmationComponent;
+
 
   // Observable to hold the chosen products
   chosenProducts$!: Observable<ChosenProduct[]>;
@@ -90,6 +96,12 @@ export class CartComponent implements OnInit {
   // Function to remove a product from state.
   removeProduct(id: string): void {
     this.store.dispatch(removeChosenProduct({ productId: id })); 
+  }
+
+    // Placeholder function to handle the restart button click
+  onRestart(): void {
+    console.debug('CartComponent.onRestart()');
+    this.modalComponent.openModalConfirmation('Are you sure you want to restart?');
   }
 
 }

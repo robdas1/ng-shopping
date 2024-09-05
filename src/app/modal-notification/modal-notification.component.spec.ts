@@ -65,7 +65,7 @@ describe('ModalMotificationComponent', () => {
     // Ensure the modal service open method was called with the correct arguments
     expect(modalService.open).toHaveBeenCalledWith(
       component.modalPopupNotifier,
-      { ariaLabelledBy: 'modal-basic-title' }
+      { ariaLabelledBy: 'modal-notification-basic-title' }
     );
 
     // Ensure the modal result promise is resolved

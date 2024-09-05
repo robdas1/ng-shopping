@@ -92,6 +92,7 @@ export class CheckoutComponent implements OnInit {
 
   // Placeholder function to handle the purchase button click
   onPurchase(): void {
+    console.debug('CheckoutComponent.onPurchase()');
     this.modalComponent.openModalNotification('Payment system not yet available');
   }
 
