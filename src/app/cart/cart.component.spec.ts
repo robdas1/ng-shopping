@@ -11,24 +11,25 @@ import { chosenProductReducer } from '../state/reducers/chosen-product.reducer';
 import { Store } from '@ngrx/store';
 import { addToCart, removeChosenProduct } from '../state/actions/chosen-product.actions';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Mock ModalConfirmationComponent
 @Component({
-  // the selector tells the testing framework which component is to be replaced with MockModalConfirmationComponent
-  selector: 'app-confirmation-popup', // The selector for the ModalConfirmationComponent
+  selector: 'app-confirmation-popup',
   standalone: true,
-  template: ''  // The template is empty because this is a mock component
+  template: ''
 })
 class MockModalConfirmationComponent {
+  @Input() onYes!: () => void;
+  @Input() onNo!: () => void;
 
-  // Input properties for the functions to be executed on 'Yes' and 'No' button clicks
-  @Input() onYes!: () => void;  
-  @Input() onNo!: () => void;   
+  @ViewChild('modalPopupConfirm', { static: true }) modalPopupConfirm!: TemplateRef<unknown>;
+  modalMessage = '';
 
   openModalConfirmation(message: string) {
-    console.debug('MockModalConfirmationComponent openModalConfirmation...');
+    this.modalMessage = message;
+    console.debug('MockModalConfirmationComponent openModalConfirmation with message:', message);
   }
 }
 
@@ -87,7 +88,9 @@ describe('CartComponent', () => {
         provideStore({ chosenProducts: chosenProductReducer }),
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: Router, useValue: mockRouter },
+        { provide: MockModalConfirmationComponent, useClass: MockModalConfirmationComponent },
       ]
+      
     })
       .overrideComponent(CartComponent, {
         set: {
@@ -160,5 +163,20 @@ describe('CartComponent', () => {
     expect(console.debug).toHaveBeenCalledWith('inside CartComponent.yesRestart(), title is: ', component.title);
     expect(navigateSpy).toHaveBeenCalledWith(['/start']);
   });
+
+  it('should open modal confirmation with the correct message when onRestart is called', () => {
+    const mockModalComponent = fixture.debugElement.injector.get(MockModalConfirmationComponent);
+    spyOn(mockModalComponent, 'openModalConfirmation');
+
+    // There is an issue with the mockModalComponent type, so we need to cast it to any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    component.modalComponent = mockModalComponent as any;
+
+    component.onRestart();
+
+    expect(mockModalComponent.openModalConfirmation).toHaveBeenCalledWith('Are you sure you want to restart?');
+  });
+
+
 
 });

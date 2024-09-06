@@ -45,62 +45,62 @@ describe('ModalMotificationComponent', () => {
     fixture.detectChanges();
   });
 
-  it ('my default test', () => {
-    expect(true).toBe(true);
-  });
+  // it ('my default test', () => {
+  //   expect(true).toBe(true);
+  // });
 
   // TODO:
   
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-  // it('should open modal with the provided message', async () => {
+  it('should open modal with the provided message', async () => {
 
-  //   // Arrange - Set up the component and message
-  //   const message = 'Test Message';
-  //   component.modalPopupNotifier = {} as TemplateRef<unknown>; // Mock the TemplateRef
+    // Arrange - Set up the component and message
+    const message = 'Test Message';
+    component.modalPopupConfirm = {} as TemplateRef<unknown>; // Mock the TemplateRef
 
-  //   // Act - Open the modal with the message
-  //   component.openModalConfirmation(message);
+    // Act - Open the modal with the message
+    component.openModalConfirmation(message);
 
-  //   // Assert 
-  //   // Ensure the modal is opened with the correct message
-  //   expect(component.modalMessage).toBe(message);
+    // Assert 
+    // Ensure the modal is opened with the correct message
+    expect(component.modalMessage).toBe(message);
 
-  //   // Ensure the modal service open method was called with the correct arguments
-  //   expect(modalService.open).toHaveBeenCalledWith(
-  //     component.modalPopupNotifier,
-  //     { ariaLabelledBy: 'modal-confirmation-basic-title' }
-  //   );
+    // Ensure the modal service open method was called with the correct arguments
+    expect(modalService.open).toHaveBeenCalledWith(
+      component.modalPopupConfirm,
+      { ariaLabelledBy: 'modal-confirmation-basic-title' }
+    );
 
-  //   // Ensure the modal result promise is resolved
-  //   await expectAsync(modalRef.result).toBeResolved();
-  // });
+    // Ensure the modal result promise is resolved
+    await expectAsync(modalRef.result).toBeResolved();
+  });
 
-  // it('should log the dismissal reason when the modal is dismissed', async () => {
+  it('should log the dismissal reason when the modal is dismissed', async () => {
 
-  //   // Arrange - Set up the test with a message and dismiss reason
-  //   const message = 'Test Message';
-  //   const dismissReason = 'Dismissed by user';
-  //   spyOn(console, 'debug');
-  //   component.modalPopupNotifier = {} as TemplateRef<unknown>; // Mock the TemplateRef
+    // Arrange - Set up the test with a message and dismiss reason
+    const message = 'Test Message';
+    const dismissReason = 'Dismissed by user';
+    spyOn(console, 'debug');
+    component.modalPopupConfirm = {} as TemplateRef<unknown>; // Mock the TemplateRef
 
-  //   // Act - Open the modal and reject the result promise to simulate dismissal
-  //   modalRef.result = Promise.reject(dismissReason);
-  //   component.openModalConfirmation(message);
+    // Act - Open the modal and reject the result promise to simulate dismissal
+    modalRef.result = Promise.reject(dismissReason);
+    component.openModalConfirmation(message);
 
-  //   // Catch the rejection to prevent unhandled promise rejection
-  //   try {
-  //     await modalRef.result;
-  //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   } catch (e: unknown) {
-  //     // Intentionally empty
-  //   }
+    // Catch the rejection to prevent unhandled promise rejection
+    try {
+      await modalRef.result;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e: unknown) {
+      // Intentionally empty
+    }
 
 
-  //   // Assert - Ensure the dismiss reason is logged
-  //   expect(console.debug).toHaveBeenCalledWith(`Dismissed: ${dismissReason}`);
-  // });
+    // Assert - Ensure the dismiss reason is logged
+    expect(console.debug).toHaveBeenCalledWith(`Dismissed: ${dismissReason}`);
+  });
 
 });
