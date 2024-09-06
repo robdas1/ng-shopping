@@ -12,10 +12,10 @@
         <p>{{ modalMessage }}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Yes clicked')">
+        <button type="button" class="btn btn-secondary" (click)="onYes(); modal.close('Yes clicked');">
             Yes
         </button>
-        <button type="button" class="btn btn-secondary" (click)="modal.close('No clicked')">
+        <button type="button" class="btn btn-secondary" (click)="onNo(); modal.close('No clicked');">
             No
         </button>
     </div>

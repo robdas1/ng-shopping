@@ -14,9 +14,8 @@ import { Observable } from 'rxjs';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 import { CommonModule } from '@angular/common';
 import { TotalsComponent } from '../totals/totals.component';
-import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
+import { ActivatedRoute, Resolve, ResolveFn, Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
-import { ModalNotificationComponent } from '../modal-notification/modal-notification.component';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
 
 @Component({
@@ -63,7 +62,7 @@ export class CartComponent implements OnInit {
 
   title: string | Type<Resolve<string>> | ResolveFn<string> | undefined; // data type returned by route.snapshot.routeConfig?.title
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) { 
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router) { 
     this.title = this.route.snapshot.routeConfig?.title;
   }
 
@@ -100,8 +99,16 @@ export class CartComponent implements OnInit {
 
     // Placeholder function to handle the restart button click
   onRestart(): void {
-    console.debug('CartComponent.onRestart()');
     this.modalComponent.openModalConfirmation('Are you sure you want to restart?');
+  }
+
+  yesRestart(): void {
+    console.debug('inside CartComponent.yesRestart(), title is: ', this.title);
+    this.router.navigate(['/start']);
+  }
+
+  noRestart(): void {
+    console.debug('inside CartComponent.noRestart(), title is: ', this.title);
   }
 
 }

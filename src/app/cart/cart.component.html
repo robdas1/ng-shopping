@@ -30,11 +30,11 @@
 
 <app-totals></app-totals>
 
-<div class="text-center">
-	<button type="button" type="button" class="btn btn-primary" 
+<div class="text-left">
+	<button type="button" type="button" class="btn btn-secondary" 
 		(click)="onRestart()">
 		Restart
 	</button>
 </div>
 
-<app-confirmation-popup></app-confirmation-popup>
+<app-confirmation-popup [onYes]="yesRestart.bind(this)" [onNo]="noRestart.bind(this)"></app-confirmation-popup>

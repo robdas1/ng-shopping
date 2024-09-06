@@ -21,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
 
 // Mock CartSummaryComponent
 @Component({
-  selector: 'app-cart-summary',
+  selector: 'app-cart-summary', // The selector for the CartSummaryComponent
   standalone: true,
   template: ''  // The template is empty because this is a mock component
 })

@@ -26,7 +26,6 @@ export class ModalNotificationComponent {
    * @param message The message to display in the modal popup.
    */
   openModalNotification(message: string) {
-    console.debug(`openModalNotification: ${message}`);
     this.modalMessage = message;
     this.modalService.open(
         this.modalPopupNotifier, 
@@ -37,7 +36,4 @@ export class ModalNotificationComponent {
     );
   }
 
-  testfunction() {
-    console.log('Test function');
-  }
 }

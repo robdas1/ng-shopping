@@ -73,7 +73,8 @@ Define a mock version of the sub-component. This mock should mimic the sub-compo
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mock-sub-component',
+  // the selector tells the testing framework which component is to be replaced with MockSubComponent
+  selector: 'app-cart-summary', 
   standalone: true,
   template: '' // The template is empty because this is a mock component
 })
