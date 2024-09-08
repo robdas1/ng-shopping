@@ -16,6 +16,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { addToCart, removeChosenProduct } from '../actions/chosen-product.actions';
 import { ChosenProduct } from '../../models/chosen-product.interface';
+import { resetState } from '../actions/cross-state.actions';
 
 // Initial state for chosen products, which is an empty array.
 const initialState: ChosenProduct[] = [];
@@ -27,8 +28,7 @@ export const chosenProductReducer = createReducer(
   // Handle the addToCart action
   on(addToCart, (state, { id, productName, unitPrice }) => {
 
-console.debug('chosenProductReducer addToCart, action payload: ', { id, productName, unitPrice });
-
+    console.debug('chosenProductReducer addToCart, action payload: ', { id, productName, unitPrice });
 
     // Check if the product already exists in the cart
     const foundProduct = state.find(p => p.id === id);
@@ -78,5 +78,9 @@ console.debug('chosenProductReducer addToCart, action payload: ', { id, productN
       });
       return returnState;
     }
-  })
+  }),
+
+  // Handle the resetState action
+  on(resetState, () => { return initialState; }),
+
 );

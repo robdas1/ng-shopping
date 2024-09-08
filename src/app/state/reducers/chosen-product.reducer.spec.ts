@@ -10,6 +10,7 @@
 import { chosenProductReducer } from './chosen-product.reducer';
 import { addToCart, removeChosenProduct } from '../actions/chosen-product.actions';
 import { ChosenProduct } from '../../models/chosen-product.interface';
+import { resetState } from '../actions/cross-state.actions';
 
 describe('chosenProductReducer', () => {
 
@@ -366,5 +367,37 @@ describe('chosenProductReducer', () => {
     // Assert
     expect(state.length).toBe(0);  // Verifying the state is empty after removing the product
   });
+
+  /**
+   * This test verifies that when resetState action is dispatched, the reducer 
+   * correctly resets the state to the initial state. It checks that after the
+   * action is processed, the state is empty, indicating that the state has been reset.
+   */
+  it('should reset the state when resetState action is dispatched', () => {
+    
+    // Arrange
+    const initialStateWithProducts: ChosenProduct[] = [
+      {
+        id: '01',
+        productName: 'Test Product 1',
+        unitPrice: 100.00,
+        qty: 1
+      },
+      {
+        id: '02',
+        productName: 'Test Product 2',
+        unitPrice: 200.00,
+        qty: 2
+      }
+    ];
+
+    // Act
+    const action = resetState();
+    const state = chosenProductReducer(initialStateWithProducts, action);
+
+    // Assert
+    expect(state).toEqual([]);  // Verifying the state is reset to the initial state
+  });
+
 
 });

@@ -19,6 +19,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { ShippingInfo } from '../../models/shipping-info.interface';
 import { updateCustomerName, updateCustomerAddress } from '../actions/shipping-info.actions';
+import { resetState } from '../actions/cross-state.actions';
 
 // Define the initial state based on the ShippingInfo interface
 const initialState: ShippingInfo = {
@@ -40,5 +41,9 @@ export const shippingInfoReducer = createReducer(
     on(updateCustomerAddress, (state, { customerAddress }) => ({
         ...state,
         customerAddress: customerAddress
-    }))
+    })),
+
+    // Handle the resetState action
+    on(resetState, () => { return initialState; }),
+
 );

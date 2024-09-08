@@ -18,6 +18,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { PaymentInfo } from '../../models/payment-info.interface';
 import { updatePaymentMethod, updateCardExpiration } from '../actions/payment-info.actions';
+import { resetState } from '../actions/cross-state.actions';
 
 // Define the initial state based on the PaymentInfo interface
 const initialState: PaymentInfo = {
@@ -39,5 +40,9 @@ export const paymentInfoReducer = createReducer(
   on(updateCardExpiration, (state, { cardExpiration }) => ({
     ...state,
     cardExpiration: cardExpiration
-  }))
+  })), 
+
+  // Handle the resetState action
+  on(resetState, () => { return initialState; }), 
+
 );

@@ -25,11 +25,6 @@
             <div class="col-12 d-inline-flex justify-content-center align-items-center">
                 <nav>
                     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs">
-                        <li [ngbNavItem]="1" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/start" routerLinkActive="active">
-                                {{ routeTitles['start'] }}
-                            </a>
-                        </li>
                         <li [ngbNavItem]="2" class="nav-item">
                             <a class="link-button nav-link" routerLink="/stuff" routerLinkActive="active">
                                 {{ routeTitles['stuff'] }}

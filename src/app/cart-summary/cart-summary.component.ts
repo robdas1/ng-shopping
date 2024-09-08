@@ -7,7 +7,7 @@
  * products from the store and calculate the total number of items.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -27,7 +27,7 @@ export class CartSummaryComponent implements OnInit {
   chosenProducts$!: Observable<ChosenProduct[]>; // note the use of the definite assignment assertion operator (!)
   totalItems = 0; // the total number of items in the cart
 
-  constructor(private store: Store, private router: Router) {
+  constructor(private store: Store, private router: Router, private cdr: ChangeDetectorRef) {
     // Inject the NgRx Store for state management and Router for navigation
   }
 
@@ -37,6 +37,8 @@ export class CartSummaryComponent implements OnInit {
     this.chosenProducts$ = this.store.select(selectChosenProductsState);
     this.chosenProducts$.subscribe(products => {
       this.totalItems = products.reduce((sum, product) => sum + product.qty, 0);
+
+      this.cdr.detectChanges();
     });
   }
 
