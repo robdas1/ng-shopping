@@ -38,6 +38,9 @@ export class CartSummaryComponent implements OnInit {
     this.chosenProducts$.subscribe(products => {
       this.totalItems = products.reduce((sum, product) => sum + product.qty, 0);
 
+      // When the chosen products are reset by an external component, the ngIf in this component's template
+      // does not detect the change correctly and an ExpressionChangedAfterItHasBeenCheckedError runtime
+      // error is thrown unless we manually trigger change detection here.
       this.cdr.detectChanges();
     });
   }

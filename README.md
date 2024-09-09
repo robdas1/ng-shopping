@@ -217,37 +217,6 @@ This is the branch that hosts the deployed app.
 
 
 
-### Deployment troubleshooting
-
-#### Q: I encountered the error  
-`fatal: The current branch main has no upstream branch.`  
-
-when running the deployment script. How do I fix this?
-
-A: This error occurs because the `main` branch does not have an upstream branch set. You can resolve this by running the following command:
-
-```sh
-git push --set-upstream origin main
-```
-
-
-#### Q: I encountered the error  
-`cannot open file:///e%3A/GitHub/ng-shopping/.angular/cache/18.1.2/vite/deps_temp_afd4ac51/chunk-OYXLHNU7.js. Detail: Unable to read file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js' (Error: Unable to resolve nonexistent file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js')`  
-
-when chatting with GitHub copilot. 
-
-A: The error is related to the angular cache, which may have been corrupted. Try clearing out and reseting the cache by deleting the `.angular\cache` directory. This will force angular to regenerate the cache the next time you build or serve your application. Here's how you can clear the cache and build the app.
-
-```powershell
-Remove-Item -Recurse -Force .angular\cache
-ng build
-```
-
-#### Additional steps  
-- Close any open terminals that might be referencing the cache. 
-- Restart VSCode and create a new Chat.
-- Delete node_modules and run npm install  
-
 
 
 ## Setup for Angular Router
@@ -819,4 +788,77 @@ The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used o
 
 I've discovered that by starting each prompt with @workspace, GH Copilot will actually look at the code and try to understand it, and it's responses tend to better address the problem at hand rather than addressing imaginary problems that it dreams up. In this sense @workspace serves as a counter measure against AI Hallucination by grounding GH Copilot in the reality of the actual codebase.
 
+
+## Known Issue and Troubleshooting Suggestions
+
+
+### Async Coordiation Problems
+
+This application relies on Angular change detection to coordinate things between components and services. NgRx state management is used to share info. All components and services in this application are built as standalone components. Modules are not used - there is no use of NgModule decorator anywhere in the source code. The angular router is used to display the "current page" component and there are components that display all the time. We are also using Bootstrap components. This has lead to mismatches between the state as seen by different components and the possibility that different components and services may be attempting to mutate the same DOM element. All these facts combined has lead to bugs. This section describes bugs that have been discovered and their fixes or work-arounds. 
+
+#### Dispatching loadAvailableProducts action after resetState causes navigation problems
+
+##### Bug  
+The start page is intended to be the starting point for a shopping session, in order to provide the ability to restart the shopping session. A restart button is provided on the shopping cart page so that the end-user wants can abandon the contents of the shopping cart and start the shopping session again. The drastic nature of a restart means that the end user needs to be prompted for confirmation. This is done with NgbModal which fires a callbacks onYes or onNo based on the end users response to the confirmation. The onYes callback uses Angular Router to navigate from the shopping cart to the start page, where the start page ngOnInit Angular life cycle event handler dispatches the NGrx resetState action. 
+
+The loadAvailableProducts action is handled asychronously be an NgrX effect that makes use of the application's available product service to fetch the available products data. In this scenario, if the loadAvailableProducts action is immediately dispatched after the resetState action, even though the start page ngOnInit runs and state is correctly updated, the Angular Router <router-outlet> control doesn't render the start page and the end user is left on the shopping cart page.   
+
+##### Fix  
+None found at this time. Further debugging is needed to determine why navigation isn't working in this scenario. 
+
+##### Work around  
+The loadAvailableProducts nGRx actions is called once when the website first starts up, from the AppComponent's ngOnInit life cycle handler, and the  available product reducer ignores the resetState action. All other ngRX state slice reducers set their respective state slices to initial state on resetState. This apparent inconsistency is considered acceptable for now because the array of available products are not is not expected to change during the user's current session. The shitty part of this work around is that the user will not see changes to the array of available products just by hitting the restart button on the shopping cart page. However, the restart button successfully resets all data under the control of the user, back to its initial  state.  
+  
+Also, if the user hits the browser's page reload button, nGrX will automatically reset all the state, and the page reload will cause the Angular app component to load again and dispatch the loadAvailableProducts action as if the user had just arrived at the website. This would have the desired effect ofgiving the user a brand new empty shopping cart. So far, we have not found a way to programmatically cause the same behavior.
+
+#### ExpressionChangedAfterItHasBeenCheckedError  
+
+##### Bug
+The ngIf statement in the shopping cart summary template code logs an error to the browser console containing the word ExpressionChangedAfterItHasBeenCheckedError when another component dispatches the Ngrx resetState action. 
+
+The error ExpressionChangedAfterItHasBeenCheckedError, is common in Angular when the value of a variable changes during the change detection process. It seems that the issue is related to how the state is being reset and how CartSummaryComponent's template reacts to that change.
+
+The root cause is likely that the change in the chosenProducts state happens during Angular’s change detection cycle, leading to a mismatch between the current and previous values of totalItems.
+
+##### Fix  
+ChangeDetectorRef is used to Manually Trigger Change Detection in the shopping cart summary ngOnInit method when the shopping cart summary component subscribes to chosen products to calculate the total number of items in the cart. This causes the shopping cart to manually trigger change detection whenever totalItems is recalculated so that the template's ngIf statement can correctly check it after it changes. 
+
+##### Work around not required
+
+### Deployment problems
+
+#### Upstream branch not set
+
+##### Bug
+I encountered the error  
+`fatal: The current branch main has no upstream branch.`  
+
+when running the deployment script. 
+
+##### Fix 
+This error occurs because the `main` branch does not have an upstream branch set. You can resolve this by running the following command:
+
+```sh
+git push --set-upstream origin main
+```
+
+
+##### Bug
+I encountered the error  
+`cannot open file:///e%3A/GitHub/ng-shopping/.angular/cache/18.1.2/vite/deps_temp_afd4ac51/chunk-OYXLHNU7.js. Detail: Unable to read file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js' (Error: Unable to resolve nonexistent file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js')`  
+
+#### Corrupted Angular cache 
+
+##### Fix 
+The error is related to the angular cache, which may have been corrupted. Try clearing out and reseting the cache by deleting the `.angular\cache` directory. This will force angular to regenerate the cache the next time you build or serve your application. Here's how you can clear the cache and build the app.
+
+```powershell
+Remove-Item -Recurse -Force .angular\cache
+ng build
+```
+
+##### Additional steps  
+- Close any open terminals that might be referencing the cache. 
+- Restart VSCode and create a new Chat.
+- Delete node_modules and run npm install  
 
