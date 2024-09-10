@@ -14,7 +14,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 export const routes: Routes = [
-    { path: 'start', component: StartPageComponent, title: 'Restart' },
+    { path: 'start', component: StartPageComponent, title: 'Start Here' },
     { path: 'stuff', component: ProductListComponent, title: 'Need Stuff?' },
     { path: 'cart', component: CartComponent, title: 'Shopping Cart' },
     { path: 'checkout', component: CheckoutComponent, title: 'Checkout' },

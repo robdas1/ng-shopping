@@ -13,11 +13,8 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule, Router } from '@angular/router';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header.component';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 // Mock CartSummaryComponent
 @Component({
@@ -33,49 +30,20 @@ class MockCartSummaryComponent implements OnInit {
   }
 }
 
-// Mock Router with route configuration
-class MockRouter {
-  config = [
-    { path: 'start', title: 'Start Here' },
-    { path: 'stuff', title: 'Stuff' },
-    { path: 'cart', title: 'Cart' },
-    { path: 'checkout', title: 'Checkout' }
-  ];
-}
-
-// Mock ActivatedRoute
-const mockActivatedRoute = {
-  snapshot: {
-    routeConfig: {
-      title: 'Mock Title'
-    }
-  }
-};
-
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let mockRouter: MockRouter;
 
   beforeEach(async () => {
-    mockRouter = new MockRouter();
 
     // Setting up the test environment for HeaderComponent
     await TestBed.configureTestingModule({
 
       imports: [
 
-        // Importing router module to satisfy router dependencies
-        RouterModule.forRoot([]),
-
         // Import the actual HeaderComponent for testing
         HeaderComponent,
       ],
-
-      providers: [
-        { provide: Router, useValue: mockRouter },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
-      ]
 
     })
       .overrideComponent(HeaderComponent, {
@@ -83,7 +51,6 @@ describe('HeaderComponent', () => {
         // Override CartSummaryComponent with MockCartSummaryComponent
         set: {
           imports: [
-            NgbNavModule,
             MockCartSummaryComponent
           ],
         }
@@ -107,21 +74,5 @@ describe('HeaderComponent', () => {
     // Assertion to verify the component is created
     expect(component).toBeTruthy();
   });
-
-  it('should populate routeTitles correctly on ngOnInit', () => {
-
-    // Arrange: Define the expected route titles 
-    const expectedTitles = {
-      'start': 'Start Here',
-      'stuff': 'Stuff',
-      'cart': 'Cart',
-      'checkout': 'Checkout'
-    };
-
-    // Act: implicitly handled by fixture.detectChanges() in beforeEach
-    // Assert: Verify the routeTitles are populated correctly
-    expect(component.routeTitles).toEqual(expectedTitles);
-  });
-
 
 });

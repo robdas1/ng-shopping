@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StartPageComponent } from './start-page.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 // Mock Router class
@@ -18,6 +18,7 @@ describe('StartPageComponent', () => {
   let component: StartPageComponent;
   let fixture: ComponentFixture<StartPageComponent>;
   let router: Router;
+  const mockActivatedRoute = { snapshot: { routeConfig: { title: 'Start Here' } } };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -29,6 +30,9 @@ describe('StartPageComponent', () => {
 
         // Use the MockStore class instead of the real Store service.
         { provide: Store, useClass: MockStore },
+
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+
 
       ]
     })

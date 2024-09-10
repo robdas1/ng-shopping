@@ -32,8 +32,6 @@
 #bg-img {
     height:100%; 
     max-width: 550px;
+    margin-bottom: 2.7rem;
 }
 
-#containerdiv {
-    height: 400px;
-}

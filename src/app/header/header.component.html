@@ -16,34 +16,5 @@
                 <app-cart-summary />
             </div>
         </div>
-        <div class="row">
-            <div class="col12">
-                <hr />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 d-inline-flex justify-content-center align-items-center">
-                <nav>
-                    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs">
-                        <li [ngbNavItem]="2" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/stuff" routerLinkActive="active">
-                                {{ routeTitles['stuff'] }}
-                            </a>
-                        </li>
-                        <li [ngbNavItem]="3" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/cart" routerLinkActive="active">
-                                {{ routeTitles['cart'] }}
-                            </a>
-                        </li>
-                        <li [ngbNavItem]="4" class="nav-item">
-                            <a class="link-button nav-link" routerLink="/checkout" routerLinkActive="active">
-                                {{ routeTitles['checkout'] }}
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
     </div>
 </header>
