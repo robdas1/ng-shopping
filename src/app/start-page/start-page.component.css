@@ -1,37 +1,35 @@
-#outerdiv {
-    position: relative;
-    text-align:center; 
+.start-page {
+    background: url("../../assets/stuff_sm.jpg") center;
+    background-size: cover;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    max-width: 580px;
+    margin: 0 auto;
 }
 
-#innerdiv {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100px;
-    text-align: center;
+.start-page-link {
     padding: 0.5rem 2.5rem;
-    border: 2px solid white; 
-}
-
-#innerdiv p {
-    margin: 0;
-}
-
-#innerdiv img {
-    height: 2.7rem;
-    width: 2.7rem;
+    border-radius: 0.5rem;
+    color: beige;
+    background-color: darkgreen;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
     border: solid thin;
-    margin-top: 0.6rem;
 }
 
-#innerdiv:hover {
+.start-page-link:hover {
     cursor: pointer;
 }
 
-#bg-img {
-    height:100%; 
-    max-width: 550px;
-    margin-bottom: 2.7rem;
+.pushbuttonimage {
+    height: 2.7rem;
+    width: 2.7rem;
+    border-radius: 0.5rem;
+    border: solid thin;
+    margin-top: 0.6rem;
 }
-
