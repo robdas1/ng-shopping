@@ -1,6 +1,7 @@
 <div class="container">
     <div class="start-page">
-        <div class="start-page-link" (click)="navigateToStuff()">
+        <div class="start-page-link" (click)="navigateToStuff()" (keydown.enter)="navigateToStuff()"
+            (keydown.space)="navigateToStuff()" tabindex="0">
             Let's go shopping! <br />
             <img src="assets/pushbutton.jpg" alt="push button" class="pushbuttonimage">
         </div>

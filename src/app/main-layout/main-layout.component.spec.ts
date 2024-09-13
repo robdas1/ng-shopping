@@ -11,20 +11,40 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainLayoutComponent } from './main-layout.component';
-import { 
+import {
+  NavigationEnd,
   Router,
+  RouterEvent,
   RouterModule,
-  RouterOutlet, 
+  RouterOutlet,
 } from '@angular/router';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { CommonModule } from '@angular/common';
+
 
 // Mock Router with route configuration
 class MockRouter {
   config = [
-    // this data forces the unit test to iterate over the router configuration
-    { path: 'mock path', title: 'mock title' },
+    { path: 'stuff', title: 'Stuff' },
+    { path: 'cart', title: 'Cart' },
+    { path: 'checkout', title: 'Checkout' }
   ];
+
+  // Mock events subject
+  private eventsSubject = new Subject<RouterEvent>();
+  events = this.eventsSubject.asObservable();
+
+  navigate = jasmine.createSpy('navigate');
+  url = '';
+
+  // Method to emit events
+  emitEvent(event: RouterEvent) {
+    this.url = (event as NavigationEnd).urlAfterRedirects;
+    this.eventsSubject.next(event);
+  }
 }
+
 // Group of tests for MainLayoutComponent
 describe('MainLayoutComponent', () => {
 
@@ -53,15 +73,16 @@ describe('MainLayoutComponent', () => {
         { provide: Router, useValue: mockRouter },
       ],
     })
-    .overrideComponent(MainLayoutComponent, {
-      set: {
-        imports: [
-          NgbNavModule,
-          RouterOutlet
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(MainLayoutComponent, {
+        set: {
+          imports: [
+            NgbNavModule,
+            RouterOutlet,
+            CommonModule
+          ]
+        }
+      })
+      .compileComponents();
 
     // Create a fixture for MainLayoutComponent
     fixture = TestBed.createComponent(MainLayoutComponent);
@@ -81,5 +102,25 @@ describe('MainLayoutComponent', () => {
     // Assert: Component should be truthy upon creation (it exists)
     expect(component).toBeTruthy();
   });
+
+  it('should set isNavMenuVisible to true for URLs containing /stuff, /cart, or /checkout', () => {
+    const testUrls = ['/stuff', '/cart', '/checkout'];
+    testUrls.forEach(url => {
+      mockRouter.emitEvent(new NavigationEnd(0, url, url));
+      fixture.detectChanges();
+      expect(component.isNavMenuVisible).toBeTrue();
+    });
+  });
+
+  it('should set isNavMenuVisible to false for URLs not containing /stuff, /cart, or /checkout', () => {
+    const testUrls = ['/home', '/about', '/contact'];
+    testUrls.forEach(url => {
+      mockRouter.emitEvent(new NavigationEnd(0, url, url));
+      fixture.detectChanges(); 
+      expect(component.isNavMenuVisible).toBeFalse();
+    });
+  });
+
+
 
 });
