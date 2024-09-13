@@ -784,6 +784,30 @@ The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used o
 @workspace what is the purpose of jasmine.createSpy('navigate')? What does it do? What is a 'Spy'?  
 ```  
   
+#### Modifying Application Functionality  
+
+##### Handling Tricky Asynchronous Behavior 
+
+```
+@workspace I need your help modifying the behavior of my Angular 18 application. I'm looking for the simplest, easiest to maintain solution.  
+
+I am building an angular 18 application that consists entirely of standalone components, there is intentionally no AppModule or @NgModule used in the application. 
+
+My angular 18 app has a main layout component that contains the application's one and only angular routing router-outlet. In the main layout template src\app\main-layout\main-layout.component.html there is also a div containing some html markup for a menu that I want to conditionally hide or show. The condition is that the menu div should be shown only when the current route title is one of these: "stuff", "cart", "checkout". The menu div should be hidden for any other route title. 
+
+In the main layout component class MainLayoutComponent, I am trying to add a boolean property, isMenuVisible, so that I can use an ngIf to conditionally show the menu div. I'm having difficulty with using the application's navigation to set the value of isMenuVisible. The difficulty I'm having is due to the asynchronous nature of the application's navigation: the route can be changed from anywhere in the application at any time by the user. But the main layout component is initialized with ngOnInit and a constructor only once at the beginning of the application, because it is not one of the routes being displayed inside router outlet, but rather, the main layout component contains angular's router-outlet. 
+
+I have discovered that in the individual components that are displayed in router-outlet I am able to determine the current route title from a route:ActivatedRoute constructor parameter using this.route.snapshot.routeConfig?.title but this value is null in MainLayoutComponent.ngOnInit so I don't know how I would use it to update the value of isMenuVisible whenever the user selects a different route. 
+
+I am considering a number of different possible solutions. Please tell me if my solutions are viable, and what the relative advantages/disadvantages are of each of my solutions. I would also like to know if there are other possible solutions that I haven't thought of. For reference purposes, lets call the components that can be loaded via the router: stuff-component, cart-component, checkout-component, start-component, and detail-component. 
+
+Possible solution 1. Subscribing to RXJS observables. From MainLayoutComponent.ngOnInit function subscribe to this.route.data and use its ["title"] value to set isMenuVisible. I've tried this using this.route.data.subscribe(data=>{this.title=data['title'];} but this doesn't seem to work. It sets this.title once at the beginning to undefined. It doesn't change when I navigate to different routes. I'm hoping there's a way to make the code aware of changes to the route and set isMenuActive appropriately. So far I've had no success with this.
+
+Possible solution 2. Communicate the new title from the component to main layout whenever a component is loaded into the router. When a new component is loaded into the router-outlet, in the initialization code for the component that is loaded, could somehow communicate the new value of the title back to the MainLayoutComponent so that it can set the value of isMenuVisible. I've created a function in MainLayoutComponent called setRouteTitle(newTitle) that takes the new title as a parameter, and uses it to set the value of isMenuVisible. The intention was to call MainLayoutComponent.setRouteTitle from the components when they are loaded into the router-outlet in the MainLayoutComponent template. For example, when the user navigates to stuff-component, and stuff-component is loaded into the router, then stuff-component should call MainLayoutComponent.setRouteTitle("stuff"). But since the components are all standalone, they are unaware of each other and I don't know how to call setRouteTitle from stuff-component. Is there a way to do this? Perhaps an injectable service that calls setRouteTitle or provides some kind of link or reference to MainLayoutComponent? Is that do-able?
+
+Possible solution 3. Use NGRX. Create an NGRX state slice for the current route title. Whenever a new component is loaded into the router outlet, that component could dispatch an NGRX action whose payload is its route title. MainLayoutComponent could subscribe to an  NGRX selector for the current route title and whenever the NGRX selector returns a different value for the current route title, MainLayoutComponent could set the new value for isMenuVisible. Could this work? I've done something similar on another part of the application but ran into problems with angular change detection, but I was able to address the problem in the component that reacts to the change in NGRX state by using the ChangeDetectorRef class to force change detection. Can I do this kind of thing here for the current modifications? 
+```
+
 #### Use of @workspace  
 
 I've discovered that by starting each prompt with @workspace, GH Copilot will actually look at the code and try to understand it, and it's responses tend to better address the problem at hand rather than addressing imaginary problems that it dreams up. In this sense @workspace serves as a counter measure against AI Hallucination by grounding GH Copilot in the reality of the actual codebase.
