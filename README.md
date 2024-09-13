@@ -764,24 +764,48 @@ The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used o
 ##### Whole source code file
   
 ```
-@workspace Please give me a documented version of this source code file. Document this code using inline comments. Wrap lines are 100 chars co that they can easily be read on small screens. Place the comments directly above the code that they are explaining. Use inline comments to create a file header. The file header should have a title, and a summary paragraph explaining the purpose of the source code in the file. If there is any code that cannot be explained with a single line comment, then add a paragraph to the file header to explain it. Use the single line coding style with a double slashes comment delimiter "//", except for the file header, where you should use the multi-line comment delimiter "/**" and "*/". Assume the audience is a junior, entry level developer with minimal experience with the programming language. IMPORTANT: the code is thoroughly test and working correctly, so do not change any executable statements, only add comments and if necessary add white space for readability - ALL EXECUTABLE CODE SHOULD BE KEPT AS-IS.
+@workspace Please give me a documented version of this source code file. 
+Document this code using inline comments. Wrap lines are 100 chars co that 
+they can easily be read on small screens. Place the comments directly above 
+the code that they are explaining. Use inline comments to create a file header. 
+The file header should have a title, and a summary paragraph explaining the 
+purpose of the source code in the file. If there is any code that cannot be 
+explained with a single line comment, then add a paragraph to the file header 
+to explain it. Use the single line coding style with a double slashes comment
+delimiter "//", except for the file header, where you should use the multi-line 
+comment delimiter "/**" and "*/". Assume the audience is a junior, entry level 
+developer with minimal experience with the programming language. IMPORTANT: the 
+code is thoroughly test and working correctly, so do not change any executable 
+statements, only add comments and if necessary add white space for 
+readability - ALL EXECUTABLE CODE SHOULD BE KEPT AS-IS.
 ``` 
 
 ##### File header only
 
 ```
-@workspace Please give me a file header for this source code file using inline comments. Wrap lines are 100 chars co that they can easily be read on small screens. The file header should have a title, and a summary paragraph explaining the purpose of the source code in the file. For the file header, use the multi-line comment delimiter "/**" and "*/". Assume the audience is a junior, entry level developer with minimal experience with the programming language.
+@workspace Please give me a file header for this source code file using 
+inline comments. Wrap lines are 100 chars co that they can easily be read 
+on small screens. The file header should have a title, and a summary 
+paragraph explaining the purpose of the source code in the file. For the 
+file header, use the multi-line comment delimiter "/**" and "*/". Assume 
+the audience is a junior, entry level developer with minimal experience 
+with the programming language.
 ```
 #### Unit testing prompts
 
 ##### Mocking the Angular Router 
   
 ```  
-@workspace is there a mock provider for router available for testing, similar to the provider available from ngrx for mocking the store? I want to use a mock so that I don't end up with the fully functional router in my unit test. The purpose here is to unit test the component, not the component's dependencies. That's why I'm looking for a mock router. 
+@workspace is there a mock provider for router available for testing, similar 
+to the provider available from ngrx for mocking the store? I want to use a 
+mock so that I don't end up with the fully functional router in my unit test. 
+The purpose here is to unit test the component, not the component's 
+dependencies. That's why I'm looking for a mock router. 
 ```  
   
 ```  
-@workspace what is the purpose of jasmine.createSpy('navigate')? What does it do? What is a 'Spy'?  
+@workspace what is the purpose of jasmine.createSpy('navigate')? What does it do? 
+What is a 'Spy'?  
 ```  
   
 #### Modifying Application Functionality  
@@ -789,23 +813,83 @@ The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used o
 ##### Handling Tricky Asynchronous Behavior 
 
 ```
-@workspace I need your help modifying the behavior of my Angular 18 application. I'm looking for the simplest, easiest to maintain solution.  
+@workspace I need your help modifying the behavior of my Angular 18 application. 
+I'm looking for the simplest, easiest to maintain solution.  
 
-I am building an angular 18 application that consists entirely of standalone components, there is intentionally no AppModule or @NgModule used in the application. 
+I am building an angular 18 application that consists entirely of standalone 
+components, there is intentionally no AppModule or @NgModule used in the 
+application. 
 
-My angular 18 app has a main layout component that contains the application's one and only angular routing router-outlet. In the main layout template src\app\main-layout\main-layout.component.html there is also a div containing some html markup for a menu that I want to conditionally hide or show. The condition is that the menu div should be shown only when the current route title is one of these: "stuff", "cart", "checkout". The menu div should be hidden for any other route title. 
+My angular 18 app has a main layout component that contains the application's 
+one and only angular routing router-outlet. In the main layout template 
+src\app\main-layout\main-layout.component.html there is also a div containing 
+some html markup for a menu that I want to conditionally hide or show. The 
+condition is that the menu div should be shown only when the current route 
+title is one of these: "stuff", "cart", "checkout". The menu div should be 
+hidden for any other route title. 
 
-In the main layout component class MainLayoutComponent, I am trying to add a boolean property, isMenuVisible, so that I can use an ngIf to conditionally show the menu div. I'm having difficulty with using the application's navigation to set the value of isMenuVisible. The difficulty I'm having is due to the asynchronous nature of the application's navigation: the route can be changed from anywhere in the application at any time by the user. But the main layout component is initialized with ngOnInit and a constructor only once at the beginning of the application, because it is not one of the routes being displayed inside router outlet, but rather, the main layout component contains angular's router-outlet. 
+In the main layout component class MainLayoutComponent, I am trying to add 
+a boolean property, isMenuVisible, so that I can use an ngIf to conditionally 
+show the menu div. I'm having difficulty with using the application's 
+navigation to set the value of isMenuVisible. The difficulty I'm having is 
+due to the asynchronous nature of the application's navigation: the route 
+can be changed from anywhere in the application at any time by the user. 
+But the main layout component is initialized with ngOnInit and a constructor 
+only once at the beginning of the application, because it is not one of the 
+routes being displayed inside router outlet, but rather, the main layout 
+component contains angular's router-outlet. 
 
-I have discovered that in the individual components that are displayed in router-outlet I am able to determine the current route title from a route:ActivatedRoute constructor parameter using this.route.snapshot.routeConfig?.title but this value is null in MainLayoutComponent.ngOnInit so I don't know how I would use it to update the value of isMenuVisible whenever the user selects a different route. 
+I have discovered that in the individual components that are displayed in 
+router-outlet I am able to determine the current route title from a 
+route:ActivatedRoute constructor parameter using 
+this.route.snapshot.routeConfig?.title 
+but this value is null in MainLayoutComponent.ngOnInit so I don't know how 
+I would use it to update the value of isMenuVisible whenever the user 
+selects a different route. 
 
-I am considering a number of different possible solutions. Please tell me if my solutions are viable, and what the relative advantages/disadvantages are of each of my solutions. I would also like to know if there are other possible solutions that I haven't thought of. For reference purposes, lets call the components that can be loaded via the router: stuff-component, cart-component, checkout-component, start-component, and detail-component. 
+I am considering a number of different possible solutions. Please tell me 
+if my solutions are viable, and what the relative advantages/disadvantages 
+are of each of my solutions. I would also like to know if there are other 
+possible solutions that I haven't thought of. For reference purposes, lets 
+call the components that can be loaded via the router: stuff-component, 
+cart-component, checkout-component, start-component, and detail-component. 
 
-Possible solution 1. Subscribing to RXJS observables. From MainLayoutComponent.ngOnInit function subscribe to this.route.data and use its ["title"] value to set isMenuVisible. I've tried this using this.route.data.subscribe(data=>{this.title=data['title'];} but this doesn't seem to work. It sets this.title once at the beginning to undefined. It doesn't change when I navigate to different routes. I'm hoping there's a way to make the code aware of changes to the route and set isMenuActive appropriately. So far I've had no success with this.
+Possible solution 1. Subscribing to RXJS observables. 
+From MainLayoutComponent.ngOnInit function subscribe to this.route.data and 
+use its ["title"] value to set isMenuVisible. I've tried this using 
+this.route.data.subscribe(data=>{this.title=data['title'];} 
+but this doesn't seem to work. It sets this.title once at the beginning to 
+undefined. It doesn't change when I navigate to different routes. I'm hoping 
+there's a way to make the code aware of changes to the route and set 
+isMenuActive appropriately. So far I've had no success with this.
 
-Possible solution 2. Communicate the new title from the component to main layout whenever a component is loaded into the router. When a new component is loaded into the router-outlet, in the initialization code for the component that is loaded, could somehow communicate the new value of the title back to the MainLayoutComponent so that it can set the value of isMenuVisible. I've created a function in MainLayoutComponent called setRouteTitle(newTitle) that takes the new title as a parameter, and uses it to set the value of isMenuVisible. The intention was to call MainLayoutComponent.setRouteTitle from the components when they are loaded into the router-outlet in the MainLayoutComponent template. For example, when the user navigates to stuff-component, and stuff-component is loaded into the router, then stuff-component should call MainLayoutComponent.setRouteTitle("stuff"). But since the components are all standalone, they are unaware of each other and I don't know how to call setRouteTitle from stuff-component. Is there a way to do this? Perhaps an injectable service that calls setRouteTitle or provides some kind of link or reference to MainLayoutComponent? Is that do-able?
+Possible solution 2. Communicate the new title from the component to main 
+layout whenever a component is loaded into the router. When a new component 
+is loaded into the router-outlet, in the initialization code for the component 
+that is loaded, could somehow communicate the new value of the title back to 
+the MainLayoutComponent so that it can set the value of isMenuVisible. I've 
+created a function in MainLayoutComponent called setRouteTitle(newTitle) that 
+takes the new title as a parameter, and uses it to set the value of isMenuVisible. 
+The intention was to call MainLayoutComponent.setRouteTitle from the components 
+when they are loaded into the router-outlet in the MainLayoutComponent template. 
+For example, when the user navigates to stuff-component, and stuff-component is 
+loaded into the router, then stuff-component should call 
+MainLayoutComponent.setRouteTitle("stuff"). But since the components are all 
+standalone, they are unaware of each other and I don't know how to call 
+setRouteTitle from stuff-component. Is there a way to do this? Perhaps an 
+injectable service that calls setRouteTitle or provides some kind of link or 
+reference to MainLayoutComponent? Is that do-able?
 
-Possible solution 3. Use NGRX. Create an NGRX state slice for the current route title. Whenever a new component is loaded into the router outlet, that component could dispatch an NGRX action whose payload is its route title. MainLayoutComponent could subscribe to an  NGRX selector for the current route title and whenever the NGRX selector returns a different value for the current route title, MainLayoutComponent could set the new value for isMenuVisible. Could this work? I've done something similar on another part of the application but ran into problems with angular change detection, but I was able to address the problem in the component that reacts to the change in NGRX state by using the ChangeDetectorRef class to force change detection. Can I do this kind of thing here for the current modifications? 
+Possible solution 3. Use NGRX. Create an NGRX state slice for the current route 
+title. Whenever a new component is loaded into the router outlet, that component 
+could dispatch an NGRX action whose payload is its route title. MainLayoutComponent 
+could subscribe to an  NGRX selector for the current route title and whenever the 
+NGRX selector returns a different value for the current route title, MainLayoutComponent 
+could set the new value for isMenuVisible. Could this work? I've done something similar 
+on another part of the application but ran into problems with angular change detection, 
+but I was able to address the problem in the component that reacts to the change in NGRX 
+state by using the ChangeDetectorRef class to force change detection. Can I do this kind 
+of thing here for the current modifications? 
 ```
 
 #### Use of @workspace  
