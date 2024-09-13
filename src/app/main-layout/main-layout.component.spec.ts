@@ -94,7 +94,6 @@ describe('MainLayoutComponent', () => {
     fixture.detectChanges();
   });
 
-  // Test case to check if the component is created
   it('should create', () => {
 
     // Arrange: Component setup is already done in beforeEach
@@ -104,23 +103,46 @@ describe('MainLayoutComponent', () => {
   });
 
   it('should set isNavMenuVisible to true for URLs containing /stuff, /cart, or /checkout', () => {
+
+    // Arrange:
+    // Define the URLs that should make the nav menu visible
     const testUrls = ['/stuff', '/cart', '/checkout'];
+
+    // Iterate over each test URL
     testUrls.forEach(url => {
+
+      // Emit a NavigationEnd event with the test URL
       mockRouter.emitEvent(new NavigationEnd(0, url, url));
+
+      // Act:
+      // Trigger change detection to update the component's state
       fixture.detectChanges();
+
+      // Assert: isNavMenuVisible is true
       expect(component.isNavMenuVisible).toBeTrue();
     });
   });
-
+  
   it('should set isNavMenuVisible to false for URLs not containing /stuff, /cart, or /checkout', () => {
+
+    // Arrange:
+    // Define the URLs that should not make the nav menu visible
     const testUrls = ['/home', '/about', '/contact'];
+
+    // Iterate over each test URL
     testUrls.forEach(url => {
+
+      // Emit a NavigationEnd event with the test URL
       mockRouter.emitEvent(new NavigationEnd(0, url, url));
-      fixture.detectChanges(); 
+
+      // Act:
+      // Trigger change detection to update the component's state
+      fixture.detectChanges();
+
+      // Assert: isNavMenuVisible is false
       expect(component.isNavMenuVisible).toBeFalse();
     });
   });
-
 
 
 });

@@ -47,16 +47,23 @@ export class MainLayoutComponent implements OnInit {
 
     // Subscribe to the router events to set visibility of the nav menu
     this.router.events
+
+      // Filter the events to only include NavigationEnd events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         this.isNavMenuVisible = false;
+
+        // Get the current URL from the router
         const currentUrl = this.router.url;
+
         if (typeof currentUrl === 'string') {
+          
+          // Set the nav menu visibility to true if the current URL contains
+          // any of the specified paths: '/stuff', '/cart', or '/checkout'
           this.isNavMenuVisible =
             ['/stuff', '/cart', '/checkout']
               .some(url => currentUrl.includes(url));
         } 
-      });
-  }
+      });  }
 
 }
