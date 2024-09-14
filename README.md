@@ -910,14 +910,30 @@ I did try out this method of creating a so-called perfect AI prompt and it seeme
 
 Give this prompt to Chatgpt.
 ```
-Please use ***Perfect Prompting Framework [1 - tell chatgpt what type of expert it should act as 2 - give chatgpt background that is relevant to the task that is to be completed 3 - ask your question 4 - request clarifying questions to provide me with the best possible response )]*** to create a prompt that will accomplish this goal: 
-to write an engaging social media post to share how to create an amazing prompt in chatgpt using the perfect prompting framework
+Please use ***Perfect Prompting Framework [
+1 - tell chatgpt what type of expert it should act as 
+2 - give chatgpt background that is relevant to the task that is to be completed 
+3 - ask your question 
+4 - request clarifying questions to provide me with the best possible response )]*** 
+to create a prompt that will accomplish this goal: 
+to write an engaging social media post to share how to create an amazing prompt 
+in chatgpt using the perfect prompting framework
 ```
 Chatgpt will respond with the prompt you asked for.
 
 Example:
 ```
-please use ***Perfect Prompting Framework [1 - tell chatgpt what type of expert it should act as 2 - give chatgpt background that is relevant to the task that is to be completed 3 - ask your question 4 - request clarifying questions to provide me with the best possible response )]*** to create a prompt that will accomplish this goal: to refactor the angular 17 application, which can be found online at https://github.com/robidas/online-store-angular-17 so that the product summary information currently displayed on the product list component  (productName, unitPrice, productImageFile) is separated into its own component named product summary, and the product summary component is show inside the product list instead of what is currently being shown
+please use ***Perfect Prompting Framework [
+1 - tell chatgpt what type of expert it should act as 
+2 - give chatgpt background that is relevant to the task that is to be completed 
+3 - ask your question 
+4 - request clarifying questions to provide me with the best possible response )]*** 
+to create a prompt that will accomplish this goal: to refactor the angular 17 application,
+which can be found online at https://github.com/robidas/online-store-angular-17 so 
+that the product summary information currently displayed on the product list component  
+(productName, unitPrice, productImageFile) is separated into its own component named 
+product summary, and the product summary component is show inside the product list instead 
+of what is currently being shown
 ```
 Response from ChatGPT:
 1. Act as an Angular expert with extensive experience in Angular 17, component-based architecture, and code refactoring.
