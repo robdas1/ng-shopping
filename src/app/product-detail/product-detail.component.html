@@ -1,6 +1,6 @@
 <div *ngIf="product$ | async as product; else errorTemplate" class="text-center">
     <hgroup>
-        <h2 class="display-6"> {{product.productName}}</h2>
+        <h2 class="display-6 my-5"> {{product.productName}}</h2>
         <p>{{product.productDetails}}</p>
         <p>{{product.unitPrice | currency}}</p>
     </hgroup>
