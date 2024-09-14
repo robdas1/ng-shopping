@@ -755,6 +755,9 @@ AI will sometimes give you wrong code, and AI will sometimes lie to you about ho
 
 You are advised to view every piece of code given to you by AI sceptically. Make sure you understand what the code does and verify it through testing. For this project extensive use was made of unit testing with Karma/Jasmine. Unit testing code coverage was kept as close to 100% or at least as high as possible. Any code changes, regardless of the source, were tested before and after the code change. You may know this as a software development technique called TDD. Developers should always thoroughly test all code changes regardless of where they get them from. Testing should include unit testing, manual testing through the user interface and runtime debugger, and careful use of print statements and logging.
 
+#### Politeness 
+Strange as it may sound, you'll get a better and more productive chat dialog going with ChatGPT and with GitHub Copilot if you conduct your side of the conversation in a courteous and respectful manner. I think AI takes its queue from your tone. It reflects the same attitude back to you. Its limitations  will occasionally drive you bonkers, but resist the urge to curse or respond in a disrespectful way. It gets you nowhere with AI and may in fact be counter-productive. Best advice? Treat AI as you would a real person. Patience and politeness will go a long way. Try to help it out if its thinking appears to be going in the wrong direction. I'm sure AI doesn't have feelings for you to hurt, but sometimes it behaves that way. Hmm... 
+
 ### Useful AI Prompts for Coding  
 
 The AI prompts in this section, given to GitHub CoPilot and ChatGPT, were used over-and-over again, and fine tuned in the process. 
@@ -895,6 +898,39 @@ of thing here for the current modifications?
 #### Use of @workspace  
 
 I've discovered that by starting each prompt with @workspace, GH Copilot will actually look at the code and try to understand it, and it's responses tend to better address the problem at hand rather than addressing imaginary problems that it dreams up. In this sense @workspace serves as a counter measure against AI Hallucination by grounding GH Copilot in the reality of the actual codebase.
+
+#### The Perfect Prompt  
+
+##### *Disclaimers* 
+- *I randomly stumbled upon "The Perfect Prompt" when researching another topic and saved it for possible later further study. However, I didn't note where I found it, and googling couldn't find it either, so I'm sorry but I don't have a source.*  
+
+- *I always view claims of perfection skeptically. I doubt there's anything perfect in this imperfect world.* 
+
+I did try out this method of creating a so-called perfect AI prompt and it seemed to yield promising results. I might try it again so I'm putting the notes I made here. The basic idea is to ask ChatGPT to create a prompt for itself. A *meta-prompt* if you will.
+
+Give this prompt to Chatgpt.
+```
+Please use ***Perfect Prompting Framework [1 - tell chatgpt what type of expert it should act as 2 - give chatgpt background that is relevant to the task that is to be completed 3 - ask your question 4 - request clarifying questions to provide me with the best possible response )]*** to create a prompt that will accomplish this goal: 
+to write an engaging social media post to share how to create an amazing prompt in chatgpt using the perfect prompting framework
+```
+Chatgpt will respond with the prompt you asked for.
+
+Example:
+```
+please use ***Perfect Prompting Framework [1 - tell chatgpt what type of expert it should act as 2 - give chatgpt background that is relevant to the task that is to be completed 3 - ask your question 4 - request clarifying questions to provide me with the best possible response )]*** to create a prompt that will accomplish this goal: to refactor the angular 17 application, which can be found online at https://github.com/robidas/online-store-angular-17 so that the product summary information currently displayed on the product list component  (productName, unitPrice, productImageFile) is separated into its own component named product summary, and the product summary component is show inside the product list instead of what is currently being shown
+```
+Response from ChatGPT:
+1. Act as an Angular expert with extensive experience in Angular 17, component-based architecture, and code refactoring.
+
+2. Background: I have an Angular 17 application available at https://github.com/robidas/online-store-angular-17. The application currently displays product summary information (productName, unitPrice, productImageFile) within the product list component. I want to refactor this to improve maintainability and reusability by separating the product summary information into its own component.
+
+3. Question: How can I refactor my Angular 17 application so that the product summary information currently displayed in the product list component is separated into its own component named ProductSummaryComponent, and the ProductSummaryComponent is then displayed inside the ProductListComponent instead of the current implementation?
+
+4. Request for Clarifying Questions: Please ask any clarifying questions you need to provide me with the best possible response.
+-----------
+This should provide a clear and structured request for refactoring your Angular application.
+
+
 
 
 ## Known Issue and Troubleshooting Suggestions
