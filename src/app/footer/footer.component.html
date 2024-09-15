@@ -1,16 +1,14 @@
 <div class="container">
+
+  <!-- Row to ensure full height for vertical centering -->
   <div class="row" style="height: 100%;">
-    <!-- Row to ensure full height for vertical centering -->
-    <div class="d-inline-flex justify-content-center align-items-center">
-      <!-- Flex container to center content both horizontally and vertically -->
-      <div class="text-center text-md-start">
-        <!-- Logo section, centered on small screens and left-aligned on medium and larger screens -->
-        <a href="https://rob-das-win.azurewebsites.net/about" target="_blank" rel="noreferrer">
-          <img src="assets/logo-sm.png" alt="Logo" class="img-fluid shadow-sm bg-body">
-        </a>
-      </div>
-      <div class="text-center text-md-start ms-3">
-        <!-- App info section, centered on small screens and left-aligned on medium and larger screens -->
+
+    <!-- Flex container to center content both horizontally and vertically -->
+    <div class="d-inline-flex align-items-center align-items-md-start">
+      <a href="https://rob-das-win.azurewebsites.net/about" target="_blank" rel="noreferrer">
+        <img src="assets/logo-sm.png" alt="Logo">
+      </a>
+      <div class="text-start ms-3">
         <p>
           <span class="fw-bolder">{{ appName }} {{ appVersion }}</span> &mdash; {{ appDescription }} &nbsp;
 
@@ -22,6 +20,7 @@
   </div>
   <div class="row">
     <div class="col-12">
+      <hr />
       <p>
         This site is not intended for buying or selling anything. Nothing
         changes hands. It's a simulation of a user's shopping experience,
