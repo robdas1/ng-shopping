@@ -92,7 +92,7 @@ export class CheckoutComponent implements OnInit {
 
   // Placeholder function to handle the purchase button click
   onPurchase(): void {
-    this.modalComponent.openModalNotification('Payment system not yet available');
+    this.modalComponent.openModalNotification('Payment not accepted. The payment system is not yet available.');
   }
 
   // Dispatch update payment method action when the payment method changes

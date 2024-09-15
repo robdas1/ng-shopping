@@ -88,7 +88,7 @@ describe('CheckoutComponent', () => {
     standaloneComponent.onPurchase();
     
     // Assert: Verify the alert was called with the correct message
-    expect(mockModalNotificationComponent.openModalNotification).toHaveBeenCalledWith('Payment system not yet available');
+    expect(mockModalNotificationComponent.openModalNotification).toHaveBeenCalledWith('Payment not accepted. The payment system is not yet available.');
   });
 
 

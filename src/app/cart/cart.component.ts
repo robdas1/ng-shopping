@@ -99,7 +99,7 @@ export class CartComponent implements OnInit {
 
     // Placeholder function to handle the restart button click
   onRestart(): void {
-    this.modalComponent.openModalConfirmation('Are you sure you want to restart?');
+    this.modalComponent.openModalConfirmation('Are you sure you want to start again? (cart will be empty)');
   }
 
   yesRestart(): void {

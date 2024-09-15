@@ -174,7 +174,7 @@ describe('CartComponent', () => {
 
     component.onRestart();
 
-    expect(mockModalComponent.openModalConfirmation).toHaveBeenCalledWith('Are you sure you want to restart?');
+    expect(mockModalComponent.openModalConfirmation).toHaveBeenCalledWith('Are you sure you want to start again? (cart will be empty)');
   });
 
 
