@@ -2,7 +2,7 @@
     <h2 class="display-6 my-5">{{title}}</h2>
 </div>
 
-<div class="product-list-container">
+<div class="product-list-class">
     <div *ngFor="let product of products$ | async">
         <app-product-summary [product]="product"></app-product-summary>
     </div>

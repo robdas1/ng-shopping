@@ -1,8 +1,5 @@
-<!-- TODO: show menu if this.title = this.route.snapshot.routeConfig?.title; is in ['stuff','cart','checkout'] -->
-<!-- TODO: move title from pages to here -->
-
-<div *ngIf="isNavMenuVisible===true">
-    <div class="container">
+<div class="container">
+    <div *ngIf="isNavMenuVisible===true">
         <div class="row">
             <div class="col12 d-inline-flex justify-content-center align-items-center">
                 <nav>
@@ -27,5 +24,5 @@
             </div>
         </div>
     </div>
+    <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
