@@ -1,29 +1,58 @@
+/* cart background image only displays on medium and larger screens */
+@media (min-width: 768px) {
 
- .background-image {
-    position: relative;
-    padding: 20px;
+    /* The following CSS is adapted from https://www.w3schools.com/howto/howto_css_image_text.asp */
+    .cart-background-image {
+        position: relative;
+        padding: 20px;
+        max-width: 220px;
+    }
+
+    .cart-background-image::before {
+        content: '';
+        background-image: url('../../assets/shopping-cart.jpg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.35;
+        /* Adjust the opacity value as needed */
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }
 
-.background-image::before {
-    content: '';
-    background-image: url('../../assets/shopping-cart.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.35; /* Adjust the opacity value as needed */
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    margin: 15%;
+/* bootstrap display-5 is too large */
+#dtek-title h4.display-5 {
+    font-size: 2.0rem;
 }
 
-.logo {
-    margin-top:10%;
-}
-
+/* bootstrap display-6 is too large */
 #dtek-title p.display-6 {
     font-size: 1.5rem;
 }
 
+/* logo height grows with screen size unless we set a limit */
+.logo {
+    max-height: 220px;
+}
+
+/* hide the logo on small screens */
+@media (max-width: 768px) {
+    .logo {
+        display: none;
+    }
+}
+
+/* change the heading text based on screen size */
+.dtek-heading::before {
+    content: "DTEK Online Shopping";
+}
+
+@media (min-width: 768px) {
+
+    .dtek-heading::before {
+        content: "Online Shopping";
+    }
+}

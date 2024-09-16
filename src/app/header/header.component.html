@@ -2,18 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <a href="https://rob-das-win.azurewebsites.net/about" target="_blank" rel="noreferrer">
-                    <img src="assets/logo-lg.png" alt="Logo" class="img-fluid logo bg-body">
-                </a>
+                <!-- <div class="logo-container" style="max-height: 220px;"> -->
+                <div class="logo-container">
+                    <a href="https://rob-das-win.azurewebsites.net/about" target="_blank" rel="noreferrer">
+                        <img src="assets/logo-lg.png" alt="Logo" class="img-fluid logo bg-body">
+                    </a>
+                </div>
             </div>
             <div id="dtek-title" class="col-sm-12 col-md-6 d-inline-flex justify-content-center align-items-center">
                 <hgroup class="text-center">
-                    <h4 class="display-5">DTEK Online Shopping</h4>
+                    <h4 class="dtek-heading display-5">
+                        <!-- DTEK Online Shopping -->
+                    </h4>
                     <p class="display-6">late-night shopping, made easy</p>
                 </hgroup>
             </div>
-            <div class="col-md-3 d-inline-flex justify-content-center align-items-center background-image">
-                <app-cart-summary />
+            <div class="col-md-3 d-inline-flex justify-content-center align-items-center cart-background-image"
+                >
+                <app-cart-summary id="dtek-cart-summary" />
             </div>
         </div>
     </div>
