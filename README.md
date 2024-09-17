@@ -1,6 +1,7 @@
 # Angular Shopping App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2. 
+The pre-release version of this application can be found here. The expected release date is 30 Sep, 2024.
 
 ## Overview
 
