@@ -1,5 +1,5 @@
 /* cart background image only displays on medium and larger screens */
-@media (min-width: 768px) {
+@media (min-width: 769px) {
 
     /* The following CSS is adapted from https://www.w3schools.com/howto/howto_css_image_text.asp */
     .cart-background-image {
@@ -50,7 +50,7 @@
     content: "DTEK Online Shopping";
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
 
     .dtek-heading::before {
         content: "Online Shopping";
