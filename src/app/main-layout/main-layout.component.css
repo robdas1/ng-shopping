@@ -1,0 +1,17 @@
+    /* Increase font size on the tabs */
+    .custom-nav-tabs .nav-link {
+        font-size: 1.25rem;
+        /* Bigger font size */
+    }
+
+    /* Change inactive tabs text color to Bootstrap's text-primary */
+    .custom-nav-tabs .nav-link {
+        color: var(--bs-primary);
+        /* Primary color for inactive tabs */
+    }
+
+    /* Change active tab text color to Bootstrap's text-success */
+    .custom-nav-tabs .nav-link.active {
+        color: var(--bs-success);
+        /* Success color for active tab */
+    }

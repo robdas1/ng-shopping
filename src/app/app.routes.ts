@@ -15,7 +15,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 
 export const routes: Routes = [
     { path: 'start', component: StartPageComponent, title: 'Start Here' },
-    { path: 'stuff', component: ProductListComponent, title: 'Need Stuff?' },
+    { path: 'stuff', component: ProductListComponent, title: 'Get Stuff' },
     { path: 'cart', component: CartComponent, title: 'Shopping Cart' },
     { path: 'checkout', component: CheckoutComponent, title: 'Checkout' },
     { path: 'product/:id', component: ProductDetailComponent, title: 'Details' },
