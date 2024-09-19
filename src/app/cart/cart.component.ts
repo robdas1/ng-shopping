@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { TotalsComponent } from '../totals/totals.component';
 import { ActivatedRoute, Resolve, ResolveFn, Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
-import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
+import { RestartButtonComponent } from '../restart-button/restart-button.component';
 
 @Component({
   selector: 'app-cart',
@@ -38,16 +38,16 @@ import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirma
     // subtotal, tax, and total amounts calculated from the cart's contents.
     TotalsComponent,
 
-    RouterLink, ModalConfirmationComponent
+    // RouterLink is imported to enable navigation to the product details page
+    RouterLink, 
+    
+    // RestartButtonComponent is imported to let the user restart the shopping
+    RestartButtonComponent
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-
-  // @ViewChild(ModalNotificationComponent) modalComponent!: ModalNotificationComponent;
-  @ViewChild(ModalConfirmationComponent) modalComponent!: ModalConfirmationComponent;
-
 
   // Observable to hold the chosen products
   chosenProducts$!: Observable<ChosenProduct[]>;
@@ -62,7 +62,7 @@ export class CartComponent implements OnInit {
 
   title: string | Type<Resolve<string>> | ResolveFn<string> | undefined; // data type returned by route.snapshot.routeConfig?.title
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router) { 
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) { 
     this.title = this.route.snapshot.routeConfig?.title;
   }
 
@@ -95,20 +95,6 @@ export class CartComponent implements OnInit {
   // Function to remove a product from state.
   removeProduct(id: string): void {
     this.store.dispatch(removeChosenProduct({ productId: id })); 
-  }
-
-    // Placeholder function to handle the restart button click
-  onRestart(): void {
-    this.modalComponent.openModalConfirmation('Are you sure you want to start again? (cart will be empty)');
-  }
-
-  yesRestart(): void {
-    console.debug('inside CartComponent.yesRestart(), title is: ', this.title);
-    this.router.navigate(['/start']);
-  }
-
-  noRestart(): void {
-    console.debug('inside CartComponent.noRestart(), title is: ', this.title);
   }
 
 }

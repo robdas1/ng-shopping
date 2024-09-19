@@ -7,11 +7,11 @@
  * the user clicks the 'Yes' or 'No' buttons, respectively.  
  * Example usage in the containing component:
  * 
- * <app-confirmation-popup 
+ * <app-modal-confirmation 
  *  [onYes]="yesLogic.bind(this)" 
  *  [onNo]="nologic.bind(this)">
- * </app-confirmation-popup>
-  * 
+ * </app-modal-confirmation>
+ * 
  * The `.bind(this)` syntax is used to bind the functions to the calling 
  * component's scope. This ensures that when the functions are executed within 
  * the ModalConfirmationComponent, they have access to the variables and methods 
@@ -25,7 +25,7 @@ import { Component, ViewChild, TemplateRef, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-confirmation-popup',
+  selector: 'app-modal-confirmation',
   standalone: true,
   imports: [],
   templateUrl: './modal-confirmation.component.html',

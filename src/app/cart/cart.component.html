@@ -20,8 +20,10 @@
             </td>
             <td class="number-right">{{ product.qty }}</td>
             <td class="text-right">
-                <button (click)="removeProduct(product.id)" class="btn btn-danger add-rem-btn" title="remove one">-</button> / 
-                <button (click)="addProduct(product.id, product.productName, product.unitPrice)" class="btn btn-success add-rem-btn" title="add one">+</button>
+                <button (click)="removeProduct(product.id)" class="btn btn-danger add-rem-btn"
+                    title="remove one">-</button> /
+                <button (click)="addProduct(product.id, product.productName, product.unitPrice)"
+                    class="btn btn-success add-rem-btn" title="add one">+</button>
             </td>
             <td class="number-right">{{ product.unitPrice * product.qty | currency }}</td>
         </tr>
@@ -31,10 +33,5 @@
 <app-totals></app-totals>
 
 <div class="text-left">
-	<button type="button" type="button" class="btn btn-secondary" 
-		(click)="onRestart()">
-		Start Again
-	</button>
+    <app-restart-button></app-restart-button>
 </div>
-
-<app-confirmation-popup [onYes]="yesRestart.bind(this)" [onNo]="noRestart.bind(this)"></app-confirmation-popup>
