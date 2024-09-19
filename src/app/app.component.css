@@ -4,5 +4,8 @@
     border-radius: 0.5rem;
     border: solid var(--border-color);
     border-width: thin;
+
+        /* Left-to-right gradient with RGB colors */
+        background: linear-gradient(to right, rgb(239, 228, 176), WHITE);
   }
 

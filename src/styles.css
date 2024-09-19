@@ -1,3 +1,10 @@
+body {
+    /*TODO: instead of exclaim important, it should be possible 
+    to reverse whatever is setting body.background-color */
+    background-color:darkgray !important;
+    padding-top: 1.0em;
+}
+
 /* You can add global styles to this file, and also import other style files */
 :root {
     --border-color: darkgray;
