@@ -19,11 +19,12 @@ import { ChosenProduct } from '../models/chosen-product.interface';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 import { ModalNotificationComponent } from '../modal-notification/modal-notification.component';
 import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
+import { RestartButtonComponent } from "../restart-button/restart-button.component";
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [TotalsComponent, CommonModule, ModalNotificationComponent],
+  imports: [TotalsComponent, CommonModule, ModalNotificationComponent, RestartButtonComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })

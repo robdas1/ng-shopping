@@ -4,10 +4,17 @@
 
 <app-totals></app-totals>
 
+<div class="text-right">
+	<button type="button" type="button" class="btn btn-primary" [disabled]="(isPurchaseEnabled$ | async) === false"
+		(click)="onPurchase()">
+		Purchase
+	</button>
+</div>
+
 <fieldset>
 	<legend class="mx-auto">Payment</legend>
 	<div>
-		<label class="form-label" for="paymentMethod">Payment Method</label>
+		<label class="form-label" for="paymentMethod">Payment Method*</label>
 		<select id="paymentMethod" class="form-select" [value]="paymentMethod$ | async"
 			(change)="onChangePaymentMethod($event)">
 			<option value="credit card">Credit Card</option>
@@ -16,7 +23,7 @@
 		</select>
 	</div>
 	<div>
-		<label class="form-label" for="cardExpiration">Card Expiry</label>
+		<label class="form-label" for="cardExpiration">Card Expiry*</label>
 		<input class="form-control" type="date" id="cardExpiration" [value]="cardExpirationString$ | async"
 			(change)="onChangeCardExpiration($event)">
 	</div>
@@ -25,21 +32,19 @@
 <fieldset>
 	<legend class="mx-auto">Shipping</legend>
 	<div>
-		<label class="form-label" for="customerName">Customer Name</label>
+		<label class="form-label" for="customerName">Customer Name*</label>
 		<input class="form-control" type="text" id="customerName" [value]="customerName$ | async"
 			(change)="onChangeCustomerName($event)">
 	</div>
 	<div>
-		<label class="form-label" for="customerAddress">Customer Address</label>
+		<label class="form-label" for="customerAddress">Customer Address*</label>
 		<input type="text" id="customerAddress" class="form-control" [value]="customerAddress$ | async"
 			(change)="onChangeCustomerAddress($event)">
 	</div>
 </fieldset>
-<div class="text-center">
-	<button type="button" type="button" class="btn btn-primary" [disabled]="(isPurchaseEnabled$ | async) === false"
-		(click)="onPurchase()">
-		Purchase
-	</button>
+
+<div class="text-right mt-3">
+	<app-restart-button></app-restart-button>
 </div>
 
 <app-notification-popup></app-notification-popup>
