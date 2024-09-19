@@ -4,8 +4,18 @@
     border-radius: 0.5rem;
     border: solid var(--border-color);
     border-width: thin;
+}
 
-        /* Left-to-right gradient with RGB colors */
-        background: linear-gradient(to right, rgb(239, 228, 176), WHITE);
-  }
+div#dtek-header.app-section {
+    /* Left-to-right gradient with RGB colors */
+    background: linear-gradient(to right, rgb(239, 228, 176), WHITE);
+}
 
+div#dtek-main.app-section {
+    background:var(--main-color);
+}
+
+div#dtek-footer.app-section {
+    /* background: rgb(239, 228, 176); */
+    background: linear-gradient(to right, rgb(239, 228, 176), WHITE);
+}

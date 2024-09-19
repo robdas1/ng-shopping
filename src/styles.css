@@ -1,18 +1,21 @@
-body {
-    /*TODO: instead of exclaim important, it should be possible 
-    to reverse whatever is setting body.background-color */
-    background-color:darkgray !important;
-    padding-top: 1.0em;
-}
-
 /* You can add global styles to this file, and also import other style files */
 :root {
     --border-color: darkgray;
     --nav-blue: #0056b3;
     --nav-text: #fff; /* White text */
     --product-summary-background: aliceblue;
+    --body-color: #eaeaea;
+    --main-color: rgb(249, 243, 221);
   }
   
+body {
+    /*TODO: instead of exclaim important, it should be possible 
+    to reverse whatever is setting body.background-color */
+    /* background-color: rgb(249, 243, 221) !important; */
+    background-color: var(--body-color) !important;
+    padding-top: 1.0em;
+}
+
 .full-width-table {
     width: 100%;
 }

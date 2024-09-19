@@ -4,8 +4,17 @@
 
 <app-totals></app-totals>
 
+
+	<span *ngIf="(chosenProducts$ | async)?.length === 0" class="text-danger">*<em>Shopping cart is empty.</em><br /></span>
+
+	<span *ngIf="(!(paymentMethod$ | async) || !(cardExpiration$ | async) || !(customerName$ | async) || !(customerAddress$ | async))" class="text-danger">*<em>All payment and shipping details are required.</em><br /></span>
+
+
 <div class="text-right">
-	<button type="button" type="button" class="btn btn-primary" [disabled]="(isPurchaseEnabled$ | async) === false"
+	<button type="button" 
+		class="btn btn-primary" 
+		[disabled]="(isPurchaseEnabled$ | async) === false"
+		[ngClass]="{'btn-secondary': (isPurchaseEnabled$ | async) === false}"
 		(click)="onPurchase()">
 		Purchase
 	</button>
