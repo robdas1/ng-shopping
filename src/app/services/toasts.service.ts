@@ -12,7 +12,9 @@ export interface Toast {
 export class ToastsService {
   toasts: Toast[] = [];
 
-  show(message: string, options: Partial<Toast> = {}) {
+  show(
+    message: string, 
+    options: Partial<Toast> = {}) {
     this.toasts.push({ message, ...options });
     console.log(message); // For simplicity, using console.log
   }

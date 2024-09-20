@@ -14,7 +14,7 @@ describe('ToastsService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should add a toast when show is called', () => {
+  it('should add a toast when show is called with options', () => {
     const message = 'Test message';
     const options: Partial<Toast> = { classname: 'test-class', delay: 3000 };
     service.show(message, options);
@@ -24,6 +24,15 @@ describe('ToastsService', () => {
     expect(service.toasts[0].classname).toBe(options.classname);
     expect(service.toasts[0].delay).toBe(options.delay);
   });
+
+  it('should add a toast when show is called without options', () => {
+    const message = 'Test message';
+    service.show(message);
+
+    expect(service.toasts.length).toBe(1);
+    expect(service.toasts[0].message).toBe(message);
+  });
+
 
   it('should remove a toast when remove is called', () => {
     const toast: Toast = { message: 'Test message', classname: 'test-class', delay: 3000 };

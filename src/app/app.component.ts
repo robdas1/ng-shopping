@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
     // Subscribe to grand total changes and show a toast notification
     this.grandTotal$.subscribe(grandTotal => {
       if (grandTotal > 0) {
-        this.toastsService.show(`Grand Total: $${grandTotal.toFixed(2)}`);
+        this.toastsService.show(`Grand Total: $${grandTotal.toFixed(2)}`, { classname: 'bg-success text-light' });
       }
     });
 
