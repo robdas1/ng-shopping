@@ -1,5 +1,5 @@
 .app-section {
-    padding: 0.5rem 1.0rem 0.5rem 1.0rem;
+    padding: 0.5rem 1.4rem 0.5rem 1.3rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
     border: solid var(--border-color);
@@ -17,5 +17,6 @@ div#dtek-main.app-section {
 
 div#dtek-footer.app-section {
     /* background: rgb(239, 228, 176); */
-    background: linear-gradient(to right, rgb(239, 228, 176), WHITE);
+    /* background: linear-gradient(to right, rgb(239, 228, 176), WHITE); */
+    background:var(--main-color);
 }

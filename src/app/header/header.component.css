@@ -4,8 +4,11 @@
     /* The following CSS is adapted from https://www.w3schools.com/howto/howto_css_image_text.asp */
     .cart-background-image {
         position: relative;
-        padding: 20px;
+        /* padding: 20px; */
         max-width: 220px;
+        border: solid var(--border-color);
+        border-width: thin;
+        border-radius: 0.3rem;
     }
 
     .cart-background-image::before {
@@ -31,6 +34,13 @@
 /* logo height grows with screen size unless we set a limit */
 .logo {
     max-height: 220px;
+    border: solid var(--border-color);
+    border-width: thin;
+    border-radius: 0.3rem;
+}
+
+.logo-col {
+    padding-left: 0;
 }
 
 /* hide the logo on small screens */
