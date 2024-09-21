@@ -1,4 +1,7 @@
 <div [routerLink]="['/product', product.id]" class="product-summary">
-    <img [src]="product.productImageFile" alt="product image">
-    <h3>{{ product.productName }}</h3>
+    <h3 class="text-center">{{ product.productName }}</h3>
+    <div class="p-1">
+        <img [src]="product.productImageFile" alt="product image">
+    </div>
+    <p class="text-center">{{ product.unitPrice | currency }}</p>
 </div>
