@@ -1,12 +1,9 @@
 .product-summary {
-    /* border: none;  */
     border: solid var(--border-color);
     border-width: thin;
-
     border-radius: 2px; 
     padding: 0;
     margin: 10px auto;
-    /* display: block; */
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
@@ -18,14 +15,8 @@
   .product-summary img {
     max-height: 200px;
     border-radius: 0.5rem;
-    /* margin: 0 auto; */
   }
 
-  /* .product-summary>img:hover {
-    max-height: 190px;
-    margin: 5 auto;
-  } */
-  
   .product-summary h3 {
     padding-left: 10px; /* Adds some space on the left for better visual appearance */
   }
@@ -34,7 +25,6 @@
     cursor: pointer; 
     background-color: var(--nav-blue);
     color: var(--nav-text);
-    /* border: solid thick var(--nav-blue); */
   }
   
   

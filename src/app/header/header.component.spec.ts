@@ -1,6 +1,5 @@
 /**
- * @file header.component.spec.ts
- * @description Unit test for the HeaderComponent in an Angular 18 application using standalone components.
+ * Header Component Unit Tests
  * 
  * This file tests the HeaderComponent, which is a standalone component that includes another custom 
  * component called CartSummaryComponent. The goal of this test is to ensure that HeaderComponent works as 

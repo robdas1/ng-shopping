@@ -4,7 +4,6 @@
     /* The following CSS is adapted from https://www.w3schools.com/howto/howto_css_image_text.asp */
     .cart-background-image {
         position: relative;
-        /* padding: 20px; */
         max-width: 220px;
         border: solid var(--border-color);
         border-width: thin;
@@ -17,7 +16,6 @@
         background-size: cover;
         background-position: center;
         opacity: 0.35;
-        /* Adjust the opacity value as needed */
         position: absolute;
         top: 0;
         right: 0;

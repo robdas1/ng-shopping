@@ -15,7 +15,7 @@ import { ChosenProduct } from './models/chosen-product.interface';
 
 describe('AppComponent', () => {
 
-  // Mock data for testing
+  // Mock data 
   const mockChosenProducts: ChosenProduct[] = [
     { id: '01', productName: 'Test Product', unitPrice: 100.00, qty: 1 },
     { id: '02', productName: 'Another Test Product', unitPrice: 150.00, qty: 2 }
@@ -23,7 +23,8 @@ describe('AppComponent', () => {
 
   const mockTaxRate = 0.05; // 5%
 
-  // Mock Store service to spy on and assert dispatch calls, and return mock data for selectors
+  // Mock Store service 
+  // spy on and assert dispatch calls, and return mock data for selectors
   class MockStore {
     dispatch = jasmine.createSpy('dispatch');
     select = jasmine.createSpy('select').and.callFake(selector => {
@@ -40,7 +41,6 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let store: Store;
 
-  // Set up TestBed configuration before each test
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [

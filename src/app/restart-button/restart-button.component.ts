@@ -1,7 +1,8 @@
 /**
  * Restart Button
  * 
- * This component is a standalone component that is used to restart the application.
+ * This component providesthe user with a button to restart the application. 
+ * It uses the modal-confirmation component to confirm the user's intention to restart the application.
  */
 import { Component, ViewChild } from '@angular/core';
 import { ModalConfirmationComponent } from '../modal-confirmation/modal-confirmation.component';
