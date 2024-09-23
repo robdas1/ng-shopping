@@ -4,7 +4,7 @@
  * This component represents the cart view of the application. It allows users
  * to view chosen products and interact with them.
  */
-import { Component, OnInit, Type, ViewChild } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChosenProduct } from '../models/chosen-product.interface';
 import { addToCart, removeChosenProduct } from '../state/actions/chosen-product.actions';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 import { selectChosenProductsState } from '../state/selectors/chosen-product.selectors';
 import { CommonModule } from '@angular/common';
 import { TotalsComponent } from '../totals/totals.component';
-import { ActivatedRoute, Resolve, ResolveFn, Router } from '@angular/router';
+import { ActivatedRoute, Resolve, ResolveFn } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { RestartButtonComponent } from '../restart-button/restart-button.component';
 

@@ -8,7 +8,7 @@
 <span *ngIf="(chosenProducts$ | async)?.length === 0" class="text-danger text-end d-block"><em>Shopping cart is empty.</em>*<br /></span>
 
 <span
-    *ngIf="(!(paymentMethod$ | async) || !(cardExpiration$ | async) || !(customerName$ | async) || !(customerAddress$ | async))"
+    *ngIf="( (paymentMethod$ | async)===null || (cardExpiration$ | async)===null || (customerName$ | async)===null || (customerAddress$ | async)===null )"
     class="text-danger text-end d-block"><em>All payment and shipping details are required.</em>*<br /></span>
 
 <div class="text-right">

@@ -49,7 +49,7 @@ export class CheckoutComponent implements OnInit {
   // The title from the activated route
   title: string | Type<Resolve<string>> | ResolveFn<string> | undefined; // data type returned by route.snapshot.routeConfig?.title
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) { 
+  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     this.title = this.route.snapshot.routeConfig?.title;
   }
 
@@ -118,15 +118,23 @@ export class CheckoutComponent implements OnInit {
   // Dispatch an action when the customer name changes
   onChangeCustomerName(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    const newName = inputElement.value;
-    this.store.dispatch(updateCustomerName({ customerName: newName }));
+    const newName = inputElement.value?.trim();
+    if (newName) {
+      this.store.dispatch(updateCustomerName({ customerName: newName }));
+    } else {
+      this.store.dispatch(updateCustomerName({ customerName: null }));
+    }
   }
 
   // Dispatch an action when the customer address changes
   onChangeCustomerAddress(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    const newAddress = inputElement.value;
-    this.store.dispatch(updateCustomerAddress({ customerAddress: newAddress }));
+    const newAddress = inputElement.value?.trim();
+    if (newAddress) {
+      this.store.dispatch(updateCustomerAddress({ customerAddress: newAddress }));
+    } else {
+      this.store.dispatch(updateCustomerAddress({ customerAddress: null }));
+    }
   }
 
 }
