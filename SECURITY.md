@@ -7,4 +7,4 @@ Security updates are being supported for versions of the ng-shopping project, al
 
 ## Reporting a Vulnerability
 
-To report a vulnerability, please contact the author, Robi Indra Das, through DTEK Consulting Services Ltd., Alberta, Canada.
+To report a vulnerability, please contact the author, Robi Indra Das, through [DTEK Consulting Services Ltd., Alberta, Canada](https://rob-das-win.azurewebsites.net/).
