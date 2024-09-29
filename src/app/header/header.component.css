@@ -4,7 +4,8 @@
     /* The following CSS is adapted from https://www.w3schools.com/howto/howto_css_image_text.asp */
     .cart-background-image {
         position: relative;
-        max-width: 220px;
+        max-width: 170px;
+        max-height: 135px;
         border: solid var(--border-color);
         border-width: thin;
         border-radius: 0.3rem;
@@ -24,14 +25,19 @@
     }
 }
 
+/* bootstrap display-5 is too large */
+#dtek-title .display-5 {
+    font-size: 2.5rem;
+}
+
 /* bootstrap display-6 is too large */
-#dtek-title p.display-6 {
-    font-size: 1.5rem;
+#dtek-title .display-6 {
+    font-size: 1.2rem;
 }
 
 /* logo height grows with screen size unless we set a limit */
 .logo {
-    max-height: 220px;
+    max-height: 135px;
     border: solid var(--border-color);
     border-width: thin;
     border-radius: 0.3rem;
@@ -57,5 +63,12 @@
 
     .dtek-heading::before {
         content: "Online Shopping";
+    }
+    .col-md-3.logo-col {
+        /* This is to override the default width of 25% for col-md-3 from _grid.sccs 
+        which causes additional spacing on the right of the logo, which in turn causes 
+        the title to shift to the right. I think this may be a result of the use of a  
+        combination of the bootstrap grid system, d-flex, and justify-content-between. */
+        max-width: 150px;
     }
 }

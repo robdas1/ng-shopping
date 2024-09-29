@@ -1,3 +1,11 @@
+.site-boundary {
+    border-radius: 0.5rem;
+    border-width: thin;
+    max-width: 50rem; 
+    padding-left:0;
+    padding-right:0;
+  }
+  
 .app-section {
     padding: 0.5rem 1.4rem 0.5rem 1.3rem;
     margin: 0.5rem;
@@ -16,7 +24,5 @@ div#dtek-main.app-section {
 }
 
 div#dtek-footer.app-section {
-    /* background: rgb(239, 228, 176); */
-    /* background: linear-gradient(to right, rgb(239, 228, 176), WHITE); */
     background:var(--main-color);
 }
