@@ -9,10 +9,15 @@ on 2024-Sep-30. It is hosted online with GitHub Pages and can be found here.
   
 
 The initial release version was designated as version 2 because DTEK Online Shopping 
-is a complete ground-up rewrite of DTEK Online Store version 1, which can be found 
+is a complete ground-up rewrite of DTEK Online Store version 1. The design for 
+version 1 formed the basis for development of version 2. Documentation for version 1
+including the design, user manual, maintenance, and a link to the live app hosted in Microsoft Azure can be found 
 here.
 
-[DTEK Online Store version 1](https://rob-das-react.azurewebsites.net/)
+[DTEK Online Store version 1](https://rob-das-win.azurewebsites.net/Documentation/OnlineStore)
+
+Version 1 was developed using the React library. Version 2 was developed using 
+the Angular platform/framework.
 
 ## Overview
 
