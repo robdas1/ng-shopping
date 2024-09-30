@@ -21,7 +21,7 @@ the Angular platform/framework.
 
 ## Overview
 
-This project is an Angular development, proof-of-concept. This simulated eCommerce site is 
+This project is an Angular development project. This simulated eCommerce site is 
 intended to provide a recreational shopping experience.
 
 ## Standalone Components
