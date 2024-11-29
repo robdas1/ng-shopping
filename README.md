@@ -2,8 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2. 
 
-The application, DTEK Online Shopping version 2, was released and went live 
-on 2024-Sep-30. It is hosted online with GitHub Pages and can be found here.
+## Introduction
+
+The ng-shopping project uses Angular to implement the DTEK Online Shopping website, which serves as a research and development initiative to create a recreational shopping experience website. The application, DTEK Online Shopping version 2, was released and went live 
+in 2024. It is hosted online with GitHub Pages and can be found here.
   
 [DTEK Online Shopping version 2](https://robdas1.github.io/ng-shopping/)  
   
@@ -18,6 +20,13 @@ here.
 
 Version 1 was developed using the React library. Version 2 was developed using 
 the Angular platform/framework.
+
+Version 2 was primarily created to explore the differences between React and Angular; and to explore the use of AI paired-programming to reduce the amount of time and effort needed for the coding, to rapidly learn new technology, and to provide high quality source code deliverables. This version provided an opportunity to explore the use of asynchronous programming techniques utilizing RXJS observables, and the use of the Redux design pattern for state management. While version 1 used only custom CSS for styling in order to explore new powerful techniques like Flexbox, version 2 used Bootstrap 5.
+
+### About the Author
+
+The ng-shopping project and associated documentation, including this readme file, were written, developed and produced by 
+[Robi Indra Das](https://robidas.github.io/static-site/robdas-resume.pdf), Microsoft Certified Azure Developer, owner, manager, and senior development consultant for DTEK Consulting Services Ltd.
 
 ## Overview
 
