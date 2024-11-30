@@ -63,9 +63,85 @@ Run `ng build` to build the project. The build artifacts will be stored under th
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you first need to add a package 
 that implements end-to-end testing capabilities. No end-to-end tests for this application have been created at this time.
 
-## Further help
+## Further help with the Angular CLI
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Deployment to GitHub Pages
+
+### Initial setup
+
+- Create ng-shopping repo on GitHub.
+
+- Create ng-shopping project locally. 
+
+Important: use a local disk for the local git repo, not a network drive, because the "ng deploy" command fails when run from a network drive even if the drive is mapped to a drive letter. For more information, see the section "Known Issues and Trouble Shooting Suggestions" near the end of this document.  
+
+```
+ng new ng-shopping
+cd ng-shopping
+```
+- Connect local project to remote repo.
+```
+git remote add origin https://github.com/robdas1/ng-shopping.git
+```
+- Add angular-cli-ghpages to project.
+```
+ng add angular-cli-ghpages
+```
+- Push local code to GitHub repo.
+```
+git add .
+git commit -m "initial commit"
+git push -u origin main
+```
+
+
+- Deploy project to GitHub Pages (this will deploy what is currently on the local computer but will not push the code to the remote repo).
+```
+ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
+```
+
+- After this is done, verify the GitHub Pages settings are correct, online in the repo.
+
+![Verify GitHub Pages Settings](readme-images/verify-gh-pages-settings.jpg)
+
+
+### On-going deployment
+
+#### Push Code 
+```
+git add .
+git commit -m "[commit comment]"
+git push
+```
+
+#### Re-deploy App
+```
+ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
+```
+This command is conceptually two separate steps: build and deployment
+
+*--base-ref* specifies the root directory of the project in the source code repository, which is used by the deployment step to resolve path differences between the development directory structure in the repo, and the flattened directory structure that the build step creates in the deployment folder, which gets pushed to the GH Pages hosting environment  
+
+*--dir* specifies the path to the deployment folder created by the build step
+
+### Git production branches
+
+#### main
+This is the main production  branch that has the code. In ancient times we used to call this the master branch.
+
+#### gh-pages  
+This is the branch that hosts the deployed app.
+
+
+
+
+## Setup for Angular Router
+
+### TODO  
+
 
 ## Unit Testing  
 This section provides details on the unit testing for DTEK Online Shopping. 
@@ -181,79 +257,6 @@ With this setup, the unit test will create the `HeaderComponent` while using `Mo
 
 By following these steps, you can effectively isolate and test standalone components in Angular, ensuring your unit tests are focused, maintainable, and free of unintended dependencies.
 
-
-
-
-## Deployment to GitHub Pages
-
-### Initial setup
-
-- Create ng-shopping repo on GitHub.
-
-- Create ng-shopping project locally.
-```
-ng new ng-shopping
-cd ng-shopping
-```
-- Connect local project to remote repo.
-```
-git remote add origin https://github.com/robdas1/ng-shopping.git
-```
-- Add angular-cli-ghpages to project.
-```
-ng add angular-cli-ghpages
-```
-- Push local code to GitHub repo.
-```
-git add .
-git commit -m "initial commit"
-git push -u origin main
-```
-
-
-- Deploy project to GitHub Pages (this will deploy what is currently on the local computer but will not push the code to the remote repo).
-```
-ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
-```
-
-- After this is done, verify the GitHub Pages settings are correct, online in the repo.
-
-![Verify GitHub Pages Settings](readme-images/verify-gh-pages-settings.jpg)
-
-
-### On-going deployment
-
-#### Push Code 
-```
-git add .
-git commit -m "[commit comment]"
-git push
-```
-
-#### Re-deploy App
-```
-ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shopping/ --dir=dist/ng-shopping/browser
-```
-This command is conceptually two separate steps: build and deployment
-
-*--base-ref* specifies the root directory of the project in the source code repository, which is used by the deployment step to resolve path differences between the development directory structure in the repo, and the flattened directory structure that the build step creates in the deployment folder, which gets pushed to the GH Pages hosting environment  
-
-*--dir* specifies the path to the deployment folder created by the build step
-
-### Git production branches
-
-#### main
-This is the main production  branch that has the code. In ancient times we used to call this the master branch.
-
-#### gh-pages  
-This is the branch that hosts the deployed app.
-
-
-
-
-## Setup for Angular Router
-
-### TODO  
 
 
 
@@ -1108,13 +1111,36 @@ This error occurs because the `main` branch does not have an upstream branch set
 ```sh
 git push --set-upstream origin main
 ```
+#### Misconfgured remote
 
+##### Bug  
+When issuing the deployment command, I encountered the error  
+```
+❌ An error occurred when trying to deploy:
+Failed to get remote.undefined.url (task must either be run in a git repository with a configured undefined remote or must be configured with the "repo" option).
+```
+
+This was occurring on a development computer that was using a mapped network drive for the local git repo. We suspect that there may be additional configuration steps needed to address security concerns related to network drives.    
+
+
+
+##### Fix 
+No fix has been found at this time.  
+
+##### Work around
+
+Clone the repo to a local drive and run the deployment command from the local drive. 
+
+
+
+### Caching issues
+
+#### Corrupted Angular cache 
 
 ##### Bug
 I encountered the error  
 `cannot open file:///e%3A/GitHub/ng-shopping/.angular/cache/18.1.2/vite/deps_temp_afd4ac51/chunk-OYXLHNU7.js. Detail: Unable to read file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js' (Error: Unable to resolve nonexistent file 'e:\GitHub\ng-shopping.angular\cache\18.1.2\vite\deps_temp_afd4ac51\chunk-OYXLHNU7.js')`  
 
-#### Corrupted Angular cache 
 
 ##### Fix 
 The error is related to the angular cache, which may have been corrupted. Try clearing out and reseting the cache by deleting the `.angular\cache` directory. This will force angular to regenerate the cache the next time you build or serve your application. Here's how you can clear the cache and build the app.
