@@ -145,7 +145,7 @@ This is the branch that hosts the deployed app.
 This component is the middle section of the web app between the header and footer. At the top of this component is a navigation bar utilizing the ngbnav bootstrap component. Below that is the main section of the app that houses the other app pages using the angular router outlet built-in component.
 
 ### app.routes.ts
-This component exports an array of routes containing paths, components to render for those paths, and titles. The Angular routing provider declared in app.config.ts, uses this array of routes to render the components inside the router-outlet component selector in amin-layout.component.html
+This component exports an array of routes containing paths, components to render for those paths, and titles. The Angular routing provider declared in app.config.ts, uses this array of routes to render the components inside the router-outlet component selector in main-layout.component.html
 
 
 ## Unit Testing  
