@@ -60,7 +60,7 @@ Run `ng build` to build the project. The build artifacts will be stored under th
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you first need to add a package 
+To use the `ng e2e` command to run end-to-end tests, you first need to add a package 
 that implements end-to-end testing capabilities. No end-to-end tests for this application have been created at this time.
 
 ## Further help with the Angular CLI
@@ -109,6 +109,7 @@ ng deploy --repo=https://github.com/robdas1/ng-shopping.git --base-href=/ng-shop
 
 
 ### On-going deployment
+Note: before running the deployment as described in this section, build and lint the code and run locally making sure there are no compiler errors, test manually with a simple smoke-test to make sure there are no obvious runtime errors, run the full set of unit test verifying that they all pass and that unit testing code coverage is 100%.  
 
 #### Push Code 
 ```
@@ -140,7 +141,11 @@ This is the branch that hosts the deployed app.
 
 ## Setup for Angular Router
 
-### TODO  
+### main-layout.component.ts
+This component is the middle section of the web app between the header and footer. At the top of this component is a navigation bar utilizing the ngbnav bootstrap component. Below that is the main section of the app that houses the other app pages using the angular router outlet built-in component.
+
+### app.routes.ts
+This component exports an array of routes containing paths, components to render for those paths, and titles. The Angular routing provider declared in app.config.ts, uses this array of routes to render the components inside the router-outlet component selector in amin-layout.component.html
 
 
 ## Unit Testing  

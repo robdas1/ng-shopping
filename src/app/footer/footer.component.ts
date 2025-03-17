@@ -21,7 +21,7 @@ export class FooterComponent {
   appName = 'DTEK Online Shopping';
 
   // The current version of the application
-  appVersion = 'v2.1.1';
+  appVersion = 'v2.1.5';
 
   // A brief description of the application
   appDescription = 'an Angular development project. This simulated eCommerce site is ' +
