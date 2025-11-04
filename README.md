@@ -1,10 +1,10 @@
-# Angular Shopping App
+# DTEK Online Shopping, Open Source Project
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2. 
 
 ## Introduction
 
-The ng-shopping project uses Angular to implement the DTEK Online Shopping website, which serves as a research and development initiative to create a recreational shopping experience website. The application, DTEK Online Shopping version 2, was released and went live 
+The ng-shopping project "DTEK Online Shopping" uses Angular to implement the DTEK Online Shopping website, which serves as a research and development initiative to create a recreational shopping experience website. The application, DTEK Online Shopping version 2, was released and went live 
 in 2024. It is hosted online with GitHub Pages and can be found here.
   
 [DTEK Online Shopping version 2](https://robdas1.github.io/ng-shopping/)  
